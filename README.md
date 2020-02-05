@@ -158,5 +158,5 @@ Sovellusta on mahdollista käyttää mobiilisti 
  
 
 ## Käyttöliittymä 
-![kayttoliittymakaavio] (/kayttoliittymakaavio.png)
+![kayttoliittymakaavio] (/blob/master/kayttoliittymakaavio.png)
 Format: ![Alt Text](url)
