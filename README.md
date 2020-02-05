@@ -37,7 +37,7 @@ Lipunmyyjänä edustan omistajaa, enkä halua, että samalla lipulla pääsee us
 
  
   
-**Toiminnalliset vaatimukset ** 
+**Toiminnalliset vaatimukset** 
   
 
 Mahdollisuus valita lipputyyppi (Aikuinen, Lapsi, Eläkeläinen/Varusmies)  
@@ -81,7 +81,7 @@ Ennakkomyynnin loputtua loput liput tulostetaan ovella myytäviksi
   
 *verkkokauppa  
   
-**Ei-toiminnalliset vaatimukset (ei koodattavissa olevat vaatimukset)  **
+**Ei-toiminnalliset vaatimukset (ei koodattavissa olevat vaatimukset)**
   
 
 Sovelluksen on oltava asiakkaan saatavilla 24/7  
@@ -89,7 +89,7 @@ Sovelluksen on oltava asiakkaan saatavilla 24/7 
 Sovellusta on mahdollista käyttää mobiilisti  
 
   
-**Rooli 2: Admin-käyttäjän käyttäjä tarinat ** 
+**Rooli 2: Admin-käyttäjän käyttäjä tarinat** 
 
 Admin käyttäjänä haluan lisätä myyjiä, jotta lippujen myynti onnistuu. 
 
