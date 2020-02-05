@@ -85,7 +85,7 @@ Rooli 3: Asiakas (Verkkokauppa) 
 * Ennakkomyynnin loputtua loput liput tulostetaan ovella myytäviksi 
 
   
-####Ei-toiminnalliset vaatimukset(ei koodattavissa olevat vaatimukset) 
+#### Ei-toiminnalliset vaatimukset (ei koodattavissa olevat vaatimukset) 
 * Sovelluksen on oltava asiakkaan saatavilla 24/7  
 * Sovellusta on mahdollista käyttää mobiilisti  
 
