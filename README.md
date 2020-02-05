@@ -158,5 +158,5 @@ Sovellusta on mahdollista käyttää mobiilisti 
  
 
 ## Käyttöliittymä 
-![kayttoliittymakaavio] (/blob/master/kayttoliittymakaavio.png)
+![kayttoliittymakaavio] (https://github.com/NipeH/ohjelmistoprojekti1/blob/master/kayttoliittymakaavio.png)
 Format: ![Alt Text](url)
