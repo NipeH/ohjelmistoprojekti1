@@ -94,3 +94,6 @@ Rooli 3: Asiakas (Verkkokauppa) 
 ## Käyttöliittymä 
 ![kayttoliittymakaavio](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/kayttoliittymakaavio.png)
 
+
+## Luokkakaavio 
+![kaaviomalli](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/kaaviomalli.png)
