@@ -99,5 +99,3 @@ Rooli 3: Asiakas (Verkkokauppa) 
 ![kaaviomalli](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/kaaviomalli.png)
 
 
-##Tietokanta-mallin prototyyppi
-<iframe width="560" height="315" src='https://dbdiagram.io/embed/5e3eda319e76504e0ef13360'> </iframe>
