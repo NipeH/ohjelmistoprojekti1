@@ -2,16 +2,19 @@ package com.example.ohjelmistoprojekti1.domain;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 @Entity
 public class Event {
-	// todo: improve alternative methods for time and date management
+	// TODO: improve alternative methods for time and date management
 
 	@Id
 	@NotNull
@@ -20,24 +23,28 @@ public class Event {
 
 	@NotNull
 	private String name, description;
-	
+
 	@NotNull
 	private String venue;
-	
+
 	@NotNull
 	private Date date;
-	
+
 	@NotNull
 	private Time time;
-	
+
 	@NotNull
 	private int ticketInventory;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
+	private List<Ticket> tickets;
 
 	public Event() {
 		super();
 	}
 
-	public Event(String name, String description, String venue, Date date, Time time, int ticketInventory) {
+	public Event(@NotNull String name, @NotNull String description, @NotNull String venue, @NotNull Date date,
+			@NotNull Time time, @NotNull int ticketInventory, List<Ticket> tickets) {
 		super();
 		this.name = name;
 		this.description = description;
@@ -45,6 +52,15 @@ public class Event {
 		this.date = date;
 		this.time = time;
 		this.ticketInventory = ticketInventory;
+		this.tickets = tickets;
+	}
+
+	public List<Ticket> getTickets() {
+		return tickets;
+	}
+
+	public void setTickets(List<Ticket> tickets) {
+		this.tickets = tickets;
 	}
 
 	public long getEventId() {
