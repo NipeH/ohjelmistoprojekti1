@@ -10,7 +10,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Event {
-	//todo: create alternative methods for time and date management
+	// todo: create alternative methods for time and date management
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,18 +20,20 @@ public class Event {
 	private String venue;
 	private Date date;
 	private Time time;
+	private int ticketInventory;
 
 	public Event() {
 		super();
 	}
 
-	public Event(String name, String description, String venue, Date date, Time time) {
+	public Event(String name, String description, String venue, Date date, Time time, int ticketInventory) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.venue = venue;
 		this.date = date;
 		this.time = time;
+		this.ticketInventory = ticketInventory;
 	}
 
 	public long getEventId() {
@@ -81,7 +83,20 @@ public class Event {
 	public void setTime(Time time) {
 		this.time = time;
 	}
+	
+	/** date parameter in form: "yyyy-mm-dd */
+	public void setDate(String date) {
+		this.date = java.sql.Date.valueOf(date);
+	}
 
+	public int getTicketInventory() {
+		return this.ticketInventory;
+	}
+
+	public void setTicketInventory(int ticketInventory) {
+		this.ticketInventory = ticketInventory;
+	}
+	
 	/*
 	 * How to set date and time:
 	 * Event.setSqlDate(java.sql.Date.valueOf("2017-11-15"));
