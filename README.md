@@ -97,7 +97,7 @@ Rooli 3: Asiakas (Verkkokauppa) 
 ## Tietokanta 
 
 ## Luokkakaavio 
-![kaaviomalli](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/kaaviomalli.png)
+![tietokanta](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/tietokanta.png)
 
 Ohessa tietojärjestelmän luokkakaavio.
 
