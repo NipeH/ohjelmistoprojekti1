@@ -76,6 +76,11 @@ public class Event {
 		this.date = date;
 	}
 
+	/** @param date parameter in form: "yyyy-mm-dd" */
+	public void setDate(String date) {
+		this.date = java.sql.Date.valueOf(date);
+	}
+
 	public Time getTime() {
 		return time;
 	}
@@ -83,10 +88,10 @@ public class Event {
 	public void setTime(Time time) {
 		this.time = time;
 	}
-	
-	/** date parameter in form: "yyyy-mm-dd */
-	public void setDate(String date) {
-		this.date = java.sql.Date.valueOf(date);
+
+	/** @param time parameter in form: "hh:mm:ss" */
+	public void setTime(String time) {
+		this.time = java.sql.Time.valueOf(time);
 	}
 
 	public int getTicketInventory() {
@@ -96,12 +101,5 @@ public class Event {
 	public void setTicketInventory(int ticketInventory) {
 		this.ticketInventory = ticketInventory;
 	}
-	
-	/*
-	 * How to set date and time:
-	 * Event.setSqlDate(java.sql.Date.valueOf("2017-11-15"));
-	 * Event.setSqlTime(java.sql.Time.valueOf("15:30:14"));
-	 * Event.setSqlTimestamp(java.sql.Timestamp.valueOf("2017-11-15 15:30:14.332"));
-	 */
 
 }
