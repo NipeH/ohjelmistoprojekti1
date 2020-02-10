@@ -24,6 +24,12 @@ public class User {
 	
 	@NotNull(message="Anna sähköpostiosoite")
 	private String email;
+	
+	@NotNull(message="Anna käyttäjätunnus")
+	private String username;
+	
+	@NotNull(message="Anna salasana")
+	private String password;
 
 	public User() {
 		super();
@@ -31,13 +37,15 @@ public class User {
 	}
 
 	public User(long userid, String firstname, String lastname, String phonenumber,
-		 String email) {
+		 String email, String username, String password) {
 		super();
 		this.userid = userid;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.phonenumber = phonenumber;
 		this.email = email;
+		this.username = username;
+		this.password = password;
 	}
 
 	public long getUserid() {
@@ -80,14 +88,27 @@ public class User {
 		this.email = email;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	@Override
 	public String toString() {
 		return "User [userid=" + userid + ", firstname=" + firstname + ", lastname=" + lastname + ", phonenumber="
-				+ phonenumber + ", email=" + email + "]";
+				+ phonenumber + ", email=" + email + ", username=" + username + ", password=" + password + "]";
 	}
-	
-	
-	
 	
 	
 
