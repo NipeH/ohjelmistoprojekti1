@@ -7,19 +7,30 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Event {
-	// todo: create alternative methods for time and date management
+	// todo: improve alternative methods for time and date management
 
 	@Id
+	@NotNull
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long eventId;
 
+	@NotNull
 	private String name, description;
+	
+	@NotNull
 	private String venue;
+	
+	@NotNull
 	private Date date;
+	
+	@NotNull
 	private Time time;
+	
+	@NotNull
 	private int ticketInventory;
 
 	public Event() {
