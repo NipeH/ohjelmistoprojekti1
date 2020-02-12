@@ -96,17 +96,9 @@ Rooli 3: Asiakas (Verkkokauppa) 
 
 ## Tietokanta 
 
-## Luokkakaavio 
-![tietokanta](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/tietokanta.png)
+Tietokannan kaavio löytyy ajantasaisena linkin takaa:
 
-Ohessa tietojärjestelmän luokkakaavio.
-
- Käsitemalliin sisältyy myös taulujen välisten viiteyhteyksien ja avainten määritykset. Tietokanta kuvataan käyttäen jotain kuvausmenetelmää, joko ER-kaaviota ja UML-luokkakaaviota. 
-
-Lisäksi kukin järjestelmän tietoelementti ja sen attribuutit kuvataan tietohakemistossa. Tietohakemisto tarkoittaa yksinkertaisesti vain jokaisen elementin (taulun) ja niiden attribuuttien (kentät/sarakkeet) listausta ja lyhyttä kuvausta esim. tähän tyyliin: 
-
-
-
+https://dbdiagram.io/d/5e41478c9e76504e0ef1400c
 
 
 
@@ -115,42 +107,6 @@ tobecontinued....
 
 
 
-
-Tilit 
-
-Tilit-taulu sisältää käyttäjätilit. Käyttäjällä voi olla monta tiliä. Tili kuuluu aina vain yhdelle käyttäjälle. 
-
-Kenttä 
-
-Tyyppi 
-
-Kuvaus 
-
-id 
-
-int PK 
-
-Tilin id 
-
-nimimerkki 
-
-varchar(30) 
-
-Tilin nimimerkki 
-
-avatar 
-
-int FK 
-
-Tilin avatar, viittaus avatar-tauluun 
-
-kayttaja 
-
-int FK 
-
-Viittaus käyttäjään käyttäjä-taulussa 
-
- 
 
 Tekninen kuvaus 
 
