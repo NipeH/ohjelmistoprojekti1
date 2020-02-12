@@ -27,10 +27,19 @@ public class Ticket {
 	@ManyToOne
 	@JoinColumn(name = "TicketTypeId")
 	private TicketType type;
+	
+	/*
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "orderdetailid")
+	private OrderDetail orderdetail;
+	 */
 
+	
+	//getterit ja setterit, constructor joinin jälkeen
+	
 	public Ticket() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Ticket(@NotNull Event event, @NotNull double price, @NotNull TicketType type) {

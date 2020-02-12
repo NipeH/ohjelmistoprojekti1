@@ -1,10 +1,15 @@
 package com.example.ohjelmistoprojekti1.domain;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+
 
 @Entity
 public class TicketType {
@@ -17,6 +22,11 @@ public class TicketType {
 	private String type;
 
 	private double discount;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="type")
+	private List<Ticket> tickets;
+ 
+ 
 
 	public TicketType() {
 		super();
@@ -28,6 +38,15 @@ public class TicketType {
 		super();
 		this.type = type;
 		this.discount = discount;
+	}
+	
+//muita?
+	public TicketType(long ticketTypeId, @NotNull String type, double discount, List<Ticket> tickets) {
+		super();
+		this.ticketTypeId = ticketTypeId;
+		this.type = type;
+		this.discount = discount;
+		this.tickets = tickets;
 	}
 
 	public long getTicketTypeId() {
