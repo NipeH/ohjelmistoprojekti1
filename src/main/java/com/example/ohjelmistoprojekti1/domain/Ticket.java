@@ -13,11 +13,11 @@ public class Ticket {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long ticketId;
+	private long ticketid;
 
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "EventId")
+	@JoinColumn(name = "eventid")
 	private Event event;
 
 	@NotNull
@@ -25,18 +25,14 @@ public class Ticket {
 
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "TicketTypeId")
+	@JoinColumn(name = "tickettypeid")
 	private TicketType type;
 	
-	/*
-	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "orderdetailid")
-	private OrderDetail orderdetail;
-	 */
+	@JoinColumn(name = "orderid")
+	private Order order;
 
 	
-	//getterit ja setterit, constructor joinin jälkeen
 	
 	public Ticket() {
 		super();
@@ -49,12 +45,21 @@ public class Ticket {
 		this.type = type;
 	}
 
-	public long getTicketId() {
-		return ticketId;
+	public Ticket(long ticketid, @NotNull Event event, @NotNull double price, @NotNull TicketType type, Order order) {
+		super();
+		this.ticketid = ticketid;
+		this.event = event;
+		this.price = price;
+		this.type = type;
+		this.order = order;
 	}
 
-	public void setTicketId(long ticketId) {
-		this.ticketId = ticketId;
+	public long getTicketid() {
+		return ticketid;
+	}
+
+	public void setTicketid(long ticketid) {
+		this.ticketid = ticketid;
 	}
 
 	public Event getEvent() {
@@ -80,5 +85,14 @@ public class Ticket {
 	public void setType(TicketType type) {
 		this.type = type;
 	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+	
 
 }

@@ -37,6 +37,9 @@ public class User {
 	@JoinColumn(name = "usertypeid")
 	private UserType usertype;
 	
+	@ManyToOne
+	@JoinColumn(name = "orderid")
+	private Order order;
 	
 
 	public User() {

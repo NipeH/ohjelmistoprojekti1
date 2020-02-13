@@ -19,7 +19,7 @@ public class Event {
 	@Id
 	@NotNull
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long eventId;
+	private long eventid;
 
 	@NotNull
 	private String name, description;
@@ -63,12 +63,12 @@ public class Event {
 		this.tickets = tickets;
 	}
 
-	public long getEventId() {
-		return eventId;
+	public long getEventid() {
+		return eventid;
 	}
 
-	public void setEventId(long eventId) {
-		this.eventId = eventId;
+	public void setEventid(long eventid) {
+		this.eventid = eventid;
 	}
 
 	public String getName() {

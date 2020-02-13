@@ -9,9 +9,7 @@ import javax.validation.constraints.Size;*/
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
-//test
 
 @Entity
 public class Customer {
@@ -35,17 +33,82 @@ public class Customer {
 	private String phone;
 
 	
-/*	
 	@ManyToOne
-	@JoinColumn(name="orderId")
+	@JoinColumn(name = "orderid")
 	private Order order;
-*/
 	
 	public Customer() {
 		super();
 	}
 
+	public Customer(long customerid, String firstname, String lastname, String email, String address, String phone,
+			Order order) {
+		super();
+		this.customerid = customerid;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.email = email;
+		this.address = address;
+		this.phone = phone;
+		this.order = order;
+	}
 
-//getterit ja setterit yms. kun joini kunnossa
+	public long getCustomerid() {
+		return customerid;
+	}
+
+	public void setCustomerid(long customerid) {
+		this.customerid = customerid;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+
 	
 }

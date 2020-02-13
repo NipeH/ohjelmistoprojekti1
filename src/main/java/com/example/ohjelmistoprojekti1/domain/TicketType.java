@@ -16,7 +16,7 @@ public class TicketType {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long ticketTypeId;
+	private long tickettypeid;
 
 	@NotNull
 	private String type;
@@ -41,20 +41,20 @@ public class TicketType {
 	}
 	
 //muita?
-	public TicketType(long ticketTypeId, @NotNull String type, double discount, List<Ticket> tickets) {
+	public TicketType(long tickettypeid, @NotNull String type, double discount, List<Ticket> tickets) {
 		super();
-		this.ticketTypeId = ticketTypeId;
+		this.tickettypeid = tickettypeid;
 		this.type = type;
 		this.discount = discount;
 		this.tickets = tickets;
 	}
 
-	public long getTicketTypeId() {
-		return ticketTypeId;
+	public long getTicketypeid() {
+		return tickettypeid;
 	}
 
-	public void setTicketTypeId(long ticketTypeId) {
-		this.ticketTypeId = ticketTypeId;
+	public void setTicketypeid(long tickettypeid) {
+		this.tickettypeid = tickettypeid;
 	}
 
 	public String getType() {
@@ -80,7 +80,7 @@ public class TicketType {
 		long temp;
 		temp = Double.doubleToLongBits(discount);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + (int) (ticketTypeId ^ (ticketTypeId >>> 32));
+		result = prime * result + (int) (tickettypeid ^ (tickettypeid >>> 32));
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
@@ -96,7 +96,7 @@ public class TicketType {
 		TicketType other = (TicketType) obj;
 		if (Double.doubleToLongBits(discount) != Double.doubleToLongBits(other.discount))
 			return false;
-		if (ticketTypeId != other.ticketTypeId)
+		if (tickettypeid != other.tickettypeid)
 			return false;
 		if (type == null) {
 			if (other.type != null)
