@@ -1,13 +1,14 @@
 package com.example.ohjelmistoprojekti1.domain;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-/*import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;*/
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+
+import javax.persistence.OneToMany;
 
 
 
@@ -31,83 +32,96 @@ public class Customer {
 	
 	//@NotNull(message="Syötä arvo")
 	private String phone;
-
 	
-	@ManyToOne
-	@JoinColumn(name = "orderid")
-	private Order order;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="customer")
+	private List<Order> orders;
+
 	
 	public Customer() {
 		super();
 	}
 
-	public Customer(long customerid, String firstname, String lastname, String email, String address, String phone,
-			Order order) {
+
+	public Customer(String firstname, String lastname, String email, String address, String phone, List<Order> orders) {
 		super();
-		this.customerid = customerid;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.email = email;
 		this.address = address;
 		this.phone = phone;
-		this.order = order;
+		this.orders = orders;
 	}
+
 
 	public long getCustomerid() {
 		return customerid;
 	}
 
+
 	public void setCustomerid(long customerid) {
 		this.customerid = customerid;
 	}
+
 
 	public String getFirstname() {
 		return firstname;
 	}
 
+
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
 	}
+
 
 	public String getLastname() {
 		return lastname;
 	}
 
+
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
+
 
 	public String getEmail() {
 		return email;
 	}
 
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 
 	public String getAddress() {
 		return address;
 	}
 
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
 
 	public String getPhone() {
 		return phone;
 	}
 
+
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
-	public Order getOrder() {
-		return order;
+
+	public List<Order> getOrders() {
+		return orders;
 	}
 
-	public void setOrder(Order order) {
-		this.order = order;
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
 	}
+
 
 
 	

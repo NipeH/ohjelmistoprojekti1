@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Ticket {
 
@@ -17,6 +19,7 @@ public class Ticket {
 
 	@NotNull
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name = "eventid")
 	private Event event;
 
@@ -25,10 +28,12 @@ public class Ticket {
 
 	@NotNull
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name = "tickettypeid")
 	private TicketType type;
 	
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name = "orderid")
 	private Order order;
 
@@ -45,9 +50,8 @@ public class Ticket {
 		this.type = type;
 	}
 
-	public Ticket(long ticketid, @NotNull Event event, @NotNull double price, @NotNull TicketType type, Order order) {
+	public Ticket(@NotNull Event event, @NotNull double price, @NotNull TicketType type, Order order) {
 		super();
-		this.ticketid = ticketid;
 		this.event = event;
 		this.price = price;
 		this.type = type;

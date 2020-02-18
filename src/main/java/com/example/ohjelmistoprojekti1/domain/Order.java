@@ -1,6 +1,7 @@
 package com.example.ohjelmistoprojekti1.domain;
 
-import java.sql.Timestamp;
+
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -8,7 +9,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -20,78 +25,104 @@ public class Order {
 	
 	private double total;
 	
-	private Timestamp timestamp;
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="order")
-	private List<User> users;
+	private Date date;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="order")
-	private List<Customer> customers;
+	
+	
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="order")
 	private List<Ticket> tickets;
 
+	@ManyToOne
+	@JsonIgnore
+	@JoinColumn(name = "userid")
+	private User user;
+	
+	@ManyToOne
+	@JsonIgnore
+	@JoinColumn(name = "customerid")
+	private Customer customer;
+	
+	
 	public Order() {
 		super();
 	}
 
-	public Order(long orderid, double total, Timestamp timestamp, List<User> users, List<Customer> customers,
-			List<Ticket> tickets) {
+
+	public Order(double total, Date date, List<Ticket> tickets, User user, Customer customer) {
 		super();
-		this.orderid = orderid;
 		this.total = total;
-		this.timestamp = timestamp;
-		this.users = users;
-		this.customers = customers;
+		this.date = date;
 		this.tickets = tickets;
+		this.user = user;
+		this.customer = customer;
 	}
+
 
 	public long getOrderid() {
 		return orderid;
 	}
 
+
 	public void setOrderid(long orderid) {
 		this.orderid = orderid;
 	}
+
 
 	public double getTotal() {
 		return total;
 	}
 
+
 	public void setTotal(double total) {
 		this.total = total;
 	}
 
-	public Timestamp getTimestamp() {
-		return timestamp;
+
+	public Date getDate() {
+		return date;
 	}
 
-	public void setTimestamp(Timestamp timestamp) {
-		this.timestamp = timestamp;
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	
+	/** @param date parameter in form: "yyyy-mm-dd" */
+	public void setDate(String date) {
+		this.date = java.sql.Date.valueOf(date);
 	}
 
-	public List<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(List<User> users) {
-		this.users = users;
-	}
-
-	public List<Customer> getCustomers() {
-		return customers;
-	}
-
-	public void setCustomers(List<Customer> customers) {
-		this.customers = customers;
-	}
 
 	public List<Ticket> getTickets() {
 		return tickets;
 	}
 
+
 	public void setTickets(List<Ticket> tickets) {
 		this.tickets = tickets;
 	}
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+
 	
 }

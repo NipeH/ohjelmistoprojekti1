@@ -1,12 +1,18 @@
 package com.example.ohjelmistoprojekti1.domain;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class User {
@@ -34,12 +40,12 @@ public class User {
 	private String password;
 	
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name = "usertypeid")
 	private UserType usertype;
 	
-	@ManyToOne
-	@JoinColumn(name = "orderid")
-	private Order order;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="user")
+	private List<Order> orders;
 	
 
 	public User() {
@@ -48,15 +54,33 @@ public class User {
 	}
 
 
+	public User(@NotNull(message = "Anna etunimi") String firstname,
+			@NotNull(message = "Anna sukuniminimi") String lastname,
+			@NotNull(message = "Anna puhelinnumero") String phonenumber,
+			@NotNull(message = "Anna sähköpostiosoite") String email,
+			@NotNull(message = "Anna käyttäjätunnus") String username,
+			@NotNull(message = "Anna salasana") String password, UserType usertype, List<Order> orders) {
+		super();
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.phonenumber = phonenumber;
+		this.email = email;
+		this.username = username;
+		this.password = password;
+		this.usertype = usertype;
+		this.orders = orders;
+	}
+	
+	
 
-	public User(long userid, @NotNull(message = "Anna etunimi") String firstname,
+
+	public User(@NotNull(message = "Anna etunimi") String firstname,
 			@NotNull(message = "Anna sukuniminimi") String lastname,
 			@NotNull(message = "Anna puhelinnumero") String phonenumber,
 			@NotNull(message = "Anna sähköpostiosoite") String email,
 			@NotNull(message = "Anna käyttäjätunnus") String username,
 			@NotNull(message = "Anna salasana") String password, UserType usertype) {
 		super();
-		this.userid = userid;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.phonenumber = phonenumber;
@@ -65,7 +89,6 @@ public class User {
 		this.password = password;
 		this.usertype = usertype;
 	}
-
 
 
 	public long getUserid() {
@@ -73,11 +96,9 @@ public class User {
 	}
 
 
-
 	public void setUserid(long userid) {
 		this.userid = userid;
 	}
-
 
 
 	public String getFirstname() {
@@ -85,11 +106,9 @@ public class User {
 	}
 
 
-
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
 	}
-
 
 
 	public String getLastname() {
@@ -97,11 +116,9 @@ public class User {
 	}
 
 
-
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
-
 
 
 	public String getPhonenumber() {
@@ -109,11 +126,9 @@ public class User {
 	}
 
 
-
 	public void setPhonenumber(String phonenumber) {
 		this.phonenumber = phonenumber;
 	}
-
 
 
 	public String getEmail() {
@@ -121,11 +136,9 @@ public class User {
 	}
 
 
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 
 
 	public String getUsername() {
@@ -133,11 +146,9 @@ public class User {
 	}
 
 
-
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
 
 
 	public String getPassword() {
@@ -145,11 +156,9 @@ public class User {
 	}
 
 
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
 
 
 	public UserType getUsertype() {
@@ -157,13 +166,19 @@ public class User {
 	}
 
 
-
 	public void setUsertype(UserType usertype) {
 		this.usertype = usertype;
 	}
 
 
+	public List<Order> getOrders() {
+		return orders;
+	}
 
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
 
 	
 

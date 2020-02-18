@@ -28,9 +28,17 @@ public class UserType {
 		super();
 	}
 
-	public UserType(long usertypeid, @NotNull String usertype, List<User> users) {
+	
+	
+	public UserType(@NotNull String usertype) {
 		super();
-		this.usertypeid = usertypeid;
+		this.usertype = usertype;
+	}
+
+
+
+	public UserType( @NotNull String usertype, List<User> users) {
+		super();
 		this.usertype = usertype;
 		this.users = users;
 	}
