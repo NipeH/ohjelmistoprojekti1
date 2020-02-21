@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- Securityä varten tulevaisuudessa: xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" -->
+
+<head>
+    <title>TicketGuru</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+
+<body>
+<!-- ADMIN TOIMINTOJA JATKOKEHITYKSEEN
+	<nav class="navbar navbar-light bg-light">
+ 		<div class="container d-flex flex-column flex-md-row justify-content-between">
+    		<a sec:authorize="hasAuthority('ADMIN')" href="/">Myyjät</a>
+  			<a sec:authorize="hasAuthority('ADMIN')" href="/" class="btn btn-success">Tapahtumat</a>
+			<a sec:authorize="hasAuthority('ADMIN')" href="/" class="btn btn-success">Asiakkaat</a>
+  		</div>
+	</nav>
+	</nav>
+-->
+	
+	<div align="center" class="jumbotron" >
+		<h1>TicketGuru</h1>
+<!--	LOGIN ominaisuuksia jatkokehitykseen:	
+		<form  th:action="@{/logout}" method="post">
+		<input type="submit" value="Kirjaudu ulos" class="btn btn-outline-danger">
+		</form>
+		<h3 th:text="${viesti}" /> -->
+	</div>
+	
+
+	
+    <table class="table table-striped"> 
+    
+   		<tr>
+   		 	<th>Nimi</th>
+   		 	<th>Kuvaus</th>
+   		 	<th>Tapahtumapaikka</th>
+   		 	<th>Päivä</th>
+   		 	<th>Kellonaika</th>
+			<!--sec:authorize="hasAuthority('ADMIN')"-->
+   		 	<th>Poista myynnistä</th>
+   		 	<th>Muokkaa</th>
+    	</tr>
+    	
+    	<tr th:each = "premise : ${premises}" height="100">
+    		<td th:text="${}"></td>
+    		<td th:text="${}"></td>
+    		<td th:text="${}"></td> 	
+    		<td th:text="${}"></td>	
+			<td th:text="${}"></td>	
+			<!--Kuva?-->
+    		<td> <img th:src="${}" height="100"></td> 
+			<!--sec:authorize="hasAuthority('ADMIN')"-->			
+    		<td> <a th:href="@{}" class="btn btn-outline-danger"> Poista </a></td> 	
+    		<td> <a th:href="@{}" class="btn btn-outline-warning"> Muokkaa </a></td> 		
+    	</tr>
+
+ 
+     </table>
+     
+		<!--sec:authorize="hasAuthority('ADMIN')"-->
+		<a href="/add" class="btn btn-success">Lisää tapahtuma</a>
+       
+
+</body>
+</html>

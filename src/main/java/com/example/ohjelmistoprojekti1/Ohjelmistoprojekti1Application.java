@@ -57,7 +57,17 @@ public class Ohjelmistoprojekti1Application {
 			event.setTime("19:00:00");
 			event.setTicketInventory(2);
 			eventRepo.save(event);
+			
+			Event ruisrock = new Event();
+			ruisrock.setName("Ruisrock");
+			ruisrock.setDescription("Esiintyjinä mm. Major Lazer");
+			ruisrock.setVenue("Turun ruissalo");
+			ruisrock.setDate("2020-07-16");
+			ruisrock.setTime("19:00:00");
+			ruisrock.setTicketInventory(200);
+			eventRepo.save(ruisrock);				
 
+			
 			// TicketType
 			TicketType normalTicket = new TicketType();
 			ticketTypeRepo.save(normalTicket);
@@ -83,13 +93,12 @@ public class Ohjelmistoprojekti1Application {
 			user.setPhonenumber("3435");
 			user.setUsername("Nipe");
 			user.setPassword("Nipe");
+		//	user.setUsertype(userTypeRepo.findByUsertype("User").get(0));
 			userRepo.save(user);
 			
-/*		
-*			userRepo.save(new User ("Essi", "Kissa", "Koira", "1234", "essi", "essi", userTypeRepo.findByName("User").get(0)));
-*
- * 		
- */
+	/*	
+			userRepo.save(new User ("Essi", "Kissa", "Koira", "1234", "essi", "essi", userTypeRepo.findByUsertype("User").get(0)));
+*/
 			
 			
 			//Customer

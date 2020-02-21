@@ -18,6 +18,7 @@ import com.example.ohjelmistoprojekti1.domain.UserRepository;
 import com.example.ohjelmistoprojekti1.domain.UserTypeRepository;
 
 
+
 @RestController
 public class EventRestController {
 	
@@ -45,6 +46,13 @@ public class EventRestController {
 	@RequestMapping(value="/events", method = RequestMethod.GET)
 	public @ResponseBody List <Event> RestEvents(){
 		return (List<Event>) erepo.findAll();
+	}
+	
+	
+	//tesstejä, ei toimi... 
+	@RequestMapping(value="/Ruisrock", method = RequestMethod.GET)
+	public @ResponseBody List <Event> RestEventsname(){
+		return (List<Event>) erepo.findByName("Ruisrock");
 	}
 }
 
