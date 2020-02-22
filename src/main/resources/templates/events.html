@@ -38,25 +38,30 @@
    		<tr>
    		 	<th>Nimi</th>
    		 	<th>Kuvaus</th>
+   		 	<th>Hinta</th>   		 	
    		 	<th>Tapahtumapaikka</th>
    		 	<th>Päivä</th>
    		 	<th>Kellonaika</th>
-			<!--sec:authorize="hasAuthority('ADMIN')"-->
+   		 	<th>Myynnissä kpl</th>   		 	
+			<!--sec:authorize="hasAuthority('ADMIN')"
    		 	<th>Poista myynnistä</th>
    		 	<th>Muokkaa</th>
+   		 	-->
     	</tr>
     	
-    	<tr th:each = "premise : ${premises}" height="100">
-    		<td th:text="${}"></td>
-    		<td th:text="${}"></td>
-    		<td th:text="${}"></td> 	
-    		<td th:text="${}"></td>	
-			<td th:text="${}"></td>	
+    	<tr th:each = "event : ${events}" height="100">
+    		<td th:text="${event.name}"></td>
+    		<td th:text="${event.description}"></td>
+    		<td th:text="${event.price}"></td> 	
+    		<td th:text="${event.venue}"></td>	
+			<td th:text="${event.date}"></td>
+			<td th:text="${event.time}"></td>
+			<td th:text="${event.ticketInventory}"></td>						
 			<!--Kuva?-->
-    		<td> <img th:src="${}" height="100"></td> 
-			<!--sec:authorize="hasAuthority('ADMIN')"-->			
+			<!--sec:authorize="hasAuthority('ADMIN')"			
     		<td> <a th:href="@{}" class="btn btn-outline-danger"> Poista </a></td> 	
-    		<td> <a th:href="@{}" class="btn btn-outline-warning"> Muokkaa </a></td> 		
+    		<td> <a th:href="@{}" class="btn btn-outline-warning"> Muokkaa </a></td>
+    		--> 		
     	</tr>
 
  

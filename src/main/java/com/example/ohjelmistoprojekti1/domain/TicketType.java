@@ -30,7 +30,7 @@ public class TicketType {
 
 	public TicketType() {
 		super();
-		this.type = "Normal";
+		this.type = "normal";
 		this.discount = 0.0;
 	}
 

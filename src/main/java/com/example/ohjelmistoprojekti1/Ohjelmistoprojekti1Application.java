@@ -52,6 +52,7 @@ public class Ohjelmistoprojekti1Application {
 			event.setName("Syksyn sävel");
 			event.setDescription("Suomen luonnon ja vuodenaikojen innoittama konserttiesitys."
 					+ " Soittimina tusina sadeputkea ja märkä rätti");
+			event.setPrice(50);
 			event.setVenue("Nipen takapiha. Kelivaraus. Poudan yllättäessä siirrymme roskakatokseen");
 			event.setDate("2020-09-16");
 			event.setTime("19:00:00");
@@ -61,6 +62,7 @@ public class Ohjelmistoprojekti1Application {
 			Event ruisrock = new Event();
 			ruisrock.setName("Ruisrock");
 			ruisrock.setDescription("Esiintyjinä mm. Major Lazer");
+			ruisrock.setPrice(200);
 			ruisrock.setVenue("Turun ruissalo");
 			ruisrock.setDate("2020-07-16");
 			ruisrock.setTime("19:00:00");
@@ -72,18 +74,31 @@ public class Ohjelmistoprojekti1Application {
 			TicketType normalTicket = new TicketType();
 			ticketTypeRepo.save(normalTicket);
 
-			TicketType childTicket = new TicketType("child", 0.5);
-			ticketTypeRepo.save(childTicket);
+			ticketTypeRepo.save(new TicketType ("children", 0.5));
 
+			ticketTypeRepo.save(new TicketType ("student", 0.3));
+			
 			// Ticket
+			/*
 			Ticket ticket = new Ticket(event, 10.00, childTicket, null);
 			ticketRepo.save(ticket);
 			
+			Ticket ticket2 = new Ticket(ruisrock, 10.00, childTicket, null);
+			ticketRepo.save(ticket2);
+			*/
 			
-/*			//Usertype
-			userTypeRepo.save(new UserType ("User"));
-			userTypeRepo.save(new UserType ("Admin"));
-*/
+			ticketRepo.save(new Ticket (eventRepo.findByName("Ruisrock").get(0), ticketTypeRepo.findByType("children").get(0)));
+			
+			Ticket ticket3 = new Ticket();
+			ticket3.setEvent(eventRepo.findByName("Ruisrock").get(0));
+			ticket3.setType(ticketTypeRepo.findByType("student").get(0));
+			
+			
+			
+			//Usertype
+			userTypeRepo.save(new UserType ("user"));
+			userTypeRepo.save(new UserType ("admin"));
+
 			
 			//User
 			User user = new User();
@@ -93,12 +108,13 @@ public class Ohjelmistoprojekti1Application {
 			user.setPhonenumber("3435");
 			user.setUsername("Nipe");
 			user.setPassword("Nipe");
-		//	user.setUsertype(userTypeRepo.findByUsertype("User").get(0));
+			user.setUsertype(userTypeRepo.findByUsertype("user").get(0));
 			userRepo.save(user);
 			
-	/*	
-			userRepo.save(new User ("Essi", "Kissa", "Koira", "1234", "essi", "essi", userTypeRepo.findByUsertype("User").get(0)));
-*/
+		
+			userRepo.save(new User ("Essi", "Kissa", "0408786", "1234@gmail.fi", "essi", "essi", userTypeRepo.findByUsertype("user").get(0)));
+			userRepo.save(new User ("Kissa-admin", "Kissa", "0408786", "1234@gmail.fi", "essi", "essi", userTypeRepo.findByUsertype("admin").get(0)));
+
 			
 			
 			//Customer

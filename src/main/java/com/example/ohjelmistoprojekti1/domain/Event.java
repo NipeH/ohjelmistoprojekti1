@@ -23,6 +23,9 @@ public class Event {
 
 	@NotNull
 	private String name, description;
+	
+
+	private double price;
 
 	@NotNull
 	private String venue;
@@ -42,18 +45,23 @@ public class Event {
 	public Event() {
 		super();
 	}
+	
+	
 
-	public Event(@NotNull String name, @NotNull String description, @NotNull String venue, @NotNull Date date,
-			@NotNull Time time, @NotNull int ticketInventory, List<Ticket> tickets) {
+	public Event(@NotNull String name, @NotNull String description, double price, @NotNull String venue,
+			@NotNull Date date, @NotNull Time time, @NotNull int ticketInventory, List<Ticket> tickets) {
 		super();
 		this.name = name;
 		this.description = description;
+		this.price = price;
 		this.venue = venue;
 		this.date = date;
 		this.time = time;
 		this.ticketInventory = ticketInventory;
 		this.tickets = tickets;
 	}
+	
+
 
 	public List<Ticket> getTickets() {
 		return tickets;
@@ -128,5 +136,15 @@ public class Event {
 	public void setTicketInventory(int ticketInventory) {
 		this.ticketInventory = ticketInventory;
 	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	
+	
 
 }

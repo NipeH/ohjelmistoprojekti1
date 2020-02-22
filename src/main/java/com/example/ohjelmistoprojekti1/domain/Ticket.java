@@ -23,7 +23,7 @@ public class Ticket {
 	@JoinColumn(name = "eventid")
 	private Event event;
 
-	@NotNull
+
 	private double price;
 
 	@NotNull
@@ -42,15 +42,21 @@ public class Ticket {
 	public Ticket() {
 		super();
 	}
+	
+	public Ticket(@NotNull Event event, @NotNull TicketType type) {
+		super();
+		this.event = event;
+		this.type = type;
+	}
 
-	public Ticket(@NotNull Event event, @NotNull double price, @NotNull TicketType type) {
+	public Ticket(@NotNull Event event, double price, @NotNull TicketType type) {
 		super();
 		this.event = event;
 		this.price = price;
 		this.type = type;
 	}
 
-	public Ticket(@NotNull Event event, @NotNull double price, @NotNull TicketType type, Order order) {
+	public Ticket(@NotNull Event event, double price, @NotNull TicketType type, Order order) {
 		super();
 		this.event = event;
 		this.price = price;
