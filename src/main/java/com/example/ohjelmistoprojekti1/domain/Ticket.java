@@ -42,7 +42,8 @@ public class Ticket {
 	public Ticket() {
 		super();
 	}
-	
+
+	//täytyy siivota
 	public Ticket(@NotNull Event event, @NotNull TicketType type) {
 		super();
 		this.event = event;

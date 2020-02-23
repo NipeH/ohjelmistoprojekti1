@@ -80,19 +80,20 @@ public class Ohjelmistoprojekti1Application {
 			
 			// Ticket
 			/*
-			Ticket ticket = new Ticket(event, 10.00, childTicket, null);
+			Ticket ticket = new Ticket(event, 10.00, "children", null);
 			ticketRepo.save(ticket);
 			
-			Ticket ticket2 = new Ticket(ruisrock, 10.00, childTicket, null);
+			Ticket ticket2 = new Ticket(ruisrock, 10.00, "student", null);
 			ticketRepo.save(ticket2);
 			*/
+			
 			
 			ticketRepo.save(new Ticket (eventRepo.findByName("Ruisrock").get(0), ticketTypeRepo.findByType("children").get(0)));
 			
 			Ticket ticket3 = new Ticket();
 			ticket3.setEvent(eventRepo.findByName("Ruisrock").get(0));
 			ticket3.setType(ticketTypeRepo.findByType("student").get(0));
-			
+			ticketRepo.save(ticket3);
 			
 			
 			//Usertype

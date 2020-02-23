@@ -29,7 +29,7 @@ public class Order {
 
 	
 	
-	
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="order")
 	private List<Ticket> tickets;
 

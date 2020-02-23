@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Event {
 	// TODO: improve alternative methods for time and date management
@@ -30,15 +32,16 @@ public class Event {
 	@NotNull
 	private String venue;
 
-	@NotNull
+	//@NotNull
 	private Date date;
 
-	@NotNull
+	//@NotNull
 	private Time time;
 
 	@NotNull
 	private int ticketInventory;
 
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
 	private List<Ticket> tickets;
 
@@ -59,6 +62,18 @@ public class Event {
 		this.time = time;
 		this.ticketInventory = ticketInventory;
 		this.tickets = tickets;
+	}
+	
+	public Event(@NotNull String name, @NotNull String description, double price, @NotNull String venue,
+			 Date date,  Time time, @NotNull int ticketInventory) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.venue = venue;
+		this.date = date;
+		this.time = time;
+		this.ticketInventory = ticketInventory;
 	}
 	
 
