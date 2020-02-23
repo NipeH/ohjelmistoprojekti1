@@ -60,6 +60,19 @@ public class EventRestController {
 		return (List<Ticket>) trepo.findAll();
 	}
 	
+	//lisää tapahtuma
+    @PostMapping("/api/addevent")
+    public Event addEvent(@RequestBody Event event) {    
+    return erepo.save(event);
+    }
+    
+	//lisää lippu
+    /*
+    @PostMapping("/api/addticket")
+    public Ticket addTicketEvent(@RequestBody Ticket ticket) {    
+    return trepo.save(ticket);
+    }
+	*/
 	
     //hae nimellä
 	@RequestMapping(value="/Ruisrock", method = RequestMethod.GET)
