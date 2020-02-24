@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -74,11 +75,7 @@ public class EventRestController {
     }
 	*/
 	
-    //hae nimellä
-	@RequestMapping(value="/Ruisrock", method = RequestMethod.GET)
-	public @ResponseBody List <Event> RestEventsname(){
-		return (List<Event>) erepo.findByName("Ruisrock");
-	}
+
 	
 	//hae parametrina tulevalla idllä
 	@RequestMapping(value="/event/{id}", method = RequestMethod.GET)

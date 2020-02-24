@@ -3,6 +3,7 @@ package com.example.ohjelmistoprojekti1.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -53,6 +54,32 @@ public class AppController {
 		return "events";
 	}
 	
-
+	//muokkaa - template puuttuu
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String editEvent(@PathVariable("id") Long eventid, Model model){
+    model.addAttribute("event", erepo.findById(eventid));
+    return "edit";
+}
+    
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public String deleteEvent(@PathVariable("id") Long eventid) {
+    erepo.deleteById(eventid);
+    return "redirect:../events";
+    
 
 }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

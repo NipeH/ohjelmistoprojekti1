@@ -35,15 +35,14 @@ public class Ticket {
 	@ManyToOne
 	@JsonIgnore
 	@JoinColumn(name = "orderid")
-	private Order order;
+	private Order orders;
 
 	
 	
 	public Ticket() {
 		super();
 	}
-
-	//täytyy siivota
+	
 	public Ticket(@NotNull Event event, @NotNull TicketType type) {
 		super();
 		this.event = event;
@@ -56,13 +55,23 @@ public class Ticket {
 		this.price = price;
 		this.type = type;
 	}
+	
 
-	public Ticket(@NotNull Event event, double price, @NotNull TicketType type, Order order) {
+
+	public Ticket(@NotNull Event event, double price, @NotNull TicketType type, Order orders) {
 		super();
 		this.event = event;
 		this.price = price;
 		this.type = type;
-		this.order = order;
+		this.orders = orders;
+	}
+
+	public Order getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Order orders) {
+		this.orders = orders;
 	}
 
 	public long getTicketid() {
@@ -97,13 +106,6 @@ public class Ticket {
 		this.type = type;
 	}
 
-	public Order getOrder() {
-		return order;
-	}
-
-	public void setOrder(Order order) {
-		this.order = order;
-	}
 	
 
 }
