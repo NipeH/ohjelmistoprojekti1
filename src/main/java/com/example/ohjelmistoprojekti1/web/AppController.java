@@ -42,10 +42,10 @@ public class AppController {
 	return "add";
 	}
 	
-	@RequestMapping(value="save",  method= RequestMethod.POST) 
+	@RequestMapping(value="/save",  method= RequestMethod.POST)
 	public String saveEvent(Event event, Model model) {
 		erepo.save(event);
-		return "redirect:events";
+		return "redirect:index";
 	}
 	
 	@RequestMapping(value = {"/index", "/", "events"})
