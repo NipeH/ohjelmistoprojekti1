@@ -108,7 +108,7 @@ tobecontinued....
 
 
 
-Tekninen kuvaus 
+## Tekninen kuvaus 
 
 Teknisessä kuvauksessa esitetään järjestelmän toteutuksen suunnittelussa tehdyt tekniset ratkaisut, esim. 
 
@@ -118,22 +118,35 @@ Palvelintoteutuksen yleiskuvaus: teknologiat, deployment-ratkaisut yms.
 
 Keskeisten rajapintojen kuvaukset, esimerkit REST-rajapinta. Tarvittaessa voidaan rajapinnan käyttöä täsmentää UML-sekvenssikaavioilla. 
 
-<h1> REST-API:t </h1>
+## REST-API:t
 
 Ohjelman API:t pyrkivät toteuttamaan REST-rajapintojen ominaisuudet. Rajapintojen toteutuksessa on käytetty yleisesti käytössä olevia käytänteitä koskien mm. palveluiden nimeämistä. Iteraatiosta kolme alkaen ohjelma tarjoaa oleellisimmat toiminnot ja endpointit JSON-muotoisina API:nä. 
 
-Kehitysvaiheen ohjelman basepath on http:localhost:8080/api <!-- Tarkista tämä -->
+### basepath
+Kehitysvaiheen ohjelman basepath on http:localhost:8080/api 
 Tuotantovaiheen ohjelman basepath jatkaa samalla käytännöllä siten, että API-palveluiden osoite on muotoa www.ticketguru.com/api, missä www.ticketguru.com on ohjelman etusivu. Jatkossa tässä dokumentissa viitataan basepathiin merkinnällä ".../api/", milloin ei ole erityistä syytä korostaa maininnan koskevan erikseen joko kehitys- tai tuotantovaiheen sovellusta. 
 
-Ensimmäisenä on luotu rajapinta tapahtumille, joihin Ticketguru myy lippuja. Kaikki luodut tapahtumat löytyvät osoitteesta .../api/events Sivu sisältää JSON-muotoisen taulukon, joka sisältää tapahtuma-objektit. Yksittäisiin objekteihin pääsee käsiksi osoitteesta .../api/events/{id} missä {id} on tapahtuman yksilöllinen id, esimerkiksi .../api/events/2 
+### Rajapinnat
+Ensimmäisenä on luotu rajapinta tapahtumille, joihin Ticketguru myy lippuja. Kaikki luodut tapahtumat löytyvät osoitteesta .../api/events Sivu sisältää JSON-muotoisen taulukon, joka sisältää tapahtuma-objektit ja relaatiot. Yksittäisiin objekteihin pääsee käsiksi osoitteesta .../api/events/{id} missä {id} on tapahtuman yksilöllinen id.
+
+### Tapahtumat / Events:
+<ul>
+ <li>Näytä kaikki tapahtumat: GET /api/events tai /events</li>
+ <li>Hae yksittäinen tapahtuma: GET /events/{id} tai /event/{id}</li> 
+  <li>Lisää tapahtuma: POST /add/event</li>
+ <li>Muokkaa tapahtumaa: PUT /edit/event/{id}</li>
+  <li>Poista tapahtuma: DELETE /delete/event/{id}</li>
+ </ul>
 
 
+### Avoimet ja autentikointia vaativat endpointit
+Tällä hetkellä kaikki endpointit ovat avoimia, myöhemmin asianmukaisen autentikoinnin ja autoriosinnin taakse tulevat kaikki muut paitsi POST:/login ja GET:events/...
 
+...
 
+## Toteutuksen yleisiä ratkaisuja, esim. turvallisuus. 
 
-Toteutuksen yleisiä ratkaisuja, esim. turvallisuus. 
-
-Tämän lisäksi 
+## Tämän lisäksi 
 
 ohjelmakoodin tulee olla kommentoitua 
 
@@ -141,13 +154,13 @@ luokkien, metodien ja muuttujien tulee olla kuvaavasti nimettyjä ja noudattaa j
 
 ohjelmiston pitää olla organisoitu komponentteihin niin, että turhalta toistolta vältytään 
 
-Testaus 
+## Testaus 
 
 Tässä kohdin selvitetään, miten ohjelmiston oikea toiminta varmistetaan testaamalla projektin aikana: millaisia testauksia tehdään ja missä vaiheessa. Testauksen tarkemmat sisällöt ja testisuoritusten tulosten raportit kirjataan erillisiin dokumentteihin. 
 
 Tänne kirjataan myös lopuksi järjestelmän tunnetut ongelmat, joita ei ole korjattu. 
 
-Asennustiedot 
+## Asennustiedot 
 
 Järjestelmän asennus on syytä dokumentoida kahdesta näkökulmasta: 
 
@@ -157,7 +170,7 @@ järjestelmän asentaminen tuotantoympäristöön: miten järjestelmän saisi as
 
 Asennusohjeesta tulisi ainakin käydä ilmi, miten käytettävä tietokanta ja käyttäjät tulee ohjelmistoa asentaessa määritellä (käytettävä tietokanta, käyttäjätunnus, salasana, tietokannan luonti yms.). 
 
-Käynnistys- ja käyttöohje 
+## Käynnistys- ja käyttöohje 
 
 Tyypillisesti tässä riittää kertoa ohjelman käynnistykseen tarvittava URL sekä mahdolliset kirjautumiseen tarvittavat tunnukset. Jos järjestelmän käynnistämiseen tai käyttöön liittyy joitain muita toimenpiteitä tai toimintajärjestykseen liittyviä asioita, nekin kerrotaan tässä yhteydessä. 
 
