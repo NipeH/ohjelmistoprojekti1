@@ -98,7 +98,7 @@ public class EventRestController {
     				event.setPrice(editEvent.getPrice());
     				event.setTicketInventory(editEvent.getTicketInventory());
     				return erepo.save(event);
-    			}) // ei mitään tallennettavaa
+    			}) 
     			.orElseGet(() -> {
     				editEvent.setEventid(eventid);
     				return erepo.save(editEvent);
