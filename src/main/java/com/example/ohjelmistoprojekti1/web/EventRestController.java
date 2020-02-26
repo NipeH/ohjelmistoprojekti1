@@ -68,6 +68,7 @@ public class EventRestController {
     }
     
 	//lisää lippu
+  //lisää lippu
     /*
     @PostMapping("/api/addticket")
     public Ticket addTicketEvent(@RequestBody Ticket ticket) {    
