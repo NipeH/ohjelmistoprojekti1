@@ -64,6 +64,16 @@ public class Ticket {
 	}
 	
 	
+	
+	public Ticket(@NotNull Event event, double price, @NotNull TicketType type, Order orders, boolean isValid) {
+		super();
+		this.event = event;
+		this.price = price;
+		this.type = type;
+		this.orders = orders;
+		this.isValid = isValid;
+	}
+
 	public void setValid(boolean isValid) {
 		this.isValid = isValid;
 	}

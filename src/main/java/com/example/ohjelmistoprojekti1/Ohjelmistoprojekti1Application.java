@@ -78,15 +78,7 @@ public class Ohjelmistoprojekti1Application {
 
 			ticketTypeRepo.save(new TicketType ("student", 0.3));
 			
-			// Ticket
-			/*
-			Ticket ticket = new Ticket(event, 10.00, "children", null);
-			ticketRepo.save(ticket);
-			
-			Ticket ticket2 = new Ticket(ruisrock, 10.00, "student", null);
-			ticketRepo.save(ticket2);
-			*/
-			
+			// Ticket		
 			
 			ticketRepo.save(new Ticket (eventRepo.findByName("Ruisrock").get(0), ticketTypeRepo.findByType("children").get(0)));
 			
@@ -95,6 +87,12 @@ public class Ohjelmistoprojekti1Application {
 			ticket3.setType(ticketTypeRepo.findByType("student").get(0));
 			ticket3.setValid(true);
 			ticketRepo.save(ticket3);
+			
+			Ticket ticket2 = new Ticket();
+			ticket2.setEvent(eventRepo.findByName("Syksyn sävel").get(0));
+			ticket2.setType(ticketTypeRepo.findByType("student").get(0));
+			ticket2.setValid(true);
+			ticketRepo.save(ticket2);
 			
 			
 			//Usertype

@@ -5,8 +5,11 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,47 +51,59 @@ public class EventRestController {
 	
 	@Autowired
 	private UserTypeRepository utrepo;	
-	
+
 	//hakee kaikki tapahtumat
-	@RequestMapping(value="/eventsrest", method = RequestMethod.GET)
+	@GetMapping(value="/api/events")
 	public @ResponseBody List <Event> RestEvents(){
 		return (List<Event>) erepo.findAll();
 	}
 	
-	//hae kaikki liput
-	@RequestMapping(value="/alltickets", method = RequestMethod.GET)
-	public @ResponseBody List <Ticket> allTickets(){
-		return (List<Ticket>) trepo.findAll();
-	}
-	
 	//lisää tapahtuma
-    @PostMapping("/api/addevent")
+    @PostMapping("/api/events")
     public Event addEvent(@RequestBody Event event) {    
     return erepo.save(event);
     }
     
-	//lisää lippu
-    /*
-    @PostMapping("/api/addticket")
-    public Ticket addTicketEvent(@RequestBody Ticket ticket) {    
-    return trepo.save(ticket);
-    }
-	*/
-	
-
-	
 	//hae parametrina tulevalla idllä
-	@RequestMapping(value="/event/{id}", method = RequestMethod.GET)
+	@GetMapping(value="/event/{id}")
     public @ResponseBody Optional<Event> eventById(@PathVariable("id") Long eventid) {	
     return erepo.findById(eventid);
-    } 
+    }     
 	
 	//hae parametrina tulevalla nimellä
-	@RequestMapping(value="/events/{name}", method = RequestMethod.GET)
+	@RequestMapping(value="/api/events/{name}", method = RequestMethod.GET)
     public @ResponseBody List<Event> eventByName(@PathVariable("name") String name) {	
     return erepo.findByNameIgnoreCase(name);
     } 	
 	
+	//poista
+	@DeleteMapping("/api/events/{id}")		
+	void deleteEvent(@PathVariable("id") Long eventid ) {
+		erepo.deleteById(eventid);
+	}
+	
+	//muokkaa	
+    @PutMapping("/api/events/{id}")
+	public Event editEvent(@RequestBody Event editEvent, @PathVariable("id") Long eventid) {	
+
+    	return erepo.findById(eventid)
+    			.map(event -> {
+    				event.setName(editEvent.getName());
+    				event.setVenue(editEvent.getVenue());
+    				event.setTime(editEvent.getTime());
+    				event.setDate(editEvent.getDate());
+    				event.setDescription(editEvent.getDescription());
+    				event.setPrice(editEvent.getPrice());
+    				event.setTicketInventory(editEvent.getTicketInventory());
+    				return erepo.save(event);
+    			}) // ei mitään tallennettavaa
+    			.orElseGet(() -> {
+    				editEvent.setEventid(eventid);
+    				return erepo.save(editEvent);
+    			});
+		
+	}		
+
 	
 }
 
