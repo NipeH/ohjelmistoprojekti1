@@ -52,14 +52,16 @@ public class EventRestController {
 	@Autowired
 	private UserTypeRepository utrepo;	
 
+	
 	//hakee kaikki tapahtumat
-	@GetMapping(value="/api/events")
+	@GetMapping(value="/events")
 	public @ResponseBody List <Event> RestEvents(){
 		return (List<Event>) erepo.findAll();
 	}
+
 	
 	//lisää tapahtuma
-    @PostMapping("/api/events")
+    @PostMapping("/add/event")
     public Event addEvent(@RequestBody Event event) {    
     return erepo.save(event);
     }
@@ -71,19 +73,19 @@ public class EventRestController {
     }     
 	
 	//hae parametrina tulevalla nimellä
-	@RequestMapping(value="/api/events/{name}", method = RequestMethod.GET)
+	@RequestMapping(value="/event/{name}", method = RequestMethod.GET)
     public @ResponseBody List<Event> eventByName(@PathVariable("name") String name) {	
     return erepo.findByNameIgnoreCase(name);
     } 	
 	
 	//poista
-	@DeleteMapping("/api/events/{id}")		
+	@DeleteMapping("/delete/event/{id}")		
 	void deleteEvent(@PathVariable("id") Long eventid ) {
 		erepo.deleteById(eventid);
 	}
 	
 	//muokkaa	
-    @PutMapping("/api/events/{id}")
+    @PutMapping("/edit/event/{id}")
 	public Event editEvent(@RequestBody Event editEvent, @PathVariable("id") Long eventid) {	
 
     	return erepo.findById(eventid)
