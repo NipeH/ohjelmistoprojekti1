@@ -75,7 +75,6 @@ public class Ohjelmistoprojekti1Application {
 			ticketTypeRepo.save(normalTicket);
 
 			ticketTypeRepo.save(new TicketType ("children", 0.5));
-
 			ticketTypeRepo.save(new TicketType ("student", 0.3));
 			
 			// Ticket		

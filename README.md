@@ -108,7 +108,7 @@ tobecontinued....
 
 
 
-Tekninen kuvaus 
+## Tekninen kuvaus 
 
 Teknisessä kuvauksessa esitetään järjestelmän toteutuksen suunnittelussa tehdyt tekniset ratkaisut, esim. 
 
@@ -127,13 +127,15 @@ Kehitysvaiheen ohjelman basepath on http:localhost:8080/api
 Tuotantovaiheen ohjelman basepath jatkaa samalla käytännöllä siten, että API-palveluiden osoite on muotoa www.ticketguru.com/api, missä www.ticketguru.com on ohjelman etusivu. Jatkossa tässä dokumentissa viitataan basepathiin merkinnällä ".../api/", milloin ei ole erityistä syytä korostaa maininnan koskevan erikseen joko kehitys- tai tuotantovaiheen sovellusta. 
 
 ### Rajapinnat
-Ensimmäisenä on luotu rajapinta tapahtumille, joihin Ticketguru myy lippuja. Kaikki luodut tapahtumat löytyvät osoitteesta .../api/events Sivu sisältää JSON-muotoisen taulukon, joka sisältää tapahtuma-objektit. Yksittäisiin objekteihin pääsee käsiksi osoitteesta .../api/events/{id} missä {id} on tapahtuman yksilöllinen id, esimerkiksi .../api/events/2 
+Ensimmäisenä on luotu rajapinta tapahtumille, joihin Ticketguru myy lippuja. Kaikki luodut tapahtumat löytyvät osoitteesta .../api/events Sivu sisältää JSON-muotoisen taulukon, joka sisältää tapahtuma-objektit ja relaatiot. Yksittäisiin objekteihin pääsee käsiksi osoitteesta .../api/events/{id} missä {id} on tapahtuman yksilöllinen id.
 
 ### Tapahtumat / Events:
 <ul>
- <li>Näytä kaikki tapahtumat: GET /api/events</li>
-  <li>Lisää tapahtuma: POST /api/events</li>
- <li></li>
+ <li>Näytä kaikki tapahtumat: GET /api/events tai /events</li>
+ <li>Hae yksittäinen tapahtuma: GET /events/{id} tai /event/{id}</li> 
+  <li>Lisää tapahtuma: POST /add/event</li>
+ <li>Muokkaa tapahtumaa: PUT /edit/event/{id}</li>
+  <li>Poista tapahtuma: DELETE /delete/event/{id}</li>
  </ul>
 
 
