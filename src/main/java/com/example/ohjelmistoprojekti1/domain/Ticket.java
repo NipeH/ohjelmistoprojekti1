@@ -23,7 +23,6 @@ public class Ticket {
 	@JoinColumn(name = "eventid")
 	private Event event;
 
-
 	private double price;
 
 	@NotNull
@@ -31,18 +30,18 @@ public class Ticket {
 	@JsonIgnore
 	@JoinColumn(name = "tickettypeid")
 	private TicketType type;
-	
+
 	@ManyToOne
 	@JsonIgnore
 	@JoinColumn(name = "orderid")
 	private Order orders;
 
-	
-	
+	private boolean isValid;
+
 	public Ticket() {
 		super();
 	}
-	
+
 	public Ticket(@NotNull Event event, @NotNull TicketType type) {
 		super();
 		this.event = event;
@@ -55,8 +54,6 @@ public class Ticket {
 		this.price = price;
 		this.type = type;
 	}
-	
-
 
 	public Ticket(@NotNull Event event, double price, @NotNull TicketType type, Order orders) {
 		super();
@@ -64,6 +61,11 @@ public class Ticket {
 		this.price = price;
 		this.type = type;
 		this.orders = orders;
+	}
+	
+	
+	public void setValid(boolean isValid) {
+		this.isValid = isValid;
 	}
 
 	public Order getOrders() {
@@ -106,6 +108,8 @@ public class Ticket {
 		this.type = type;
 	}
 
-	
+	public boolean isValid() {
+		return this.isValid;
+	}
 
 }

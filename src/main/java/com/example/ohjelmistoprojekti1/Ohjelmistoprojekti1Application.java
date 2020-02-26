@@ -93,6 +93,7 @@ public class Ohjelmistoprojekti1Application {
 			Ticket ticket3 = new Ticket();
 			ticket3.setEvent(eventRepo.findByName("Ruisrock").get(0));
 			ticket3.setType(ticketTypeRepo.findByType("student").get(0));
+			ticket3.setValid(true);
 			ticketRepo.save(ticket3);
 			
 			
