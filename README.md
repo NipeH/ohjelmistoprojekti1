@@ -118,7 +118,7 @@ Palvelintoteutuksen yleiskuvaus: teknologiat, deployment-ratkaisut yms.
 
 Keskeisten rajapintojen kuvaukset, esimerkit REST-rajapinta. Tarvittaessa voidaan rajapinnan käyttöä täsmentää UML-sekvenssikaavioilla. 
 
-<h1> REST-API:t </h1>
+## REST-API:t
 
 Ohjelman API:t pyrkivät toteuttamaan REST-rajapintojen ominaisuudet. Rajapintojen toteutuksessa on käytetty yleisesti käytössä olevia käytänteitä koskien mm. palveluiden nimeämistä. Iteraatiosta kolme alkaen ohjelma tarjoaa oleellisimmat toiminnot ja endpointit JSON-muotoisina API:nä. 
 
