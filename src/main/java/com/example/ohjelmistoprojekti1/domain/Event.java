@@ -76,6 +76,17 @@ public class Event {
 		this.ticketInventory = ticketInventory;
 	}
 	
+	public Event(@NotNull String name, @NotNull String description, double price, @NotNull String venue,
+			 String date,  String time, @NotNull int ticketInventory) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.venue = venue;
+		this.date = java.sql.Date.valueOf(date);
+		this.time = java.sql.Time.valueOf(time);
+		this.ticketInventory = ticketInventory;
+	}
 
 
 	public List<Ticket> getTickets() {
