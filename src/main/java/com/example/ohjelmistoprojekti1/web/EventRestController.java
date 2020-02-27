@@ -66,6 +66,19 @@ public class EventRestController {
     return erepo.save(event);
     }
     
+
+	//lisää lippu
+  //lisää lippu
+    /*
+    @PostMapping("/api/addticket")
+    public Ticket addTicketEvent(@RequestBody Ticket ticket) {    
+    return trepo.save(ticket);
+    }
+	*/
+	
+
+	
+
 	//hae parametrina tulevalla idllä
 	@GetMapping(value="/event/{id}")
     public @ResponseBody Optional<Event> eventById(@PathVariable("id") Long eventid) {	
