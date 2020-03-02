@@ -77,11 +77,11 @@ public class EventRestController {
 	// poista
 	@DeleteMapping("/delete/event/{id}")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT) // 204 jos onnistuu
-	public void deleteEvent(@PathVariable("id") /* @Min(1) */Long eventid) { // vähintään 1 pituinen paramentri
-																				// annettava
+	public void deleteEvent(@PathVariable("id") @Min(1) Long eventid) {// parametri väh.1:n pituinen
 		try {
 			erepo.deleteById(eventid);
 		} catch (Exception e) {
+			//palauttaa status 404, jos id:tä vastaavaa eventiä ei löydy
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Entity Not Found", e);
 		}
 	}
