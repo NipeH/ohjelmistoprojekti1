@@ -94,7 +94,7 @@ public class EventRestController {
     			.map(event -> {
     				event.setName(editEvent.getName());
     				event.setVenue(editEvent.getVenue());
-    				event.setTime(editEvent.getTime());
+    				event.setTime(editEvent.getTimeStr());
     				event.setDate(editEvent.getDate());
     				event.setDescription(editEvent.getDescription());
     				event.setPrice(editEvent.getPrice());
