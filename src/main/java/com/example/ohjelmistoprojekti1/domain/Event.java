@@ -146,8 +146,22 @@ public class Event {
 		return time;
 	}
 
-	public void setTime(Time time) {
-		this.time = time;
+	public void setTime(Object timeObj) {
+		if (timeObj instanceof Time) {
+			this.time =(Time) timeObj;			
+		} else if (timeObj instanceof String) {
+			timestr = (String) timeObj;
+			if (timestr.length() == 5) {
+				timestr += ":00";
+			}
+			this.time = Time.valueOf(timestr);
+		} else {
+			try {
+				this.time = Time.valueOf(timeObj.toString());
+			} catch (Exception e){
+				System.out.println(e.getMessage());
+			}
+		}
 	}
 	
 	public String getTimestr() {
@@ -155,6 +169,13 @@ public class Event {
 	}
 	public void setTimestr(String timestr) {
 		this.timestr = timestr;
+		try {
+			timestr += ":00";
+			this.time = Time.valueOf(timestr);			
+		}
+		catch (Exception e ) {
+			System.out.println("Virhe setTimestr() => " + e.getMessage());
+		}
 	}
 
 	/** @param time parameter in form: "hh:mm:ss" */
