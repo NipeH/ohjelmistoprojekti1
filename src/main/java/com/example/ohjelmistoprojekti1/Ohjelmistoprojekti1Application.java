@@ -134,6 +134,8 @@ public class Ohjelmistoprojekti1Application {
 			order.setCustomer(null);
 			order.setTickets(null);
 			*/
+			
+			System.out.println("End of commandLineRunner");
 		};
 	}
 }

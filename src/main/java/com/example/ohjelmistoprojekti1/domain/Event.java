@@ -35,8 +35,8 @@ public class Event {
 	//@NotNull
 	private Date date;
 
-	//@NotNull
 	private Time time;
+	private String timestr;
 
 	@NotNull
 	private int ticketInventory;
@@ -50,7 +50,7 @@ public class Event {
 	}
 	
 	
-
+/*
 	public Event(@NotNull String name, @NotNull String description, double price, @NotNull String venue,
 			@NotNull Date date, @NotNull Time time, @NotNull int ticketInventory, List<Ticket> tickets) {
 		super();
@@ -87,7 +87,7 @@ public class Event {
 		this.time = java.sql.Time.valueOf(time);
 		this.ticketInventory = ticketInventory;
 	}
-
+*/
 
 	public List<Ticket> getTickets() {
 		return tickets;
@@ -149,10 +149,18 @@ public class Event {
 	public void setTime(Time time) {
 		this.time = time;
 	}
+	
+	public String getTimestr() {
+		return timestr;
+	}
+	public void setTimestr(String timestr) {
+		this.timestr = timestr;
+	}
 
 	/** @param time parameter in form: "hh:mm:ss" */
 	public void setTime(String time) {
 		this.time = java.sql.Time.valueOf(time);
+		//this.time = time;
 	}
 
 	public int getTicketInventory() {
