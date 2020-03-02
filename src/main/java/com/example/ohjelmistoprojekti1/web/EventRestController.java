@@ -71,7 +71,13 @@ public class EventRestController {
 	@PostMapping(value = "/add/event")
 	@ResponseStatus(value = HttpStatus.CREATED) // Palauttaa 201 onnistuessaan
 	public Event addEvent(@Valid @RequestBody Event event) {
-		return erepo.save(event);
+		try {
+			return erepo.save(event);
+		} catch (Exception e) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+					"Tapahtuman luonti ei onnistunut, tarkista pakolliset kentät", e);
+
+		}
 	}
 
 	// poista
@@ -81,28 +87,35 @@ public class EventRestController {
 		try {
 			erepo.deleteById(eventid);
 		} catch (Exception e) {
-			//palauttaa status 404, jos id:tä vastaavaa eventiä ei löydy
+			// palauttaa status 404, jos id:tä vastaavaa eventiä ei löydy
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Entity Not Found", e);
 		}
 	}
 
 	// muokkaa
 	@PutMapping("/edit/event/{id}")
-	public Event editEvent(@Valid @RequestBody Event editEvent, @PathVariable("id") @Min(1) Long eventid) {
-
-		return erepo.findById(eventid).map(event -> {
-			event.setName(editEvent.getName());
-			event.setVenue(editEvent.getVenue());
-			event.setTime(editEvent.getTimeStr());
-			event.setDate(editEvent.getDate());
-			event.setDescription(editEvent.getDescription());
-			event.setPrice(editEvent.getPrice());
-			event.setTicketInventory(editEvent.getTicketInventory());
-			return erepo.save(event);
-		}).orElseGet(() -> {
-			editEvent.setEventid(eventid);
-			return erepo.save(editEvent);
-		});
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public Event editEvent(@Valid @RequestBody Event editEvent, @PathVariable("id") @Min(1) Long eventid){
+		
+		try {
+			return erepo.findById(eventid).map(event -> {
+				event.setName(editEvent.getName());
+				event.setVenue(editEvent.getVenue());
+				event.setTime(editEvent.getTimeStr());
+				event.setDate(editEvent.getDate());
+				event.setDescription(editEvent.getDescription());
+				event.setPrice(editEvent.getPrice());
+				event.setTicketInventory(editEvent.getTicketInventory());
+				return erepo.save(event);
+			}).orElseGet(() -> {
+				editEvent.setEventid(eventid);
+				return erepo.save(editEvent);
+			});
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+		}
 
 	}
 

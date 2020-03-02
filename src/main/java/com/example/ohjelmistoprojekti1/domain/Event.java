@@ -30,9 +30,10 @@ public class Event {
 	@NotNull
 	private String venue;
 
+	@NotNull
 	private Date date;
 
-	//Aika asetetaan merkkijonona hh:mm, vastaavan palautuksen saa metodilla getTimeStr
+	@NotNull
 	private Time time;
 
 	@NotNull
@@ -102,7 +103,7 @@ public class Event {
 	public Time getTime() {
 		return time;
 	}
-
+	
 	/** returns String presentation of time as hh:mm */
 	public String getTimeStr() {
 		String timestr = time.toString();
@@ -121,8 +122,13 @@ public class Event {
 //		}
 //	}
 
-	/** @param time parameter in form: "hh:mm" */
+	/** @param time parameter in form: "hh:mm:ss" */
 	public void setTime(String time) {
+		this.time = java.sql.Time.valueOf(time);
+	}
+	
+	/** @param time parameter in form: "hh:mm" */
+	public void setTimeStr(String time) {
 		time += ":00";
 		this.time = java.sql.Time.valueOf(time);
 	}
