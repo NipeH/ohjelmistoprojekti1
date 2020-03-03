@@ -16,7 +16,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Event {
-	// TODO: improve alternative methods for time and date management
 
 	@Id
 	@NotNull
@@ -25,17 +24,16 @@ public class Event {
 
 	@NotNull
 	private String name, description;
-	
 
 	private double price;
 
 	@NotNull
 	private String venue;
 
-	//@NotNull
+	@NotNull
 	private Date date;
 
-	//@NotNull
+	@NotNull
 	private Time time;
 
 	@NotNull
@@ -48,46 +46,6 @@ public class Event {
 	public Event() {
 		super();
 	}
-	
-	
-
-	public Event(@NotNull String name, @NotNull String description, double price, @NotNull String venue,
-			@NotNull Date date, @NotNull Time time, @NotNull int ticketInventory, List<Ticket> tickets) {
-		super();
-		this.name = name;
-		this.description = description;
-		this.price = price;
-		this.venue = venue;
-		this.date = date;
-		this.time = time;
-		this.ticketInventory = ticketInventory;
-		this.tickets = tickets;
-	}
-	
-	public Event(@NotNull String name, @NotNull String description, double price, @NotNull String venue,
-			 Date date,  Time time, @NotNull int ticketInventory) {
-		super();
-		this.name = name;
-		this.description = description;
-		this.price = price;
-		this.venue = venue;
-		this.date = date;
-		this.time = time;
-		this.ticketInventory = ticketInventory;
-	}
-	
-	public Event(@NotNull String name, @NotNull String description, double price, @NotNull String venue,
-			 String date,  String time, @NotNull int ticketInventory) {
-		super();
-		this.name = name;
-		this.description = description;
-		this.price = price;
-		this.venue = venue;
-		this.date = java.sql.Date.valueOf(date);
-		this.time = java.sql.Time.valueOf(time);
-		this.ticketInventory = ticketInventory;
-	}
-
 
 	public List<Ticket> getTickets() {
 		return tickets;
@@ -145,13 +103,33 @@ public class Event {
 	public Time getTime() {
 		return time;
 	}
-
-	public void setTime(Time time) {
-		this.time = time;
+	
+	/** returns String presentation of time as hh:mm */
+	public String getTimeStr() {
+		String timestr = time.toString();
+		String[] pcs = timestr.split(":");
+		timestr = pcs[0] + ":" + pcs[1];
+		return timestr;
 	}
+
+//	public void setTime(Object timeObj) {
+//		if (timeObj instanceof Time) {
+//			this.time = (Time) timeObj;
+//		} else if (timeObj instanceof String) {
+//			String s = (String) timeObj;
+//			s += ":00";
+//			this.time = Time.valueOf(s);
+//		}
+//	}
 
 	/** @param time parameter in form: "hh:mm:ss" */
 	public void setTime(String time) {
+		this.time = java.sql.Time.valueOf(time);
+	}
+	
+	/** @param time parameter in form: "hh:mm" */
+	public void setTimeStr(String time) {
+		time += ":00";
 		this.time = java.sql.Time.valueOf(time);
 	}
 
@@ -170,7 +148,5 @@ public class Event {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	
-	
 
 }

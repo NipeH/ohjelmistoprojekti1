@@ -62,12 +62,19 @@
 				<tr>
 			<td><label for="date">Päivämäärä muodossa: yyyy-mm-dd</label></td>
 			<td><input type="date" id="date" th:field="*{date}" /></td>
+<<<<<<< HEAD
 			<td th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Error </td>
 				</tr>				
 				<tr>
 			<td><label for="time">Aika muodossa: hh:mm:ss</label></td>
 			<td><input type="text" id="time" th:field="*{time}" /></td>
 			<td th:if="${#fields.hasErrors('time')}" th:errors="*{time}">Error </td>
+=======
+				</tr>				
+				<tr>
+			<td><label for="time">Aika muodossa: hh:mm:ss</label></td>
+			<td><input type="time" id="time" th:field="*{time}" /></td>
+>>>>>>> 0a37a7721799119e6636e8bdfbb2c021ced7c08e
 				</tr>					
 				<tr>
 			<td><label for="ticketInventory">Paikkoja myynnissä</label></td>
