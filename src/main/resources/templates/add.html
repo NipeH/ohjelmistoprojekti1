@@ -40,31 +40,39 @@
 				<tr>
 		  	<td><label for="name">Tapahtuman nimi</label></td>
 			<td><input type="text" id="name" th:field="*{name}" /></td>
-<!--  			<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error </td> -->
+			<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error </td>
 				</tr>
 				<tr>
 		  	<td><label for="description">Kuvaus</label></td>
 			<td><input type="text" id="description" th:field="*{description}" /></td>
+			<td th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Error </td>			
 				</tr>
 				<tr>
 			<td><label for="price">Perushinta</label></td>
 			<td><input type="text" id="price" th:field="*{price}" /></td>
+			
+			<!--<td th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Error </td> -->
+			
 				</tr>
 				<tr>
 			<td><label for="venue">Paikka</label></td>
 			<td><input type="text" id="venue" th:field="*{venue}" /></td>
+			<td th:if="${#fields.hasErrors('venue')}" th:errors="*{venue}">Error </td>
 				</tr>
 				<tr>
 			<td><label for="date">Päivämäärä muodossa: yyyy-mm-dd</label></td>
-			<td><input type="text" id="date" th:field="*{date}" /></td>
+			<td><input type="date" id="date" th:field="*{date}" /></td>
+			<td th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Error </td>
 				</tr>				
 				<tr>
 			<td><label for="time">Aika muodossa: hh:mm:ss</label></td>
 			<td><input type="text" id="time" th:field="*{time}" /></td>
+			<td th:if="${#fields.hasErrors('time')}" th:errors="*{time}">Error </td>
 				</tr>					
 				<tr>
 			<td><label for="ticketInventory">Paikkoja myynnissä</label></td>
 			<td><input type="text" id="ticketInventory" th:field="*{ticketInventory}" /></td>
+			<td th:if="${#fields.hasErrors('ticketInventory')}" th:errors="*{ticketInventory}">Error </td>
 				</tr>
 											
 				<tr>
