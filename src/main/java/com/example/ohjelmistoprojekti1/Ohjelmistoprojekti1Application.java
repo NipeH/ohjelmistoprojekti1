@@ -55,7 +55,7 @@ public class Ohjelmistoprojekti1Application {
 			event.setPrice(50);
 			event.setVenue("Nipen takapiha. Kelivaraus. Poudan yllättäessä siirrymme roskakatokseen");
 			event.setDate("2020-09-16");
-			event.setTimeStr("19:00");
+			event.setTime("19:00");
 			event.setTicketInventory(2);
 			eventRepo.save(event);
 			
@@ -65,7 +65,7 @@ public class Ohjelmistoprojekti1Application {
 			ruisrock.setPrice(200);
 			ruisrock.setVenue("Turun ruissalo");
 			ruisrock.setDate("2020-07-16");
-			ruisrock.setTimeStr("19:00");
+			ruisrock.setTime("19:00");
 			ruisrock.setTicketInventory(200);
 			eventRepo.save(ruisrock);				
 

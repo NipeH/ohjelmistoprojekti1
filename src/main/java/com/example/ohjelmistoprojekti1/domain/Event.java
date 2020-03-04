@@ -33,8 +33,7 @@ public class Event {
 	@NotNull
 	private Date date;
 
-	@NotNull
-	private Time time;
+	private String time;
 
 	@NotNull
 	private int ticketInventory;
@@ -45,6 +44,34 @@ public class Event {
 
 	public Event() {
 		super();
+	}
+
+	public void setTime(String time) {
+		try {
+			String[] psc = time.split(":");
+			int tunnit = Integer.parseInt(psc[0]);
+			int minuutit = Integer.parseInt(psc[1]);
+			if (tunnit > 24) {
+				tunnit = 24;
+			}
+			if (tunnit < 0) {
+				tunnit = 0;
+			}
+			if (minuutit > 60) {
+				minuutit = 60;
+			}
+			if (minuutit < 0) {
+				minuutit = 0;
+			}
+			time = tunnit + ":" + minuutit;
+		} catch (Exception e) {
+			System.out.println("Virhe ajan asettamisessa: " + e.getMessage());
+		}
+		this.time = time;
+	}
+
+	public String getTime() {
+		return this.time;
 	}
 
 	public List<Ticket> getTickets() {
@@ -98,39 +125,6 @@ public class Event {
 	/** @param date parameter in form: "yyyy-mm-dd" */
 	public void setDate(String date) {
 		this.date = java.sql.Date.valueOf(date);
-	}
-
-	public Time getTime() {
-		return time;
-	}
-	
-	/** returns String presentation of time as hh:mm */
-	public String getTimeStr() {
-		String timestr = time.toString();
-		String[] pcs = timestr.split(":");
-		timestr = pcs[0] + ":" + pcs[1];
-		return timestr;
-	}
-
-//	public void setTime(Object timeObj) {
-//		if (timeObj instanceof Time) {
-//			this.time = (Time) timeObj;
-//		} else if (timeObj instanceof String) {
-//			String s = (String) timeObj;
-//			s += ":00";
-//			this.time = Time.valueOf(s);
-//		}
-//	}
-
-	/** @param time parameter in form: "hh:mm:ss" */
-	public void setTime(String time) {
-		this.time = java.sql.Time.valueOf(time);
-	}
-	
-	/** @param time parameter in form: "hh:mm" */
-	public void setTimeStr(String time) {
-		time += ":00";
-		this.time = java.sql.Time.valueOf(time);
 	}
 
 	public int getTicketInventory() {

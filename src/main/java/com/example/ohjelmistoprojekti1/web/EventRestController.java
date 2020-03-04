@@ -3,7 +3,6 @@ package com.example.ohjelmistoprojekti1.web;
 import java.util.List;
 import java.util.Optional;
 
-import javax.persistence.EntityNotFoundException;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
@@ -15,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -93,15 +93,15 @@ public class EventRestController {
 	}
 
 	// muokkaa
-	@PutMapping("/edit/event/{id}")
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	public Event editEvent(@Valid @RequestBody Event editEvent, @PathVariable("id") @Min(1) Long eventid){
-		
+	@PutMapping("/put/event/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	public Event overrideEvent(@Valid @RequestBody Event editEvent, @PathVariable("id") @Min(1) Long eventid) {
+
 		try {
 			return erepo.findById(eventid).map(event -> {
 				event.setName(editEvent.getName());
 				event.setVenue(editEvent.getVenue());
-				event.setTime(editEvent.getTimeStr());
+				event.setTime(editEvent.getTime());
 				event.setDate(editEvent.getDate());
 				event.setDescription(editEvent.getDescription());
 				event.setPrice(editEvent.getPrice());
@@ -112,7 +112,6 @@ public class EventRestController {
 				return erepo.save(editEvent);
 			});
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 		}
@@ -126,14 +125,16 @@ public class EventRestController {
 	}
 
 	// hae parametrina tulevalla idllä
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/events/{id}")
 	public @ResponseBody Optional<Event> eventById(@PathVariable("id") Long eventid) {
-		// try {
-		return erepo.findById(eventid);
-		/*
-		 * } catch (NotFoundException ex) { throw new ResponseStatusException(
-		 * HttpStatus.NOT_FOUND, "Tapahtumaa ei löydy", ex); }
-		 */
+		ResponseStatusException e = new ResponseStatusException(HttpStatus.NOT_FOUND, "Tapahtumaa ei löydy");
+		if (!erepo.findById(eventid).isPresent()) {
+			throw e;
+		} else {
+			return erepo.findById(eventid);
+		}
+
 	}
 
 	// hae parametrina tulevalla nimellä
@@ -142,4 +143,28 @@ public class EventRestController {
 		return erepo.findByNameIgnoreCase(name);
 	}
 
+	// muokkaa
+	@PatchMapping("/edit/event/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	public Event editEvent(@Valid @RequestBody Event editEvent, @PathVariable("id") @Min(1) Long eventid) {
+
+		try {
+			return erepo.findById(eventid).map(event -> {
+				event.setName(editEvent.getName());
+				event.setVenue(editEvent.getVenue());
+				event.setTime(editEvent.getTime());
+				event.setDate(editEvent.getDate());
+				event.setDescription(editEvent.getDescription());
+				event.setPrice(editEvent.getPrice());
+				event.setTicketInventory(editEvent.getTicketInventory());
+				return erepo.save(event);
+			}).orElseGet(() -> {
+				editEvent.setEventid(eventid);
+				return erepo.save(editEvent);
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+		}
+	}
 }
