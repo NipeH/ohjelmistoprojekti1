@@ -88,7 +88,11 @@ public class EventRestController {
 			erepo.deleteById(eventid);
 		} catch (Exception e) {
 			// palauttaa status 404, jos id:tä vastaavaa eventiä ei löydy
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Entity Not Found", e);
+			if (!erepo.findById(eventid).isPresent()) {
+				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Entity Not Found", e);
+			} else {
+				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unable to delete event", e);
+			}
 		}
 	}
 
@@ -151,13 +155,35 @@ public class EventRestController {
 		try {
 
 			return erepo.findById(eventid).map(event -> {
-				event.setName(editEvent.getName());
-				event.setVenue(editEvent.getVenue());
-				event.setTime(editEvent.getTime());
-				event.setDate(editEvent.getDate());
-				event.setDescription(editEvent.getDescription());
-				event.setPrice(editEvent.getPrice());
-				event.setTicketInventory(editEvent.getTicketInventory());
+//				käydään läpi, mitä arvoja pyyntö sisältää:
+				if (!editEvent.getName().equals(null)) {
+					event.setName(editEvent.getName());
+				}
+
+				if (!editEvent.getVenue().equals(null)) {
+					event.setVenue(editEvent.getVenue());
+				}
+
+				if (!editEvent.getTime().equals(null)) {
+					event.setTime(editEvent.getTime());
+				}
+
+				if (!editEvent.getDate().equals(null)) {
+					event.setDate(editEvent.getDate());
+				}
+
+				if (!editEvent.getDescription().equals(null)) {
+					event.setDescription(editEvent.getDescription());
+				}
+
+				if (!((Double) editEvent.getPrice()).equals(null)) {
+					event.setPrice(editEvent.getPrice());
+				}
+
+				if (!((Integer) editEvent.getTicketInventory()).equals(null)) {
+					event.setTicketInventory(editEvent.getTicketInventory());
+				}
+
 				return erepo.save(event);
 			}).orElseGet(() -> {
 				editEvent.setEventid(eventid);
