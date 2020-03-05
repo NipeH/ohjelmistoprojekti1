@@ -92,7 +92,7 @@ public class EventRestController {
 		}
 	}
 
-	// muokkaa
+	// muokkaa PUT-metodilla -> ylikirjoittava, idempotentti metodi
 	@PutMapping("/put/event/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public Event overrideEvent(@Valid @RequestBody Event editEvent, @PathVariable("id") @Min(1) Long eventid) {
@@ -149,6 +149,7 @@ public class EventRestController {
 	public Event editEvent(@Valid @RequestBody Event editEvent, @PathVariable("id") @Min(1) Long eventid) {
 
 		try {
+
 			return erepo.findById(eventid).map(event -> {
 				event.setName(editEvent.getName());
 				event.setVenue(editEvent.getVenue());

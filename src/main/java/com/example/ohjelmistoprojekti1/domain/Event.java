@@ -1,7 +1,7 @@
 package com.example.ohjelmistoprojekti1.domain;
 
 import java.sql.Date;
-import java.sql.Time;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -34,10 +34,13 @@ public class Event {
 	private Date date;
 
 	private String time;
-
+	
+//	private LocalDateTime alku;
+//	private LocalDateTime loppu;
+	
 	@NotNull
 	private int ticketInventory;
-
+	
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
 	private List<Ticket> tickets;
@@ -73,6 +76,16 @@ public class Event {
 	public String getTime() {
 		return this.time;
 	}
+	
+	
+//
+//	public LocalDateTime getDatetime() {
+//		return datetime;
+//	}
+//
+//	public void setDatetime(LocalDateTime datetime) {
+//		this.datetime = datetime;
+//	}
 
 	public List<Ticket> getTickets() {
 		return tickets;
