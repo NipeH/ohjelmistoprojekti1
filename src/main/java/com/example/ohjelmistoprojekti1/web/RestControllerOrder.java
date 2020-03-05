@@ -39,22 +39,23 @@ public class RestControllerOrder {
 	@Autowired
 	private UserTypeRepository utrepo;
 	
+	
 	//Luodaan uusi myyntitapahtuma
 	@PostMapping(value = "/orders")
 	@ResponseStatus(value = HttpStatus.CREATED) // Palauttaa 201 onnistuessaan
 	public Order makeOrder (@RequestBody Order order) {
-		//?????????????
+		/*
+		 * Haetaan eventti
+		 * Haetaan lipputyyppi
+		 * Luodaan uusi lippu ! 
+		 * Luodaan Orderi
+		 * ???
+		 */
 		return orepo.save(order);
+	
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 
 }
