@@ -37,7 +37,7 @@ import com.example.ohjelmistoprojekti1.domain.UserTypeRepository;
 
 @RestController
 @Validated
-public class EventRestController {
+public class EventController {
 
 	@Autowired
 	private CustomerRepository crepo;

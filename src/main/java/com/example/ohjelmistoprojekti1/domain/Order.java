@@ -28,7 +28,8 @@ public class Order {
 	
 	private Date date;
 
-	
+	//poistetaan kun date toimii..
+	private String today;
 	
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="orders")
@@ -51,6 +52,16 @@ public class Order {
 	}
 
 
+	//poistetaan
+	public Order(double total, String today, List<Ticket> tickets) {
+		super();
+		this.total = total;
+		this.today = today;
+		this.tickets = tickets;
+	}
+
+
+
 	public Order(double total, Date date, List<Ticket> tickets, User user, Customer customer) {
 		super();
 		this.total = total;
@@ -58,6 +69,14 @@ public class Order {
 		this.tickets = tickets;
 		this.user = user;
 		this.customer = customer;
+	}
+	
+	
+
+
+	public Order(Date date) {
+		super();
+		this.date = date;
 	}
 
 
@@ -124,6 +143,20 @@ public class Order {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
+
+
+	//poistetaan
+	public String getToday() {
+		return today;
+	}
+
+
+	public void setToday(String today) {
+		this.today = today;
+	}
+	
+	
+	
 
 
 	

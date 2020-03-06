@@ -25,7 +25,7 @@ public class Ticket {
 
 	private double price;
 
-	@NotNull
+	
 	@ManyToOne
 	@JsonIgnore
 	@JoinColumn(name = "tickettypeid")
@@ -42,7 +42,7 @@ public class Ticket {
 		super();
 	}
 
-	public Ticket(@NotNull Event event, @NotNull TicketType type) {
+	public Ticket(@NotNull Event event,  TicketType type) {
 		super();
 		this.event = event;
 		this.type = type;
