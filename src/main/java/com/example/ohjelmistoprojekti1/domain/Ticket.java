@@ -48,14 +48,14 @@ public class Ticket {
 		this.type = type;
 	}
 
-	public Ticket(@NotNull Event event, double price, @NotNull TicketType type) {
+	public Ticket(@NotNull Event event, double price,  TicketType type) {
 		super();
 		this.event = event;
 		this.price = price;
 		this.type = type;
 	}
 
-	public Ticket(@NotNull Event event, double price, @NotNull TicketType type, Order orders) {
+	public Ticket(@NotNull Event event, double price,  TicketType type, Order orders) {
 		super();
 		this.event = event;
 		this.price = price;

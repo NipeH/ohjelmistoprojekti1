@@ -19,7 +19,7 @@ public class TicketType {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long tickettypeid;
 
-	@NotNull
+
 	private String type;
 
 	private double discount;
@@ -36,7 +36,7 @@ public class TicketType {
 		this.discount = 0.0;
 	}
 
-	public TicketType(@NotNull String type, double discount) {
+	public TicketType(String type, double discount) {
 		super();
 		this.type = type;
 		this.discount = discount;
