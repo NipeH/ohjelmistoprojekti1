@@ -27,8 +27,6 @@ import com.example.ohjelmistoprojekti1.domain.TicketTypeRepository;
 import com.example.ohjelmistoprojekti1.domain.UserRepository;
 import com.example.ohjelmistoprojekti1.domain.UserTypeRepository;
 
-
-
 @RestController
 public class OrderController {
 	@Autowired
@@ -51,91 +49,67 @@ public class OrderController {
 
 	@Autowired
 	private UserTypeRepository utrepo;
-	
-	
-	//Luodaan uusi myyntitapahtuma
-	//Lähetetään urlissa eventid ja lipputyyppi typeid 
-		//Entä jos halutaan tallentaa monta lippua samaan orderiin? lähetetäänkö kpl määrä? 
-		// - vai tarvitaanko sittenkin yksi taulu vielä? OrderRow ja Order ? jotta yhdessä myyntitapahtumassa voi olla useita lippuja
+
+	// Luodaan uusi myyntitapahtuma
+	// Lähetetään urlissa eventid ja lipputyyppi typeid
+	// Entä jos halutaan tallentaa monta lippua samaan orderiin? lähetetäänkö kpl
+	// määrä?
+	// - vai tarvitaanko sittenkin yksi taulu vielä? OrderRow ja Order ? jotta
+	// yhdessä myyntitapahtumassa voi olla useita lippuja
 	@PostMapping(value = "/orders/{eventid}/{typeid}")
 	@ResponseStatus(value = HttpStatus.CREATED) // Palauttaa 201 onnistuessaan
-	public Ticket ticket (@PathVariable("eventid") Long eventid, @PathVariable("typeid") Long typeid) {
+	public Ticket ticket(@PathVariable("eventid") Long eventid, @PathVariable("typeid") Long typeid) {
 		Ticket ticket = new Ticket();
 		Order order = new Order();
-		
-		//haetaan parametrinä tulevalla typeidllä TicketType olio
+
+		// haetaan parametrinä tulevalla typeidllä TicketType olio
 		ttrepo.findById(typeid);
 		TicketType ttype = ttrepo.findById(typeid).get();
-		
-		//haetaan tämä pvm ja tallennetaan today stringiin
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-		LocalDate localDate = LocalDate.now();
-		String today = dtf.format(localDate); // en osannut tehä datena
-		
-		//asetetaan orderille current date
-			//tähän vaihdetaan order.setDate(today) kun se toimii? setToday on string
-		order.setToday(today);
-		orepo.save(order);
-		
 
-		//haetaan tickettiin parametrinä tuleva tapahtuma
-			//tarviikohan tässä ees mappaysta.. no toimii anyways
+		orepo.save(order);
+
+		// haetaan tickettiin parametrinä tuleva tapahtuma
+		// tarviikohan tässä ees mappaysta.. no toimii anyways
 		return erepo.findById(eventid).map(event -> {
 			ticket.setEvent(event);
-			ticket.setOrders(order); //samassa yhteydessä luotu orderi
-			ticket.setValid(true); //lippu voimassa	
-			ticket.setType(ttype); //asetetaan lipputyyppi
-			ticket.setPrice(event.getPrice() * ttype.getDiscount()); //haetaan eventin hinta ja kerrotaan se lipputyypin alella
+			ticket.setOrders(order); // samassa yhteydessä luotu orderi
+			ticket.setValid(true); // lippu voimassa
+			ticket.setType(ttype); // asetetaan lipputyyppi
+			ticket.setPrice(event.getPrice() * ttype.getDiscount()); // haetaan eventin hinta ja kerrotaan se
+																		// lipputyypin alella
 			return trepo.save(ticket);
-		}).orElseThrow(() -> new ResourceNotFoundException("Eventid " + eventid + " not found")); //		
-	
+		}).orElseThrow(() -> new ResourceNotFoundException("Eventid " + eventid + " not found")); //
+
 	}
 
+	// ALUSTAVA - EI TOIMI - ONKO TARPEELLINENKAAN
+	// IDEANA JOS HALUTAAN LÄHETTÄÄ TICKETTYYPPI BODYSSA
 
-	
-	
-	
-	
-	
-	
-	//ALUSTAVA - EI TOIMI - ONKO TARPEELLINENKAAN
-		//IDEANA JOS HALUTAAN LÄHETTÄÄ TICKETTYYPPI BODYSSA
-	
-	//Luodaan uusi myyntitapahtuma
-	//Lähetetään urlissa eventid ja lipputyyppi bodyssa (tickettydeid) 
-	//Entä jos halutaan tallentaa monta lippua samaan orderiin? lähetetäänkö kpl määrä? 
-	// - vai tarvitaanko sittenkin yksi taulu vielä? OrderRow ja Order ? 
+	// Luodaan uusi myyntitapahtuma
+	// Lähetetään urlissa eventid ja lipputyyppi bodyssa (tickettydeid)
+	// Entä jos halutaan tallentaa monta lippua samaan orderiin? lähetetäänkö kpl
+	// määrä?
+	// - vai tarvitaanko sittenkin yksi taulu vielä? OrderRow ja Order ?
 	@PostMapping(value = "/orders/{eventid}/")
 	@ResponseStatus(value = HttpStatus.CREATED) // Palauttaa 201 onnistuessaan
-	public Ticket ticket (@PathVariable("eventid") Long eventid, @RequestBody TicketType ttype) {
+	public Ticket ticket(@PathVariable("eventid") Long eventid, @RequestBody TicketType ttype) {
 		Ticket ticket = new Ticket();
 		Order order = new Order();
-		//ttype.getTicketypeid();
-		
-		//haetaan tämä pvm ja muutetaan tallennetaan today stringiin
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-		LocalDate localDate = LocalDate.now();
-		String today = dtf.format(localDate);
-		
-		//asetetaan orderille current date ja tallennetaan
-		//tähän vaihdetaan order.detDate(today) kun se toimii
-		order.setToday(today);
-		orepo.save(order);
-		
+		// ttype.getTicketypeid();
 
-		//haetaan tickettiin parametrinä tuleva tapahtuma
+		orepo.save(order);
+
+		// haetaan tickettiin parametrinä tuleva tapahtuma
 		return erepo.findById(eventid).map(event -> {
 			ticket.setEvent(event);
-			ticket.setOrders(order); //samassa yhteydessä luotu orderi
-			ticket.setValid(true); //lippu voimassa	
+			ticket.setOrders(order); // samassa yhteydessä luotu orderi
+			ticket.setValid(true); // lippu voimassa
 			ticket.setType(ttype);
-			ticket.setPrice(event.getPrice() * ttype.getDiscount()); // haetaan eventin hinta ja kerrotaan valitun tickettyypin alennuksella
+			ticket.setPrice(event.getPrice() * ttype.getDiscount()); // haetaan eventin hinta ja kerrotaan valitun
+																		// tickettyypin alennuksella
 			return trepo.save(ticket);
-		}).orElseThrow(() -> new ResourceNotFoundException("Eventid " + eventid + " not found")); //		
-		
+		}).orElseThrow(() -> new ResourceNotFoundException("Eventid " + eventid + " not found")); //
 
-		
 	}
-	
 
 }
