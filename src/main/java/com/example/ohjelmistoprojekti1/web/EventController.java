@@ -151,30 +151,30 @@ public class EventController {
 	// muokkaa
 	@PatchMapping("/api/events/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public Event editEvent(@Valid @RequestBody Map<String, Object> props, @PathVariable("id") @Min(1) Long eventid) {
+	public Event editEvent(@Valid @RequestBody Map<String, Object> newEventProperties, @PathVariable("id") @Min(1) Long eventid) {
 		try {
 
 			return erepo.findById(eventid).map(event -> {
 
 //				käydään läpi, mitä arvoja pyyntö sisältää:
-				if (props.containsKey("name")) {
-					event.setName((String) props.get("name"));
+				if (newEventProperties.containsKey("name")) {
+					event.setName((String) newEventProperties.get("name"));
 				}
 
-				if (props.containsKey("venue")) {
-					event.setVenue((String) props.get("venue"));
+				if (newEventProperties.containsKey("venue")) {
+					event.setVenue((String) newEventProperties.get("venue"));
 				}
 
-				if (props.containsKey("description")) {
-					event.setDescription((String) props.get("description"));
+				if (newEventProperties.containsKey("description")) {
+					event.setDescription((String) newEventProperties.get("description"));
 				}
 
-				if (props.containsKey("price")) {
-					event.setPrice((double) props.get("price"));
+				if (newEventProperties.containsKey("price")) {
+					event.setPrice((double) newEventProperties.get("price"));
 				}
 
-				if (props.containsKey("ticketInventory")) {
-					event.setTicketInventory((int) props.get("ticketInventory"));
+				if (newEventProperties.containsKey("ticketInventory")) {
+					event.setTicketInventory((int) newEventProperties.get("ticketInventory"));
 				}
 
 				return erepo.save(event);
