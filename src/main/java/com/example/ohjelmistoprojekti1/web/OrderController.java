@@ -1,22 +1,19 @@
 package com.example.ohjelmistoprojekti1.web;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ohjelmistoprojekti1.domain.CustomerRepository;
-import com.example.ohjelmistoprojekti1.domain.Event;
 import com.example.ohjelmistoprojekti1.domain.EventRepository;
 import com.example.ohjelmistoprojekti1.domain.Order;
 import com.example.ohjelmistoprojekti1.domain.OrderRepository;
@@ -56,7 +53,7 @@ public class OrderController {
 	// määrä?
 	// - vai tarvitaanko sittenkin yksi taulu vielä? OrderRow ja Order ? jotta
 	// yhdessä myyntitapahtumassa voi olla useita lippuja
-	@PostMapping(value = "/orders/{eventid}/{typeid}")
+	@PostMapping(value = "api/orders/{eventid}/{typeid}")
 	@ResponseStatus(value = HttpStatus.CREATED) // Palauttaa 201 onnistuessaan
 	public Ticket ticket(@PathVariable("eventid") Long eventid, @PathVariable("typeid") Long typeid) {
 		Ticket ticket = new Ticket();
@@ -90,7 +87,7 @@ public class OrderController {
 	// Entä jos halutaan tallentaa monta lippua samaan orderiin? lähetetäänkö kpl
 	// määrä?
 	// - vai tarvitaanko sittenkin yksi taulu vielä? OrderRow ja Order ?
-	@PostMapping(value = "/orders/{eventid}/")
+	@PostMapping(value = "api/orders/{eventid}/")
 	@ResponseStatus(value = HttpStatus.CREATED) // Palauttaa 201 onnistuessaan
 	public Ticket ticket(@PathVariable("eventid") Long eventid, @RequestBody TicketType ttype) {
 		Ticket ticket = new Ticket();
@@ -111,5 +108,12 @@ public class OrderController {
 		}).orElseThrow(() -> new ResourceNotFoundException("Eventid " + eventid + " not found")); //
 
 	}
+	
+	@GetMapping(value = "api/orders")
+	@ResponseStatus(value = HttpStatus.OK)
+	public @ResponseBody List<Order> getAll() {
+		return (List<Order>) orepo.findAll();
+	}
 
+	 
 }
