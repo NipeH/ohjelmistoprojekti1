@@ -1,6 +1,7 @@
 package com.example.ohjelmistoprojekti1.web;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.validation.ConstraintViolationException;
@@ -68,7 +69,7 @@ public class EventController {
 	}
 
 	// lisää tapahtuma
-	@PostMapping(value = "/add/event")
+	@PostMapping(value = "/api/events")
 	@ResponseStatus(value = HttpStatus.CREATED) // Palauttaa 201 onnistuessaan
 	public Event addEvent(@Valid @RequestBody Event event) {
 		try {
@@ -81,7 +82,7 @@ public class EventController {
 	}
 
 	// poista
-	@DeleteMapping("/delete/event/{id}")
+	@DeleteMapping("/api/events/{id}")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT) // 204 jos onnistuu
 	public void deleteEvent(@PathVariable("id") @Min(1) Long eventid) {// parametri väh.1:n pituinen
 		try {
@@ -97,7 +98,7 @@ public class EventController {
 	}
 
 	// muokkaa PUT-metodilla -> ylikirjoittava, idempotentti metodi
-	@PutMapping("/put/event/{id}")
+	@PutMapping("/api/events/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public Event overrideEvent(@Valid @RequestBody Event editEvent, @PathVariable("id") @Min(1) Long eventid) {
 
@@ -105,8 +106,8 @@ public class EventController {
 			return erepo.findById(eventid).map(event -> {
 				event.setName(editEvent.getName());
 				event.setVenue(editEvent.getVenue());
-				event.setTime(editEvent.getTime());
-				event.setDate(editEvent.getDate());
+//				event.setTime(editEvent.getTime());
+//				event.setDate(editEvent.getDate());
 				event.setDescription(editEvent.getDescription());
 				event.setPrice(editEvent.getPrice());
 				event.setTicketInventory(editEvent.getTicketInventory());
@@ -123,14 +124,14 @@ public class EventController {
 	}
 
 	// hakee kaikki tapahtumat
-	@GetMapping(value = "/events")
+	@GetMapping(value = "/api/events")
 	public @ResponseBody List<Event> RestEvents() {
 		return (List<Event>) erepo.findAll();
 	}
 
 	// hae parametrina tulevalla idllä
 	@ResponseStatus(HttpStatus.OK)
-	@GetMapping(value = "/events/{id}")
+	@GetMapping(value = "api//events/{id}")
 	public @ResponseBody Optional<Event> eventById(@PathVariable("id") Long eventid) {
 		ResponseStatusException e = new ResponseStatusException(HttpStatus.NOT_FOUND, "Tapahtumaa ei löydy");
 		if (!erepo.findById(eventid).isPresent()) {
@@ -142,53 +143,45 @@ public class EventController {
 	}
 
 	// hae parametrina tulevalla nimellä
-	@RequestMapping(value = "/event/{name}", method = RequestMethod.GET)
+	@RequestMapping(value = "api/events/q={name}", method = RequestMethod.GET)
 	public @ResponseBody List<Event> eventByName(@PathVariable("name") String name) {
 		return erepo.findByNameIgnoreCase(name);
 	}
 
 	// muokkaa
-	@PatchMapping("/edit/event/{id}")
+	@PatchMapping("/api/events/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public Event editEvent(@Valid @RequestBody Event editEvent, @PathVariable("id") @Min(1) Long eventid) {
-
+	public Event editEvent(@Valid @RequestBody Map<String, Object> props, @PathVariable("id") @Min(1) Long eventid) {
 		try {
 
 			return erepo.findById(eventid).map(event -> {
+
 //				käydään läpi, mitä arvoja pyyntö sisältää:
-				if (!editEvent.getName().equals(null)) {
-					event.setName(editEvent.getName());
+				if (props.containsKey("name")) {
+					event.setName((String) props.get("name"));
 				}
 
-				if (!editEvent.getVenue().equals(null)) {
-					event.setVenue(editEvent.getVenue());
+				if (props.containsKey("venue")) {
+					event.setVenue((String) props.get("venue"));
 				}
 
-				if (!editEvent.getTime().equals(null)) {
-					event.setTime(editEvent.getTime());
+				if (props.containsKey("description")) {
+					event.setDescription((String) props.get("description"));
 				}
 
-				if (!editEvent.getDate().equals(null)) {
-					event.setDate(editEvent.getDate());
+				if (props.containsKey("price")) {
+					event.setPrice((double) props.get("price"));
 				}
 
-				if (!editEvent.getDescription().equals(null)) {
-					event.setDescription(editEvent.getDescription());
-				}
-
-				if (!((Double) editEvent.getPrice()).equals(null)) {
-					event.setPrice(editEvent.getPrice());
-				}
-
-				if (!((Integer) editEvent.getTicketInventory()).equals(null)) {
-					event.setTicketInventory(editEvent.getTicketInventory());
+				if (props.containsKey("ticketInventory")) {
+					event.setTicketInventory((int) props.get("ticketInventory"));
 				}
 
 				return erepo.save(event);
-			}).orElseGet(() -> {
-				editEvent.setEventid(eventid);
-				return erepo.save(editEvent);
-			});
+//			}).orElseGet(() -> {
+//				editEvent.setEventid(eventid);
+//				return erepo.save(editEvent);
+			}).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
