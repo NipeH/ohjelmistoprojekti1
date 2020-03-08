@@ -1,5 +1,8 @@
 package com.example.ohjelmistoprojekti1;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -54,8 +57,10 @@ public class Ohjelmistoprojekti1Application {
 					+ " Soittimina tusina sadeputkea ja märkä rätti");
 			event.setPrice(50);
 			event.setVenue("Nipen takapiha. Kelivaraus. Poudan yllättäessä siirrymme roskakatokseen");
-			event.setDate("2020-09-16");
-			event.setTime("19:00");
+//			event.setDate("2020-09-16");
+//			event.setTime("19:00");
+			event.setStartTime("2020-09-16T19:00:00");
+			event.setEndTime("2020-09-16T21:00:00");
 			event.setTicketInventory(2);
 			eventRepo.save(event);
 			
@@ -64,8 +69,9 @@ public class Ohjelmistoprojekti1Application {
 			ruisrock.setDescription("Esiintyjinä mm. Major Lazer");
 			ruisrock.setPrice(200);
 			ruisrock.setVenue("Turun ruissalo");
-			ruisrock.setDate("2020-07-16");
-			ruisrock.setTime("19:00");
+//			ruisrock.setDate("2020-07-16");
+			ruisrock.setStartTime("2020-07-16T19:00:00");
+			ruisrock.setEndTime("2020-07-05T23:59:00");
 			ruisrock.setTicketInventory(200);
 			eventRepo.save(ruisrock);				
 
@@ -125,17 +131,21 @@ public class Ohjelmistoprojekti1Application {
 			customer.setPhone("040565");
 			customerRepo.save(customer);
 			
-			/*
+			
 			//Order
 			Order order = new Order();
 			order.setTotal(30.5);
-			order.setDate("2020-18-02");
 			order.setUser(null);
-			order.setCustomer(null);
-			order.setTickets(null);
-			*/
+			order.setCustomer(customer);
+			List<Ticket> liput = new ArrayList<>();
+			for (int i = 0; i < 10; i++) {
+			liput.add(new Ticket(event, 5.0, normalTicket));
 			
-			System.out.println("End of commandLineRunner");
+			}
+			order.setTickets(liput);
+			
+			orderRepo.save(order);
+			System.out.println("\nEnd of commandLineRunner\n");
 		};
 	}
 }

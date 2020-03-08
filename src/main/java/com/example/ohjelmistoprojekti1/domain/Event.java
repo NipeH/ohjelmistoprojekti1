@@ -2,6 +2,7 @@ package com.example.ohjelmistoprojekti1.domain;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -30,17 +31,16 @@ public class Event {
 	@NotNull
 	private String venue;
 
-	@NotNull
-	private Date date;
+//	@NotNull
+//	private Date date;
+//	private String time;
 
-	private String time;
-	
-//	private LocalDateTime alku;
-//	private LocalDateTime loppu;
-	
-	@NotNull
+	private LocalDateTime startTime;
+	private LocalDateTime endTime;
+
+//	@NotNull
 	private int ticketInventory;
-	
+
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
 	private List<Ticket> tickets;
@@ -48,44 +48,68 @@ public class Event {
 	public Event() {
 		super();
 	}
-
-	public void setTime(String time) {
+	
+	
+	/** Set starting time for event example: "1988-05-18T03:57:00" @param yyyy-mm-ddThh:mm:ss */
+	public void setStartTime(String startTime) {
 		try {
-			String[] psc = time.split(":");
-			int tunnit = Integer.parseInt(psc[0]);
-			int minuutit = Integer.parseInt(psc[1]);
-			if (tunnit > 24) {
-				tunnit = 24;
-			}
-			if (tunnit < 0) {
-				tunnit = 0;
-			}
-			if (minuutit > 60) {
-				minuutit = 60;
-			}
-			if (minuutit < 0) {
-				minuutit = 0;
-			}
-			time = tunnit + ":" + minuutit;
+			DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+			this.startTime = LocalDateTime.parse(startTime, formatter);
 		} catch (Exception e) {
-			System.out.println("Virhe ajan asettamisessa: " + e.getMessage());
+			System.out.println("Alkuajan asettaminen epäonnnistui, tarkista syöte: " + e.getMessage());
 		}
-		this.time = time;
 	}
-
-	public String getTime() {
-		return this.time;
+	
+	public LocalDateTime getStartTime() {
+		return this.startTime;
 	}
 	
 	
-//
-//	public LocalDateTime getDatetime() {
-//		return datetime;
+	/** Set ending time for event example: "1988-05-18T03:57:00" @param yyyy-mm-ddThh:mm:ss */
+	public void setEndTime(String endTime) {
+		try {
+			DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+			this.endTime = LocalDateTime.parse(endTime, formatter);
+		} catch (Exception e) {
+			System.out.println("Loppuajan asettaminen epäonnnistui, tarkista syöte: " + e.getMessage());
+		}
+	}
+	
+	public LocalDateTime getEndTime() {
+		return this.endTime;
+	}
+	
+	
+	
+//	public void setTime(String time) {
+//		try {
+//			String[] psc = time.split(":");
+//			int tunnit = Integer.parseInt(psc[0]);
+//			int minuutit = Integer.parseInt(psc[1]);
+//			if (tunnit > 24) {
+//				tunnit = 24;
+//			}
+//			if (tunnit < 0) {
+//				tunnit = 0;
+//			}
+//			if (minuutit > 60) {
+//				minuutit = 60;
+//			}
+//			if (minuutit < 0) {
+//				minuutit = 0;
+//			}
+//			time = tunnit + ":" + minuutit;
+//		} catch (Exception e) {
+//			System.out.println("Virhe ajan asettamisessa: " + e.getMessage());
+//		}
+//		this.time = time;
 //	}
 //
-//	public void setDatetime(LocalDateTime datetime) {
-//		this.datetime = datetime;
+//	public String getTime() {
+//		return this.time;
 //	}
+//	
+//	
 
 	public List<Ticket> getTickets() {
 		return tickets;
@@ -127,18 +151,18 @@ public class Event {
 		this.venue = venue;
 	}
 
-	public Date getDate() {
-		return date;
-	}
+//	public Date getDate() {
+//		return date;
+//	}
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
+//	public void setDate(Date date) {
+//		this.date = date;
+//	}
 
 	/** @param date parameter in form: "yyyy-mm-dd" */
-	public void setDate(String date) {
-		this.date = java.sql.Date.valueOf(date);
-	}
+//	public void setDate(String date) {
+//		this.date = java.sql.Date.valueOf(date);
+//	}
 
 	public int getTicketInventory() {
 		return this.ticketInventory;
