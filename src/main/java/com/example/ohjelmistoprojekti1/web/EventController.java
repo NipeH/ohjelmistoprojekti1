@@ -1,5 +1,7 @@
 package com.example.ohjelmistoprojekti1.web;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -20,8 +22,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -143,15 +143,38 @@ public class EventController {
 	}
 
 	// hae parametrina tulevalla nimellä
-	@RequestMapping(value = "api/events/q={name}", method = RequestMethod.GET)
-	public @ResponseBody List<Event> eventByName(@PathVariable("name") String name) {
-		return erepo.findByNameIgnoreCase(name);
+	@GetMapping("/api/events/search/{name}={value}")
+	public @ResponseBody List<Event> eventByProperty(@PathVariable("name") String name,
+			@PathVariable("value") String value) {
+		List<Event> found = new ArrayList<>();
+		if (name.equals("name")) {
+			found.addAll(erepo.findByNameIgnoreCase(value));
+		}
+		if (name.equals("venue")) {
+			ArrayList<Event> all = (ArrayList<Event>) erepo.findAll();
+			for (Event event : all) {
+				if (event.getVenue().toLowerCase().contains(value)) {
+					found.add(event);
+				}
+			}
+		}
+		
+		if (name.equals("description")) {
+			ArrayList<Event> all = (ArrayList<Event>) erepo.findAll();
+			for (Event event : all) {
+				if (event.getDescription().toLowerCase().contains(value)) {
+					found.add(event);
+				}
+			}
+		}
+		return found;
 	}
 
 	// muokkaa
 	@PatchMapping("/api/events/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public Event editEvent(@Valid @RequestBody Map<String, Object> newEventProperties, @PathVariable("id") @Min(1) Long eventid) {
+	public Event editEvent(@Valid @RequestBody Map<String, Object> newEventProperties,
+			@PathVariable("id") @Min(1) Long eventid) {
 		try {
 
 			return erepo.findById(eventid).map(event -> {

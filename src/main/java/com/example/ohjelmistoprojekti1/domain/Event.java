@@ -1,6 +1,6 @@
 package com.example.ohjelmistoprojekti1.domain;
 
-import java.sql.Date;
+//import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -35,7 +35,9 @@ public class Event {
 //	private Date date;
 //	private String time;
 
+	// Tapahtuman alkamisaika
 	private LocalDateTime startTime;
+	// Tapahtuman päättymisaika
 	private LocalDateTime endTime;
 
 //	@NotNull
@@ -48,9 +50,12 @@ public class Event {
 	public Event() {
 		super();
 	}
-	
-	
-	/** Set starting time for event example: "1988-05-18T03:57:00" @param yyyy-mm-ddThh:mm:ss */
+
+	/**
+	 * Set starting time for event, for
+	 * Example:\n"1988-05-18T03:57:00"\n=>18.5.1988, klo 03:57 @param
+	 * yyyy-mm-ddThh:mm:ss
+	 */
 	public void setStartTime(String startTime) {
 		try {
 			DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
@@ -59,13 +64,15 @@ public class Event {
 			System.out.println("Alkuajan asettaminen epäonnnistui, tarkista syöte: " + e.getMessage());
 		}
 	}
-	
+
 	public LocalDateTime getStartTime() {
 		return this.startTime;
 	}
-	
-	
-	/** Set ending time for event example: "1988-05-18T03:57:00" @param yyyy-mm-ddThh:mm:ss */
+
+	/**
+	 * Set ending time for event, for Example:\n"1988-05-18T03:57:00"\n=>18.5.1988,
+	 * klo 03:57 @param yyyy-mm-ddThh:mm:ss
+	 */
 	public void setEndTime(String endTime) {
 		try {
 			DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
@@ -74,13 +81,11 @@ public class Event {
 			System.out.println("Loppuajan asettaminen epäonnnistui, tarkista syöte: " + e.getMessage());
 		}
 	}
-	
+
 	public LocalDateTime getEndTime() {
 		return this.endTime;
 	}
-	
-	
-	
+
 //	public void setTime(String time) {
 //		try {
 //			String[] psc = time.split(":");
