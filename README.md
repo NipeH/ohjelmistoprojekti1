@@ -133,9 +133,9 @@ Ensimmäisenä on luotu rajapinta tapahtumille, joihin Ticketguru myy lippuja. K
 <ul>
  <li>Näytä kaikki tapahtumat: GET /api/events tai /events</li>
  <li>Hae yksittäinen tapahtuma: GET /events/{id} tai /event/{id}</li> 
-  <li>Lisää tapahtuma: POST /add/event</li>
- <li>Muokkaa tapahtumaa: PUT /edit/event/{id}</li>
-  <li>Poista tapahtuma: DELETE /delete/event/{id}</li>
+  <li>Lisää tapahtuma: POST /api/events</li>
+ <li>Muokkaa tapahtumaa: PUT /api/events/{id}</li>
+  <li>Poista tapahtuma: DELETE /api/events/{id}</li>
  </ul>
 
 
