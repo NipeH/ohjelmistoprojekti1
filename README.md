@@ -132,9 +132,69 @@ Ensimmäisenä on luotu rajapinta tapahtumille, joihin Ticketguru myy lippuja. K
 ### Tapahtumat / Events:
 <ul>
  <li>Näytä kaikki tapahtumat: GET /api/events tai /events</li>
+ 
+     {
+        "eventid": 1,
+        "name": "Syksyn sävel",
+        "description": "Suomen luonnon ja vuodenaikojen innoittama konserttiesitys. Soittimina tusina sadeputkea ja märkä rätti",
+        "price": 50.0,
+        "venue": "Nipen takapiha. Kelivaraus. Poudan yllättäessä siirrymme roskakatokseen",
+        "startTime": "2020-09-16T19:00:00",
+        "endTime": "2020-09-16T21:00:00",
+        "ticketInventory": 2
+    },
+    {
+        "eventid": 2,
+        "name": "Ruisrock",
+        "description": "Esiintyjinä mm. Major Lazer",
+        "price": 200.0,
+        "venue": "Turun ruissalo",
+        "startTime": "2020-07-16T19:00:00",
+        "endTime": "2020-07-05T23:59:00",
+        "ticketInventory": 200
+    }
+
+
  <li>Hae yksittäinen tapahtuma: GET /events/{id} tai /event/{id}</li> 
+ 
+	{
+    "eventid": 1,
+    "name": "Syksyn sävel",
+    "description": "Bailataan niin, että tyrät notkuu",
+    "price": 50.0,
+    "venue": "Nipen takapiha. Kelivaraus. Poudan yllättäessä siirrymme roskakatokseen",
+    "startTime": "2020-09-16T19:00:00",
+    "endTime": "2020-09-16T21:00:00",
+    "ticketInventory": 2
+	}
+
   <li>Lisää tapahtuma: POST /add/event</li>
+  
+	{
+    "eventid": 27,
+    "name": "häät",
+    "description": "Bailataan niin, että tietää bailanneensa",
+    "price": 500.0,
+    "venue": "botski",
+    "startTime": "2020-09-16T19:00:00",
+    "endTime": "2020-09-16T21:00:00",
+    "ticketInventory": 50
+	}
+  
  <li>Muokkaa tapahtumaa: PUT /edit/event/{id}</li>
+ 
+	{
+    "eventid": 27,
+    "name": "häät",
+    "description": "Rauhaa ja rakkautta",
+    "price": 500.0,
+    "venue": "botski",
+    "startTime": "2020-09-16T19:00:00",
+    "endTime": "2020-09-16T21:00:00",
+    "ticketInventory": 50
+	}
+ 
+ 
   <li>Poista tapahtuma: DELETE /delete/event/{id}</li>
  </ul>
 
