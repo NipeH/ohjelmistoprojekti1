@@ -44,6 +44,7 @@ public class OrderController {
 	@Autowired
 	private UserRepository urepo;
 
+	
 	@Autowired
 	private UserTypeRepository utrepo;
 
@@ -73,7 +74,8 @@ public class OrderController {
 			ticket.setValid(true); // lippu voimassa
 			ticket.setType(ttype); // asetetaan lipputyyppi
 			ticket.setPrice(event.getPrice() * ttype.getDiscount()); // haetaan eventin hinta ja kerrotaan se
-																		// lipputyypin alella
+			event.setTicketInventory(-1); //vähentää jäljellä olevista lipuista
+			// lipputyypin alella
 			return trepo.save(ticket);
 		}).orElseThrow(() -> new ResourceNotFoundException("Eventid " + eventid + " not found")); //
 

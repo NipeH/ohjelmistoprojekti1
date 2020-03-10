@@ -75,6 +75,8 @@ public class Ohjelmistoprojekti1Application {
 			ruisrock.setTicketInventory(200);
 			eventRepo.save(ruisrock);				
 
+		
+			
 			
 			// TicketType
 			TicketType normalTicket = new TicketType();
@@ -142,9 +144,27 @@ public class Ohjelmistoprojekti1Application {
 			liput.add(new Ticket(event, 5.0, normalTicket));
 			
 			}
-			order.setTickets(liput);
 			
+			order.setTickets(liput);
 			orderRepo.save(order);
+			
+			Order tilaus2 = new Order();
+			tilaus2.setTotal(20.0);
+			tilaus2.setCustomer(customer);
+			tilaus2.setUser(null);
+			event.setEventid(1);
+			event.setTicketInventory(-1);
+			List<Ticket> liput2 = new ArrayList<>();
+			for (int i = 0; i < 10; i++) {
+			liput2.add(new Ticket(event, 20.0, normalTicket));
+			
+			}
+			
+			order.setTickets(liput2);
+			
+			
+			orderRepo.save(tilaus2);
+			
 			System.out.println("\nEnd of commandLineRunner\n");
 		};
 	}
