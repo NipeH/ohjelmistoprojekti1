@@ -130,30 +130,10 @@ Tuotantovaiheen ohjelman basepath jatkaa samalla käytännöllä siten, että AP
 Ensimmäisenä on luotu rajapinta tapahtumille, joihin Ticketguru myy lippuja. Kaikki luodut tapahtumat löytyvät osoitteesta .../api/events Sivu sisältää JSON-muotoisen taulukon, joka sisältää tapahtuma-objektit ja relaatiot. Yksittäisiin objekteihin pääsee käsiksi osoitteesta .../api/events/{id} missä {id} on tapahtuman yksilöllinen id.
 
 ### Tapahtumat / Events:
-<ul>
- <li>Näytä kaikki tapahtumat: GET /api/events tai /events</li>
- 
-     {
-        "eventid": 1,
-        "name": "Syksyn sävel",
-        "description": "Suomen luonnon ja vuodenaikojen innoittama konserttiesitys. Soittimina tusina sadeputkea ja märkä rätti",
-        "price": 50.0,
-        "venue": "Nipen takapiha. Kelivaraus. Poudan yllättäessä siirrymme roskakatokseen",
-        "startTime": "2020-09-16T19:00:00",
-        "endTime": "2020-09-16T21:00:00",
-        "ticketInventory": 2
-    },
-    {
-        "eventid": 2,
-        "name": "Ruisrock",
-        "description": "Esiintyjinä mm. Major Lazer",
-        "price": 200.0,
-        "venue": "Turun ruissalo",
-        "startTime": "2020-07-16T19:00:00",
-        "endTime": "2020-07-05T23:59:00",
-        "ticketInventory": 200
-    }
 
+Hae tapahtumat: [GET /api/events](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/getevents)
+
+<ul>
 
  <li>Hae yksittäinen tapahtuma: GET /events/{id} tai /event/{id}</li> 
  
