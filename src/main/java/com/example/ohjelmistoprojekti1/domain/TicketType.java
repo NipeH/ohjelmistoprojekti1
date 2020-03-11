@@ -33,7 +33,7 @@ public class TicketType {
 	public TicketType() {
 		super();
 		this.type = "normal";
-		this.discount = 0.0;
+		//this.discount = 0.0; //ehkä tää pois jos kerrotaan nollalla niin tulee nolla ! 
 	}
 
 	public TicketType(String type, double discount) {
