@@ -170,7 +170,7 @@ public class Event {
 //	}
 
 	public int getTicketInventory() {
-		return this.ticketInventory;
+		return this.ticketInventory - tickets.size();
 	}
 
 	public void setTicketInventory(int ticketInventory) {
