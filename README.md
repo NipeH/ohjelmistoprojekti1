@@ -132,6 +132,7 @@ Ensimmäisenä on luotu rajapinta tapahtumille, joihin Ticketguru myy lippuja. K
 ### Tapahtumat / Events:
 
 Hae tapahtumat: [GET /api/events](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/getevents)
+Lisää tapahtuma [POST/api/events](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/postevents)
 
 <ul>
 
@@ -148,18 +149,7 @@ Hae tapahtumat: [GET /api/events](https://github.com/NipeH/ohjelmistoprojekti1/b
     "ticketInventory": 2
 	}
 
-  <li>Lisää tapahtuma: POST /add/event</li>
   
-	{
-    "eventid": 27,
-    "name": "häät",
-    "description": "Bailataan niin, että tietää bailanneensa",
-    "price": 500.0,
-    "venue": "botski",
-    "startTime": "2020-09-16T19:00:00",
-    "endTime": "2020-09-16T21:00:00",
-    "ticketInventory": 50
-	}
   
  <li>Muokkaa tapahtumaa: PUT /edit/event/{id}</li>
  
