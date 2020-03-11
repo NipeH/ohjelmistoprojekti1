@@ -145,15 +145,15 @@ public class EventController {
 
 	}
 
-	// hae parametrina tulevalla nimellä
-	@GetMapping("/api/events/search/{name}={value}")
-	public @ResponseBody List<Event> eventByProperty(@PathVariable("name") String name,
+	// hae tapahtumia eri tuntomerkeillä: property voi saada esim. arvoja name, venue, description.
+	@GetMapping("/api/events/search/{property}={value}")
+	public @ResponseBody List<Event> eventByProperty(@PathVariable("property") String property,
 			@PathVariable("value") String value) {
 		List<Event> found = new ArrayList<>();
-		if (name.equals("name")) {
+		if (property.equals("name")) {
 			found.addAll(erepo.findByNameIgnoreCase(value));
 		}
-		if (name.equals("venue")) {
+		if (property.equals("venue")) {
 			ArrayList<Event> all = (ArrayList<Event>) erepo.findAll();
 			for (Event event : all) {
 				if (event.getVenue().toLowerCase().contains(value)) {
@@ -162,7 +162,7 @@ public class EventController {
 			}
 		}
 
-		if (name.equals("description")) {
+		if (property.equals("description")) {
 			ArrayList<Event> all = (ArrayList<Event>) erepo.findAll();
 			for (Event event : all) {
 				if (event.getDescription().toLowerCase().contains(value)) {
