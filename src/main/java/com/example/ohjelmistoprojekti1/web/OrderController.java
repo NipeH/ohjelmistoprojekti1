@@ -1,6 +1,8 @@
 package com.example.ohjelmistoprojekti1.web;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
@@ -44,7 +46,6 @@ public class OrderController {
 	@Autowired
 	private UserRepository urepo;
 
-	
 	@Autowired
 	private UserTypeRepository utrepo;
 
@@ -54,6 +55,7 @@ public class OrderController {
 	// määrä?
 	// - vai tarvitaanko sittenkin yksi taulu vielä? OrderRow ja Order ? jotta
 	// yhdessä myyntitapahtumassa voi olla useita lippuja
+
 	@PostMapping(value = "api/orders/{eventid}/{typeid}")
 	@ResponseStatus(value = HttpStatus.CREATED) // Palauttaa 201 onnistuessaan
 	public Ticket ticket(@PathVariable("eventid") Long eventid, @PathVariable("typeid") Long typeid) {
@@ -74,7 +76,7 @@ public class OrderController {
 			ticket.setValid(true); // lippu voimassa
 			ticket.setType(ttype); // asetetaan lipputyyppi
 			ticket.setPrice(event.getPrice() * ttype.getDiscount()); // haetaan eventin hinta ja kerrotaan se
-			event.setTicketInventory(-1); //vähentää jäljellä olevista lipuista
+			//event.setTicketInventory(event.getTicketInventory()-1); // vähentää jäljellä olevista lipuista yhden lipun
 			// lipputyypin alella
 			return trepo.save(ticket);
 		}).orElseThrow(() -> new ResourceNotFoundException("Eventid " + eventid + " not found")); //
@@ -110,12 +112,39 @@ public class OrderController {
 		}).orElseThrow(() -> new ResourceNotFoundException("Eventid " + eventid + " not found")); //
 
 	}
-	
+
+	// Hae kaikki jarjestelmassa olevat tilaukset
 	@GetMapping(value = "api/orders")
 	@ResponseStatus(value = HttpStatus.OK)
 	public @ResponseBody List<Order> getAll() {
 		return (List<Order>) orepo.findAll();
 	}
 
-	 
+	// Hae tietty tilaus
+	@GetMapping(value = "api/orders/{orderid}")
+	public @ResponseBody Order getOrderById(@PathVariable("orderid") Long orderid) {
+		return orepo.findById(orderid)
+				.orElseThrow(() -> new ResourceNotFoundException("No order with an id of " + orderid + " found"));
+	}
+	
+	//Hae tietyn tilauksen kaikki liput 
+	@GetMapping(value = "api/orders/{orderid}/tickets")
+	@ResponseStatus(value = HttpStatus.OK)
+	public List<Ticket> getTicketsOnOrder(@PathVariable("orderid") Long orderid) {
+		Order ord= orepo.findById(orderid)
+		.orElseThrow(() -> new ResourceNotFoundException("No order with an id of " + orderid + " found"));
+		
+		return ord.getTickets();
+	}
+
+	// Luo tyhja tilauspohja
+	@PostMapping(value = "api/orders")
+	@ResponseStatus(value = HttpStatus.CREATED)
+	public @ResponseBody Optional<Order> newOrder(@RequestBody Order ord) {
+		if (!orepo.existsById(ord.getOrderid())) {
+			orepo.save(ord);
+		}
+		return orepo.findById(ord.getOrderid());
+	}
+
 }

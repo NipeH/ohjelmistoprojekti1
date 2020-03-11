@@ -1,6 +1,7 @@
 package com.example.ohjelmistoprojekti1.domain;
 
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -44,6 +45,7 @@ public class Order {
 	public Order() {
 		super();
 		timestamp = ZonedDateTime.now();
+		tickets = new ArrayList<>();
 	}
 
 	public ZonedDateTime getTimestamp() {
@@ -92,6 +94,11 @@ public class Order {
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+
+	public void addTicket(Ticket t) {
+		tickets.add(t);
+		
 	}
 
 }

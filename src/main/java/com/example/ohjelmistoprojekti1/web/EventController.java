@@ -30,8 +30,11 @@ import org.springframework.web.server.ResponseStatusException;
 import com.example.ohjelmistoprojekti1.domain.CustomerRepository;
 import com.example.ohjelmistoprojekti1.domain.Event;
 import com.example.ohjelmistoprojekti1.domain.EventRepository;
+import com.example.ohjelmistoprojekti1.domain.Order;
 import com.example.ohjelmistoprojekti1.domain.OrderRepository;
+import com.example.ohjelmistoprojekti1.domain.Ticket;
 import com.example.ohjelmistoprojekti1.domain.TicketRepository;
+import com.example.ohjelmistoprojekti1.domain.TicketType;
 import com.example.ohjelmistoprojekti1.domain.TicketTypeRepository;
 import com.example.ohjelmistoprojekti1.domain.UserRepository;
 import com.example.ohjelmistoprojekti1.domain.UserTypeRepository;
@@ -142,15 +145,15 @@ public class EventController {
 
 	}
 
-	// hae parametrina tulevalla nimellä
-	@GetMapping("/api/events/search/{name}={value}")
-	public @ResponseBody List<Event> eventByProperty(@PathVariable("name") String name,
+	// hae tapahtumia eri tuntomerkeillä: property voi saada esim. arvoja name, venue, description.
+	@GetMapping("/api/events/search/{property}={value}")
+	public @ResponseBody List<Event> eventByProperty(@PathVariable("property") String property,
 			@PathVariable("value") String value) {
 		List<Event> found = new ArrayList<>();
-		if (name.equals("name")) {
+		if (property.equals("name")) {
 			found.addAll(erepo.findByNameIgnoreCase(value));
 		}
-		if (name.equals("venue")) {
+		if (property.equals("venue")) {
 			ArrayList<Event> all = (ArrayList<Event>) erepo.findAll();
 			for (Event event : all) {
 				if (event.getVenue().toLowerCase().contains(value)) {
@@ -158,8 +161,8 @@ public class EventController {
 				}
 			}
 		}
-		
-		if (name.equals("description")) {
+
+		if (property.equals("description")) {
 			ArrayList<Event> all = (ArrayList<Event>) erepo.findAll();
 			for (Event event : all) {
 				if (event.getDescription().toLowerCase().contains(value)) {
@@ -209,5 +212,45 @@ public class EventController {
 			e.printStackTrace();
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 		}
+	}
+
+	@GetMapping(value = "/api/events/{eventid}/tickets")
+	@ResponseStatus(value = HttpStatus.OK)
+	public List<Ticket> getTicketOnEvent(@PathVariable("eventid") Long eventid) {
+		Event event = erepo.findById(eventid)
+				.orElseThrow(() -> new ResourceNotFoundException("No event with id: " + eventid + " found"));
+		return event.getTickets();
+	}
+
+	@PostMapping(value = "/api/events/{eventid}/tickets")
+	@ResponseStatus(value = HttpStatus.CREATED)
+	public Ticket addTicketOnEvent(@PathVariable("eventid") Long eventid,
+			@RequestBody Map<String, Object> ticketprops) {
+		Event event = erepo.findById(eventid)
+				.orElseThrow(() -> new ResourceNotFoundException("No event with id: " + eventid + " found"));
+		Ticket t = new Ticket();
+		if (event.getTicketInventory() > 0) {
+			t.setEvent(event);
+			// t.setType(event.getTicketTypes().get(ticket.getType())); //one example, we
+			// get tickettype id from a list in event
+			if (ticketprops.containsKey("orderid")) {
+//				
+				if ((orepo.findById(Long.valueOf((String) ticketprops.get("orderid")))).isPresent()) {
+					Long id = Long.valueOf((String) ticketprops.get("orderid"));
+					Order o = orepo.findById(id).orElse(new Order());
+					o.addTicket(t);
+					orepo.save(o);
+					t.setOrders(o);
+//					t.setOrders(orepo.findById( Long.valueOf((String) ticketprops.get("order"))).orElse(new Order()));
+				}
+			}
+//			if (ticketprops.containsKey("ticketType")) {
+//				t.setType((TicketType) ticketprops.get("ticketType"));
+//			}
+			// näitä voisi toki kirjoitella lisääkin
+			// event.getPrice(TicketType type)
+		}
+		trepo.save(t);
+		return t;
 	}
 }
