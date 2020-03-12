@@ -175,6 +175,8 @@ Lisää myyntitapahtuma POST/orders/{eventid}/{typeid}/{lkm}
 ### Tilaustapahtumat / Orders:
 Hae tilaustapahtumat: [GET /api/orders](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/getorders)
 
+Lisää tilaustapahtuma [POST/api/orders](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/postorders)
+
 ### Avoimet ja autentikointia vaativat endpointit
 Tällä hetkellä kaikki endpointit ovat avoimia, myöhemmin asianmukaisen autentikoinnin ja autorisoinnin taakse tulevat kaikki muut paitsi POST:/login ja GET:events/...
 
