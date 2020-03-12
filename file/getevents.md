@@ -1,4 +1,4 @@
-Haetaan kaikki tapahtumat
+### Haetaan kaikki tapahtumat
 
 URL : /api/events/
 
@@ -8,11 +8,15 @@ Auth required : NO
 
 Permissions required : None
 
-Success Response
+Data constraints: {}
+
+### Success Response
+
 Code : 200 OK
 
-Content examples:
+Content: {[]} with 0, 1 or multiple events:
 
+```json
 {
     "eventid": 1,
     "name": "Syksyn sävel",
@@ -23,4 +27,4 @@ Content examples:
     "endTime": "2020-09-16T21:00:00",
     "ticketInventory": 2
 }
-
+```
