@@ -109,8 +109,6 @@ public class EventController {
 			return erepo.findById(eventid).map(event -> {
 				event.setName(editEvent.getName());
 				event.setVenue(editEvent.getVenue());
-//				event.setTime(editEvent.getTime());
-//				event.setDate(editEvent.getDate());
 				event.setDescription(editEvent.getDescription());
 				event.setPrice(editEvent.getPrice());
 				event.setTicketInventory(editEvent.getTicketInventory());
@@ -145,7 +143,8 @@ public class EventController {
 
 	}
 
-	// hae tapahtumia eri tuntomerkeillä: property voi saada esim. arvoja name, venue, description.
+	// hae tapahtumia eri tuntomerkeillä: property voi saada esim. arvoja name,
+	// venue, description.
 	@GetMapping("/api/events/search/{property}={value}")
 	public @ResponseBody List<Event> eventByProperty(@PathVariable("property") String property,
 			@PathVariable("value") String value) {
@@ -222,33 +221,34 @@ public class EventController {
 		return event.getTickets();
 	}
 
+	// LUODAAN UUSI LIPPU TAPAHTUMAAN, EDELLYTTÄEN, ETTÄ LIPPUJA ON VIELÄ SAATAVILLA
 	@PostMapping(value = "/api/events/{eventid}/tickets")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public Ticket addTicketOnEvent(@PathVariable("eventid") Long eventid,
+	public @ResponseBody Ticket addTicketOnEvent(@PathVariable("eventid") Long eventid,
 			@RequestBody Map<String, Object> ticketprops) {
+		
 		Event event = erepo.findById(eventid)
 				.orElseThrow(() -> new ResourceNotFoundException("No event with id: " + eventid + " found"));
+		
 		Ticket t = new Ticket();
 		if (event.getTicketInventory() > 0) {
 			t.setEvent(event);
-			// t.setType(event.getTicketTypes().get(ticket.getType())); //one example, we
-			// get tickettype id from a list in event
+
 			if (ticketprops.containsKey("orderid")) {
-//				
-				if ((orepo.findById(Long.valueOf((String) ticketprops.get("orderid")))).isPresent()) {
-					Long id = Long.valueOf((String) ticketprops.get("orderid"));
-					Order o = orepo.findById(id).orElse(new Order());
-					o.addTicket(t);
-					orepo.save(o);
-					t.setOrders(o);
-//					t.setOrders(orepo.findById( Long.valueOf((String) ticketprops.get("order"))).orElse(new Order()));
-				}
+
+				Long orderid = Long.valueOf((String) ticketprops.get("orderid"));
+				Order o = orepo.findById(orderid).orElse(new Order());
+				//o.addTicket(t);
+				orepo.save(o);
+				t.setOrders(o);
 			}
-//			if (ticketprops.containsKey("ticketType")) {
-//				t.setType((TicketType) ticketprops.get("ticketType"));
-//			}
-			// näitä voisi toki kirjoitella lisääkin
-			// event.getPrice(TicketType type)
+			
+			if (ticketprops.containsKey("ticketType")) {
+				Long ttid = Long.valueOf((String) ticketprops.get("ticketType"));
+				TicketType tt = ttrepo.findById(ttid).orElse(new TicketType());
+				t.setType(tt);
+			}
+			
 		}
 		trepo.save(t);
 		return t;

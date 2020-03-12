@@ -123,21 +123,22 @@ public class OrderController {
 
 	}
 */
-	// Hae kaikki jarjestelmassa olevat tilaukset
+	
+	// HAE KAIKKI JÄRJESTELMÄSSÄ OLEVAT TILAUKSET: 
 	@GetMapping(value = "api/orders")
 	@ResponseStatus(value = HttpStatus.OK)
 	public @ResponseBody List<Order> getAll() {
 		return (List<Order>) orepo.findAll();
 	}
 
-	// Hae tietty tilaus
+	// HAE TIETTY TILAUS: 
 	@GetMapping(value = "api/orders/{orderid}")
 	public @ResponseBody Order getOrderById(@PathVariable("orderid") Long orderid) {
 		return orepo.findById(orderid)
 				.orElseThrow(() -> new ResourceNotFoundException("No order with an id of " + orderid + " found"));
 	}
 	
-	//Hae tietyn tilauksen kaikki liput 
+	// HAE TIETTYYN TILAUKSEEN KUULUVAT KAIKKI LIPUT: 
 	@GetMapping(value = "api/orders/{orderid}/tickets")
 	@ResponseStatus(value = HttpStatus.OK)
 	public List<Ticket> getTicketsOnOrder(@PathVariable("orderid") Long orderid) {
@@ -147,7 +148,7 @@ public class OrderController {
 		return ord.getTickets();
 	}
 
-	// Luo tyhja tilauspohja
+	// LUO TYHJÄ TILAUSPOHJA: 
 	@PostMapping(value = "api/orders")
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public @ResponseBody Optional<Order> newOrder(@RequestBody Order ord) {
