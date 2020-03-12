@@ -28,7 +28,7 @@ Content example :
 }
 ```
 
-Error Response
+### Error Response
 
 Condition : If parameters are missing
 
@@ -36,8 +36,10 @@ Code : 400 BAD REQUEST
 
 Content example :
 
+```json
 {
     "message": 
         "Not yet"
     
 }
+```
