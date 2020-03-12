@@ -133,53 +133,27 @@ Ensimmäisenä on luotu rajapinta tapahtumille, joihin Ticketguru myy lippuja. K
 
 Hae tapahtumat: [GET /api/events](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/getevents.md)
 
+Hae tietty tapahtuma GET /api/events/{id}
+
+Etsi tiettyä tapahtumaa eri hakusanoilla: [GET /api/events/search/{property}={value}(https://github.com/NipeH/ohjelmistoprojekti1/blob/master/eventSearch)
+
 Lisää tapahtuma [POST/api/events](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/postevents.md)
 
- 
+Muokkaa tapahtumaa [PUT or PATCH /api/events/{eventid}](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/putevents.md)
 
+Poista tapahtuma DELETE /api/events/{id}
 
-<ul>
-
- <li>Hae yksittäinen tapahtuma: GET /events/{id} tai /event/{id}</li> 
- 
-	{
-    "eventid": 1,
-    "name": "Syksyn sävel",
-    "description": "Bailataan niin, että tyrät notkuu",
-    "price": 50.0,
-    "venue": "Nipen takapiha. Kelivaraus. Poudan yllättäessä siirrymme roskakatokseen",
-    "startTime": "2020-09-16T19:00:00",
-    "endTime": "2020-09-16T21:00:00",
-    "ticketInventory": 2
-	}
-
-  
-  
- <li>Muokkaa tapahtumaa: PUT /edit/event/{id}</li>
- 
-	{
-    "eventid": 27,
-    "name": "häät",
-    "description": "Rauhaa ja rakkautta",
-    "price": 500.0,
-    "venue": "botski",
-    "startTime": "2020-09-16T19:00:00",
-    "endTime": "2020-09-16T21:00:00",
-    "ticketInventory": 50
-	}
- 
- 
-  <li>Poista tapahtuma: DELETE /delete/event/{id}</li>
- </ul>
 
 ### Tilaustapahtumat / Orders:
 Hae tilaustapahtumat: [GET /api/orders](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/getorders)
 
+Hae tietty tilaustapahtuma: [GET /api/orders/{orderid}]
+
 Hae tiettyyn tilaukseen kuuluvat kaikki liput: [GET /api/orders({orderid}/tickets](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/getordersTickets)
 
-Lisää tyhjä tilaustapahtuma-pohja [POST/api/orders](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/postorders.md)
+Lisää tyhjä tilaustapahtuma-pohja [POST/api/orders](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/orders.md)
 
-Lisää tilaustapahtuma [POST/orders/{eventid}/{typeid}/{lkm}]
+Lisää tilaustapahtuma [POST/orders/{eventid}/{typeid}/{lkm}](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/postorders.md)
 
 
 
