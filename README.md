@@ -135,9 +135,11 @@ Hae tapahtumat: [GET /api/events](https://github.com/NipeH/ohjelmistoprojekti1/b
 
 Hae tietty tapahtuma GET /api/events/{id}
 
+Etsi tiettyä tapahtumaa eri hakusanoilla: [GET /api/events/search/{property}={value}(https://github.com/NipeH/ohjelmistoprojekti1/blob/master/eventSearch)
+
 Lisää tapahtuma [POST/api/events](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/postevents.md)
 
-Muokkaa tapahtumaa [PUT or PATCH /api/events](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/putevents.md)
+Muokkaa tapahtumaa [PUT or PATCH /api/events/{eventid}](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/putevents.md)
 
 Poista tapahtuma DELETE /api/events/{id}
 
