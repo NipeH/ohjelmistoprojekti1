@@ -177,9 +177,9 @@ Hae tilaustapahtumat: [GET /api/orders](https://github.com/NipeH/ohjelmistoproje
 
 Hae tiettyyn tilaukseen kuuluvat kaikki liput: [GET /api/orders({orderid}/tickets](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/getordersTickets)
 
-Lisää tyhjä tilaustapahtuma-pohja [POST/api/orders](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/postorders.md)
+Lisää tyhjä tilaustapahtuma-pohja [POST/api/orders](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/orders.md)
 
-Lisää tilaustapahtuma [POST/orders/{eventid}/{typeid}/{lkm}]
+Lisää tilaustapahtuma [POST/orders/{eventid}/{typeid}/{lkm}](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/postorders.md)
 
 
 
