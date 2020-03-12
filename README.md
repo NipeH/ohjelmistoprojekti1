@@ -155,7 +155,8 @@ Lisää tyhjä tilaustapahtuma-pohja [POST/api/orders](https://github.com/NipeH/
 
 Lisää tilaustapahtuma [POST/orders/{eventid}/{typeid}/{lkm}](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/postorders.md)
 
-
+### Liput / Tickets:
+Luodaan lippu tapahtumaan: [POST /api/events/{eventid}/tickets](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/eventTickets)
 
 ### Avoimet ja autentikointia vaativat endpointit
 Tällä hetkellä kaikki endpointit ovat avoimia, myöhemmin asianmukaisen autentikoinnin ja autorisoinnin taakse tulevat kaikki muut paitsi POST:/login ja GET:events/...
