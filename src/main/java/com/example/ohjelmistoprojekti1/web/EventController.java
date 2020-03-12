@@ -249,8 +249,8 @@ public class EventController {
 				t.setType(tt);
 			}
 			
+			trepo.save(t);
 		}
-		trepo.save(t);
 		return t;
 	}
 }
