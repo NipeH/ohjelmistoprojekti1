@@ -135,7 +135,7 @@ Hae tapahtumat: [GET /api/events](https://github.com/NipeH/ohjelmistoprojekti1/b
 
 Lisää tapahtuma [POST/api/events](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/postevents.md)
 
-Lisää myyntitapahtuma POST/orders/{eventid}/{typeid}/{lkm} 
+ 
 
 
 <ul>
@@ -175,7 +175,13 @@ Lisää myyntitapahtuma POST/orders/{eventid}/{typeid}/{lkm}
 ### Tilaustapahtumat / Orders:
 Hae tilaustapahtumat: [GET /api/orders](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/getorders)
 
-Lisää tilaustapahtuma [POST/api/orders](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/postorders.md)
+Hae tiettyyn tilaukseen kuuluvat kaikki liput: [GET /api/orders({orderid}/tickets](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/getordersTickets)
+
+Lisää tyhjä tilaustapahtuma-pohja [POST/api/orders](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/postorders.md)
+
+Lisää tilaustapahtuma [POST/orders/{eventid}/{typeid}/{lkm}]
+
+
 
 ### Avoimet ja autentikointia vaativat endpointit
 Tällä hetkellä kaikki endpointit ovat avoimia, myöhemmin asianmukaisen autentikoinnin ja autorisoinnin taakse tulevat kaikki muut paitsi POST:/login ja GET:events/...
