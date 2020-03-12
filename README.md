@@ -145,6 +145,8 @@ Poista tapahtuma DELETE /api/events/{id}
 ### Tilaustapahtumat / Orders:
 Hae tilaustapahtumat: [GET /api/orders](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/getorders)
 
+Hae tietty tilaustapahtuma: [GET /api/orders/{orderid}]
+
 Hae tiettyyn tilaukseen kuuluvat kaikki liput: [GET /api/orders({orderid}/tickets](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/getordersTickets)
 
 Lisää tyhjä tilaustapahtuma-pohja [POST/api/orders](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/orders.md)
