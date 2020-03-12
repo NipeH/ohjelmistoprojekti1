@@ -172,6 +172,8 @@ Lisää myyntitapahtuma POST/orders/{eventid}/{typeid}/{lkm}
   <li>Poista tapahtuma: DELETE /delete/event/{id}</li>
  </ul>
 
+### Tilaustapahtumat / Orders:
+Hae tilaustapahtumat: [GET /api/orders](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/getorders)
 
 ### Avoimet ja autentikointia vaativat endpointit
 Tällä hetkellä kaikki endpointit ovat avoimia, myöhemmin asianmukaisen autentikoinnin ja autorisoinnin taakse tulevat kaikki muut paitsi POST:/login ja GET:events/...
