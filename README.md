@@ -131,7 +131,7 @@ Ensimmäisenä on luotu rajapinta tapahtumille, joihin Ticketguru myy lippuja. K
 
 ### Tapahtumat / Events:
 
-Hae tapahtumat: [GET /api/events](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/getevents)
+Hae tapahtumat: [GET /api/events](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/getevents.md)
 
 Lisää tapahtuma [POST/api/events](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/postevents.md)
 
