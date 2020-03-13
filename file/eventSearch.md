@@ -1,4 +1,4 @@
-Etsitään tiettyä tapahtumaa eri hakusanoilla: 
+### Etsitään tiettyä tapahtumaa eri hakusanoilla: 
 
 URL : /api/orders//api/events/search/{property}={value}
 
@@ -8,7 +8,7 @@ Auth required : NO (to be changed, see: https://github.com/NipeH/ohjelmistoproje
 
 Permissions required : None (to be changed, see: https://github.com/NipeH/ohjelmistoprojekti1#avoimet-ja-autentikointia-vaativat-endpointit)
 
-Success Response
+### Success Response
 Code : 200 OK
 
 Content examples:
