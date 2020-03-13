@@ -66,15 +66,7 @@ public class EventController {
 	@Autowired
 	private UserTypeRepository utrepo;
 	
-	@Autowired
-	private OrderRowRepository orrepo;	
-
-	// jos parametrillä ei löydy palautetaan 404 EITOIMIIIIII
-	@ExceptionHandler(ConstraintViolationException.class)
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	ResponseEntity<String> handleConstraintViolationException(ConstraintViolationException e) {
-		return new ResponseEntity<>("not valid due to validation error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
-	}
+	
 
 	// lisää tapahtuma
 	@PostMapping(value = "/api/events")
@@ -89,7 +81,7 @@ public class EventController {
 		}
 	}
 
-	// poista
+	// poista tapahtuma
 	@DeleteMapping("/api/events/{id}")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT) // 204 jos onnistuu
 	public void deleteEvent(@PathVariable("id") @Min(1) Long eventid) {// parametri väh.1:n pituinen
@@ -137,7 +129,7 @@ public class EventController {
 
 	// hae parametrina tulevalla idllä
 	@ResponseStatus(HttpStatus.OK)
-	@GetMapping(value = "api//events/{id}")
+	@GetMapping(value = "api/events/{id}")
 	public @ResponseBody Optional<Event> eventById(@PathVariable("id") Long eventid) {
 		ResponseStatusException e = new ResponseStatusException(HttpStatus.NOT_FOUND, "Tapahtumaa ei löydy");
 		if (!erepo.findById(eventid).isPresent()) {
@@ -176,6 +168,17 @@ public class EventController {
 		}
 		return found;
 	}
+	
+	//Hae tapahtumaan myydyt liput
+	@GetMapping(value = "api/events/{eventid}/tickets_sold")
+	@ResponseStatus(value = HttpStatus.OK)
+	public List<Ticket> getTicketsOnEvent(@PathVariable("eventid") Long eventid) {
+		Event event = erepo.findById(eventid)
+		.orElseThrow(() -> new ResourceNotFoundException("No event with an id of " + eventid + " found"));
+		
+		return event.getTickets();
+	}	
+	
 
 	// muokkaa
 	@PatchMapping("/api/events/{id}")
@@ -308,22 +311,27 @@ public class EventController {
 				//Hinta = eventin hinta jos lipputyyppi on 3 eli aikuinen
 				if (ttype.getTicketypeid() == 3) {
 					t.setPrice(event.getPrice());
+					or.setTotal(or.getTotal() + t.getPrice());
 				} else {
 					t.setPrice(event.getPrice() * ttype.getDiscount());
+					or.setTotal(or.getTotal() + t.getPrice());					
 				}
 				//Vähennetään yksi inventorysta
 				event.setTicketInventory(event.getTicketInventory()-1);
 				Long tid = trepo.save(t).getTicketid();
 				tickets.add(trepo.findById(tid).get());
 				
+				
 			} // entä jos lippuja ei saatavilla?
 			
-		}
+		} 				
+
 		
-	return tickets; }
-		catch (Exception e) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-					"Tarkista pakolliset kentät, orderid, pcs ja tyckettypeid", e);
+		
+		return tickets; }
+			catch (Exception e) {
+				throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+						"Tarkista pakolliset kentät, orderid, pcs ja tyckettypeid", e);
 
 		}
 	}
