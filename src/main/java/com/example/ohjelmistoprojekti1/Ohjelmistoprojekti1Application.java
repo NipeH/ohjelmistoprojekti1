@@ -80,7 +80,17 @@ public class Ohjelmistoprojekti1Application {
 			ruisrock.setStartTime("2020-07-16T19:00:00");
 			ruisrock.setEndTime("2020-07-05T23:59:00");
 			ruisrock.setTicketInventory(200);
-			eventRepo.save(ruisrock);				
+			eventRepo.save(ruisrock);
+			
+			Event jazz = new Event();
+			jazz.setName("Jazz");
+			jazz.setDescription("Esiintyjinä Jazz");
+			jazz.setPrice(100);
+			jazz.setVenue("Pori");
+			jazz.setStartTime("2020-07-16T19:00:00");
+			jazz.setEndTime("2020-07-05T23:59:00");
+			jazz.setTicketInventory(9);
+			eventRepo.save(jazz);	
 
 		
 			

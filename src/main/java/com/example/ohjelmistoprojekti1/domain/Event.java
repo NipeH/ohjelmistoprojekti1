@@ -50,6 +50,9 @@ public class Event {
 	public Event() {
 		super();
 	}
+	
+
+
 
 	/**
 	 * Set starting time for event, for
@@ -169,13 +172,25 @@ public class Event {
 //		this.date = java.sql.Date.valueOf(date);
 //	}
 
+/* Tää tälläisenään "rikkoo" post eventin niin, ettei se palauta jsonina vastausta :/
 	public int getTicketInventory() {
 		return this.ticketInventory - tickets.size();
 	}
+*/
+	
 
 	public void setTicketInventory(int ticketInventory) {
 		this.ticketInventory = ticketInventory;
 	}
+
+
+
+	public int getTicketInventory() {
+		return ticketInventory;
+	}
+
+
+
 
 	public double getPrice() {
 		return price;

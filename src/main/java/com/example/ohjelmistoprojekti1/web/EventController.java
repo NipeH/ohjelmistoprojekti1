@@ -67,11 +67,11 @@ public class EventController {
 	private UserTypeRepository utrepo;
 	
 	
-
+	//PALAUTTAA 500?????
 	// lisää tapahtuma
 	@PostMapping(value = "/api/events")
 	@ResponseStatus(value = HttpStatus.CREATED) // Palauttaa 201 onnistuessaan
-	public Event addEvent(@Valid @RequestBody Event event) {
+	public @ResponseBody Event addEvent(@Valid @RequestBody Event event) {
 		try {
 			return erepo.save(event);
 		} catch (Exception e) {
@@ -209,11 +209,16 @@ public class EventController {
 				if (newEventProperties.containsKey("ticketInventory")) {
 					event.setTicketInventory((int) newEventProperties.get("ticketInventory"));
 				}
-
+			
+				if (newEventProperties.containsKey("startTime")) {
+					event.setStartTime((String) newEventProperties.get("startTime"));
+				}	
+				if (newEventProperties.containsKey("endTime")) {
+					event.setEndTime((String) newEventProperties.get("endTime"));
+				}				
+				
 				return erepo.save(event);
-//			}).orElseGet(() -> {
-//				editEvent.setEventid(eventid);
-//				return erepo.save(editEvent);
+
 			}).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -273,7 +278,7 @@ public class EventController {
 	
 	
 	//NO NULL VALUES
-	//Lähetetään bodyssa orderid, tickettypeid (esim. 4, 5 tai 3) ja pcs lippujen lkm
+	//Lähetetään bodyssa olemassa oleva (esim. 15 kovakoodattu) orderid, tickettypeid (esim. 4, 5 tai 3) ja pcs lippujen lkm
 	// LUODAAN UUSI LIPPU TAPAHTUMAAN, EDELLYTTÄEN, ETTÄ LIPPUJA ON VIELÄ SAATAVILLA
 	@PostMapping(value = "/api/events/{eventid}/tickets")
 	@ResponseStatus(value = HttpStatus.CREATED)
@@ -301,15 +306,16 @@ public class EventController {
 		
 		//Luodaan niin monta lippua kuin bodyssa maaritelty
 		for(int i=1; i<= pcs; i++) { 
-			Ticket t = new Ticket();
+
 		//Varmistetaan että lippuja on saatavilla
 			if (event.getTicketInventory() > 0) {
+				Ticket t = new Ticket();
 				t.setEvent(event);				
 				t.setValid(true);
 				t.setType(ttype);
 				t.setOrders(or);
 				//Hinta = eventin hinta jos lipputyyppi on 3 eli aikuinen
-				if (ttype.getTicketypeid() == 3) {
+				if (ttype.getTicketypeid() == 4) {
 					t.setPrice(event.getPrice());
 					or.setTotal(or.getTotal() + t.getPrice());
 				} else {
@@ -322,7 +328,7 @@ public class EventController {
 				tickets.add(trepo.findById(tid).get());
 				
 				
-			} // entä jos lippuja ei saatavilla?
+			} //  jos lippuja ei saatavilla <- tulee tyhjä lista.
 			
 		} 				
 
@@ -335,6 +341,43 @@ public class EventController {
 
 		}
 	}
+	
+	
+		//TULOSTETAAN MYYMÄTTÄ OLEVAT LIPUT
+		@PostMapping(value = "/api/events/{eventid}/available_tickets")
+		@ResponseStatus(value = HttpStatus.CREATED)
+		public @ResponseBody List<Ticket> tickets(@PathVariable("eventid") Long eventid) {
+			
+			List <Ticket>tickets = new ArrayList<>();
+			
+			try {
+			//Hakee eventin bodyssa tulevalla eventid:lla
+			Event event = erepo.findById(eventid)
+					.orElseThrow(() -> new ResourceNotFoundException("No event with id: " + eventid + " found"));
+
+
+			//Haetaan jäljellä olevien lippujen lkm
+			int pcs = event.getTicketInventory();
+			
+			
+			//Luodaan niin monta lippua kuin on myymättä
+			for(int i=1; i<= pcs; i++) { 
+				Ticket t = new Ticket();
+
+					t.setEvent(event);				
+					t.setValid(true);
+					t.setPrice(event.getPrice());
+					Long tid = trepo.save(t).getTicketid();
+					tickets.add(trepo.findById(tid).get());	
+			} 				
+			
+			return tickets; }
+				catch (Exception e) {
+					throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+							"Tarkista pakolliset kentät, orderid, pcs ja tyckettypeid", e);
+
+			}
+		}
 	
 	
 	

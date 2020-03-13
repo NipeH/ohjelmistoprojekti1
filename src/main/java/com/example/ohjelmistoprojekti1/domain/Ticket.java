@@ -19,7 +19,7 @@ public class Ticket {
 
 	@NotNull
 	@ManyToOne
-	@JsonIgnore
+	//@JsonIgnore
 	@JoinColumn(name = "eventid")
 	private Event event;
 
