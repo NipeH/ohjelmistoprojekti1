@@ -3,6 +3,7 @@ package com.example.ohjelmistoprojekti1;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -43,6 +44,12 @@ public class Ohjelmistoprojekti1Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Ohjelmistoprojekti1Application.class, args);
+	}
+	
+	//data transfer objects
+	@Bean
+	public ModelMapper modelMapper() {
+	    return new ModelMapper();
 	}
 
 	@Bean

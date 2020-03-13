@@ -27,12 +27,12 @@ public class Ticket {
 
 	
 	@ManyToOne
-	@JsonIgnore
+	//@JsonIgnore
 	@JoinColumn(name = "tickettypeid")
 	private TicketType type;
 
 	@ManyToOne
-	@JsonIgnore
+	//@JsonIgnore
 	@JoinColumn(name = "orderid")
 	private Order orders;
 
