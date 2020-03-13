@@ -135,7 +135,7 @@ Hae tapahtumat: [GET /api/events](https://github.com/NipeH/ohjelmistoprojekti1/b
 
 Hae tietty tapahtuma GET /api/events/{id}
 
-Etsi tiettyä tapahtumaa eri hakusanoilla: [GET /api/events/search/{property}={value}(https://github.com/NipeH/ohjelmistoprojekti1/blob/master/eventSearch)
+Etsi tiettyä tapahtumaa eri hakusanoilla: [GET /api/events/search/{property}={value}](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/eventSearch.md)
 
 Lisää tapahtuma [POST/api/events](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/postevents.md)
 
@@ -145,18 +145,18 @@ Poista tapahtuma DELETE /api/events/{id}
 
 
 ### Tilaustapahtumat / Orders:
-Hae tilaustapahtumat: [GET /api/orders](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/getorders)
+Hae tilaustapahtumat: [GET /api/orders](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/getorders.md)
 
 Hae tietty tilaustapahtuma: [GET /api/orders/{orderid}]
 
-Hae tiettyyn tilaukseen kuuluvat kaikki liput: [GET /api/orders({orderid}/tickets](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/getordersTickets)
+Hae tiettyyn tilaukseen kuuluvat kaikki liput: [GET /api/orders({orderid}/tickets](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/getordersTickets.md)
 
 Lisää tyhjä tilaustapahtuma-pohja [POST/api/orders](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/orders.md)
 
 Lisää tilaustapahtuma [POST/orders/{eventid}/{typeid}/{lkm}](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/postorders.md)
 
 ### Liput / Tickets:
-Luodaan lippu tapahtumaan: [POST /api/events/{eventid}/tickets](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/eventTickets)
+Luodaan lippu tapahtumaan: [POST /api/events/{eventid}/tickets](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/eventTickets.md)
 
 ### Avoimet ja autentikointia vaativat endpointit
 Tällä hetkellä kaikki endpointit ovat avoimia, myöhemmin asianmukaisen autentikoinnin ja autorisoinnin taakse tulevat kaikki muut paitsi POST:/login ja GET:events/...
