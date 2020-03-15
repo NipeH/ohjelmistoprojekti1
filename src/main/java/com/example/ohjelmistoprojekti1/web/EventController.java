@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
@@ -65,9 +66,8 @@ public class EventController {
 
 	@Autowired
 	private UserTypeRepository utrepo;
-	
-	
-	//PALAUTTAA 500?????
+
+	// PALAUTTAA 500?????
 	// lisää tapahtuma
 	@PostMapping(value = "/api/events")
 	@ResponseStatus(value = HttpStatus.CREATED) // Palauttaa 201 onnistuessaan
@@ -168,17 +168,16 @@ public class EventController {
 		}
 		return found;
 	}
-	
-	//Hae tapahtumaan myydyt liput
+
+	// Hae tapahtumaan myydyt liput
 	@GetMapping(value = "api/events/{eventid}/tickets_sold")
 	@ResponseStatus(value = HttpStatus.OK)
 	public List<Ticket> getTicketsOnEvent(@PathVariable("eventid") Long eventid) {
 		Event event = erepo.findById(eventid)
-		.orElseThrow(() -> new ResourceNotFoundException("No event with an id of " + eventid + " found"));
-		
+				.orElseThrow(() -> new ResourceNotFoundException("No event with an id of " + eventid + " found"));
+
 		return event.getTickets();
-	}	
-	
+	}
 
 	// muokkaa
 	@PatchMapping("/api/events/{id}")
@@ -209,14 +208,14 @@ public class EventController {
 				if (newEventProperties.containsKey("ticketInventory")) {
 					event.setTicketInventory((int) newEventProperties.get("ticketInventory"));
 				}
-			
+
 				if (newEventProperties.containsKey("startTime")) {
 					event.setStartTime((String) newEventProperties.get("startTime"));
-				}	
+				}
 				if (newEventProperties.containsKey("endTime")) {
 					event.setEndTime((String) newEventProperties.get("endTime"));
-				}				
-				
+				}
+
 				return erepo.save(event);
 
 			}).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -234,214 +233,197 @@ public class EventController {
 		return event.getTickets();
 	}
 
-/*	
-	//Lähetetään bodyssa orderid, ticketType (esim. 4, 5 tai 3) 
+	/*
+	 * //Lähetetään bodyssa orderid, ticketType (esim. 4, 5 tai 3) // LUODAAN UUSI
+	 * LIPPU TAPAHTUMAAN, EDELLYTTÄEN, ETTÄ LIPPUJA ON VIELÄ SAATAVILLA
+	 * 
+	 * @PostMapping(value = "/api/events/{eventid}/tickets")
+	 * 
+	 * @ResponseStatus(value = HttpStatus.CREATED) public @ResponseBody Ticket
+	 * addTicketOnEvent(@PathVariable("eventid") Long eventid,
+	 * 
+	 * @RequestBody Map<String, Object> ticketprops) {
+	 * 
+	 * //Hakee eventin bodyssa tulevalla eventid:lla Event event =
+	 * erepo.findById(eventid) .orElseThrow(() -> new
+	 * ResourceNotFoundException("No event with id: " + eventid + " found"));
+	 * 
+	 * Ticket t = new Ticket(); if (event.getTicketInventory() > 0) {
+	 * t.setEvent(event); //jos bodyssa tulee orderid -> if
+	 * (ticketprops.containsKey("orderid")) { //asetetaan orderidksi bodysta tuleva
+	 * orderid orderin idksi Long orderid = Long.valueOf((String)
+	 * ticketprops.get("orderid")); Order o = orepo.findById(orderid).orElse(new
+	 * Order()); //o.addTicket(t); orepo.save(o); t.setOrders(o); }
+	 * 
+	 * //hae bodyssa tuleva tickettype string if
+	 * (ticketprops.containsKey("tickettypeid")) { Long ttid = Long.valueOf((String)
+	 * ticketprops.get("ticketType")); TicketType tt =
+	 * ttrepo.findById(ttid).orElse(new TicketType()); t.setType(tt); }
+	 * 
+	 * trepo.save(t); } return t; }
+	 */
+
+	// NO NULL VALUES
+	// Lähetetään bodyssa olemassa oleva (esim. 15 kovakoodattu) orderid,
+	// tickettypeid (esim. 4, 5 tai 3) ja pcs lippujen lkm
 	// LUODAAN UUSI LIPPU TAPAHTUMAAN, EDELLYTTÄEN, ETTÄ LIPPUJA ON VIELÄ SAATAVILLA
 	@PostMapping(value = "/api/events/{eventid}/tickets")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public @ResponseBody Ticket addTicketOnEvent(@PathVariable("eventid") Long eventid,
+	public @ResponseBody List<Ticket> tickets(@PathVariable("eventid") Long eventid,
 			@RequestBody Map<String, Object> ticketprops) {
-		
-		//Hakee eventin bodyssa tulevalla eventid:lla
-		Event event = erepo.findById(eventid)
-				.orElseThrow(() -> new ResourceNotFoundException("No event with id: " + eventid + " found"));
-		
-		Ticket t = new Ticket();
-		if (event.getTicketInventory() > 0) {
-			t.setEvent(event);
-			//jos bodyssa tulee orderid ->
-			if (ticketprops.containsKey("orderid")) {
-				//asetetaan orderidksi bodysta tuleva orderid orderin idksi
-				Long orderid = Long.valueOf((String) ticketprops.get("orderid"));
-				Order o = orepo.findById(orderid).orElse(new Order());
-				//o.addTicket(t);
-				orepo.save(o);
-				t.setOrders(o);
-			}
-			
-			//hae bodyssa tuleva tickettype string
-			if (ticketprops.containsKey("tickettypeid")) {
-				Long ttid = Long.valueOf((String) ticketprops.get("ticketType"));
-				TicketType tt = ttrepo.findById(ttid).orElse(new TicketType());
-				t.setType(tt);
-			}
-			
-			trepo.save(t);
-		}
-		return t;
-	}
-*/	
-	
-	
-	
-	
-	
-	
-	//NO NULL VALUES
-	//Lähetetään bodyssa olemassa oleva (esim. 15 kovakoodattu) orderid, tickettypeid (esim. 4, 5 tai 3) ja pcs lippujen lkm
-	// LUODAAN UUSI LIPPU TAPAHTUMAAN, EDELLYTTÄEN, ETTÄ LIPPUJA ON VIELÄ SAATAVILLA
-	@PostMapping(value = "/api/events/{eventid}/tickets")
-	@ResponseStatus(value = HttpStatus.CREATED)
-	public @ResponseBody List<Ticket> tickets(@PathVariable("eventid") Long eventid, @RequestBody Map<String, Object> ticketprops) {
-		
-		List <Ticket>tickets = new ArrayList<>();
-		
+
+		List<Ticket> tickets = new ArrayList<>();
+
 		try {
-		//Hakee eventin bodyssa tulevalla eventid:lla
-		Event event = erepo.findById(eventid)
-				.orElseThrow(() -> new ResourceNotFoundException("No event with id: " + eventid + " found"));
-
-
-		//Haetaan bodysta pcs eli lippujen lkm
-		Long pcs = Long.valueOf((String) ticketprops.get("pcs"));
-		
-
-		//Haetaan lipputyyppi bodysta tulevalla id:llä tai luodaan uusi joka on automaattisesti adult
-		TicketType ttype = ttrepo.findById(Long.valueOf((String)ticketprops.get("tickettypeid"))).orElse(new TicketType());	
-		
-		//Haetaan orderi
-		Long orderid = Long.valueOf((String) ticketprops.get("orderid"));		
-		Order or = orepo.findById(orderid).get();
-	
-		
-		//Luodaan niin monta lippua kuin bodyssa maaritelty
-		for(int i=1; i<= pcs; i++) { 
-
-		//Varmistetaan että lippuja on saatavilla
-			if (event.getTicketInventory() > 0) {
-				Ticket t = new Ticket();
-				t.setEvent(event);				
-				t.setValid(true);
-				t.setType(ttype);
-				t.setOrders(or);
-				//Hinta = eventin hinta jos lipputyyppi on 3 eli aikuinen
-				if (ttype.getTicketypeid() == 4) {
-					t.setPrice(event.getPrice());
-					or.setTotal(or.getTotal() + t.getPrice());
-				} else {
-					t.setPrice(event.getPrice() * ttype.getDiscount());
-					or.setTotal(or.getTotal() + t.getPrice());					
-				}
-				//Vähennetään yksi inventorysta
-				event.setTicketInventory(event.getTicketInventory()-1);
-				Long tid = trepo.save(t).getTicketid();
-				tickets.add(trepo.findById(tid).get());
-				
-				
-			} //  jos lippuja ei saatavilla <- tulee tyhjä lista.
-			
-		} 				
-
-		
-		
-		return tickets; }
-			catch (Exception e) {
-				throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-						"Tarkista pakolliset kentät, orderid, pcs ja tyckettypeid", e);
-
-		}
-	}
-	
-	
-		//TULOSTETAAN MYYMÄTTÄ OLEVAT LIPUT
-		@PostMapping(value = "/api/events/{eventid}/available_tickets")
-		@ResponseStatus(value = HttpStatus.CREATED)
-		public @ResponseBody List<Ticket> tickets(@PathVariable("eventid") Long eventid) {
-			
-			List <Ticket>tickets = new ArrayList<>();
-			
-			try {
-			//Hakee eventin bodyssa tulevalla eventid:lla
+			// Hakee eventin bodyssa tulevalla eventid:lla
 			Event event = erepo.findById(eventid)
 					.orElseThrow(() -> new ResourceNotFoundException("No event with id: " + eventid + " found"));
 
+			// Haetaan bodysta pcs eli lippujen lkm
+			// oletuksena yksi lippu
+			int pcs = 1;
 
-			//Haetaan jäljellä olevien lippujen lkm
+//			Jos pyynnöstä löytyy lippujen lukumäärä, se talletetaan muuttujaan pcs
+			if (ticketprops.containsKey("pcs")) {
+				pcs = Integer.valueOf((String) ticketprops.get("pcs"));
+			}
+
+			// Haetaan lipputyyppi bodysta tulevalla id:llä, jos sellainen on
+//			Oletuksena tickettypen id on (ttid = 4), eli aikuisten normaalihintainen lippu
+			Long ttid = (long) 4;
+			TicketType ttype = ttrepo.findById(ttid).get();
+
+//			Jos lipun tyyppi mainitaan, se talletetaan muuttujaan ttype
+			if (ticketprops.containsKey("tickettypeid")) {
+				ttid = Long.valueOf((String) ticketprops.get("tickettypeid"));
+				ttype = ttrepo.findById(ttid)
+						.orElseThrow(() -> new EntityNotFoundException("no ticket type with id: " + " found"));
+			}
+
+			// Haetaan orderid
+			Order o = new Order();
+			if (ticketprops.containsKey("orderid")) {
+				Long orderid = Long.valueOf((String) ticketprops.get("orderid"));
+				o = orepo.findById(orderid)
+						.orElseThrow(() -> new EntityNotFoundException("No order with id: " + orderid + " found."));
+			} else {
+				orepo.save(o);
+			}
+
+			// Varmistetaan että lippuja on saatavilla
+			if (event.getTicketInventory() >= pcs) {
+				// Luodaan niin monta lippua kuin bodyssa maaritelty
+				for (int i = 1; i <= pcs; i++) {
+
+					Ticket t = new Ticket();
+					t.setEvent(event);
+					t.setValid(true);
+					t.setType(ttype);
+					t.setOrders(o);
+					// Hinta = eventin hinta jos lipputyyppi on 3 eli aikuinen
+					if (ttype.getTicketypeid() == 4) {
+						t.setPrice(event.getPrice());
+						o.setTotal(o.getTotal() + t.getPrice());
+					} else {
+						t.setPrice(event.getPrice() * ttype.getDiscount());
+						o.setTotal(o.getTotal() + t.getPrice());
+					}
+					// Vähennetään yksi inventorysta
+					event.setTicketInventory(event.getTicketInventory() - 1);
+					Long tid = trepo.save(t).getTicketid();
+					tickets.add(trepo.findById(tid).get());
+
+				}
+				// jos lippuja ei saatavilla tarpeeksi <- tulee tyhjä lista.
+			}
+
+			return tickets;
+		} catch (Exception e) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+					"Tarkista pakolliset kentät, orderid, pcs ja tyckettypeid", e);
+
+		}
+	}
+
+	// TULOSTETAAN MYYMÄTTÄ OLEVAT LIPUT
+	@PostMapping(value = "/api/events/{eventid}/available_tickets")
+	@ResponseStatus(value = HttpStatus.CREATED)
+	public @ResponseBody List<Ticket> tickets(@PathVariable("eventid") Long eventid) {
+
+		List<Ticket> tickets = new ArrayList<>();
+
+		try {
+			// Hakee eventin bodyssa tulevalla eventid:lla
+			Event event = erepo.findById(eventid)
+					.orElseThrow(() -> new ResourceNotFoundException("No event with id: " + eventid + " found"));
+
+			// Haetaan jäljellä olevien lippujen lkm
 			int pcs = event.getTicketInventory();
-			
-			
-			//Luodaan niin monta lippua kuin on myymättä
-			for(int i=1; i<= pcs; i++) { 
+
+			// Luodaan niin monta lippua kuin on myymättä
+			for (int i = 1; i <= pcs; i++) {
 				Ticket t = new Ticket();
 
-					t.setEvent(event);				
-					t.setValid(true);
-					t.setPrice(event.getPrice());
-					Long tid = trepo.save(t).getTicketid();
-					tickets.add(trepo.findById(tid).get());	
-			} 				
-			
-			return tickets; }
-				catch (Exception e) {
-					throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-							"Tarkista pakolliset kentät, orderid, pcs ja tyckettypeid", e);
-
-			}
-		}
-	
-	
-	
-	
-	
-	
-	
-	
-/*	POISTETAAN MYÖHEMMIN - TESTIVERSIO 
-	//Lähetetään bodyssa OrderRow, jossa: orderid, tickettypeid (esim. 4, 5 tai 3) ja pcs lippujen lkm
-	// LUODAAN UUSI LIPPU TAPAHTUMAAN, EDELLYTTÄEN, ETTÄ LIPPUJA ON VIELÄ SAATAVILLA
-	@PostMapping(value = "/api/events/{eventid}/tickets")
-	@ResponseStatus(value = HttpStatus.CREATED)
-	public @ResponseBody List<Ticket> tickets(@PathVariable("eventid") Long eventid, @RequestBody OrderRow or) {
-
-		List <Ticket>tickets = new ArrayList<>();
-		
-		//Hakee eventin bodyssa tulevalla eventid:lla
-		Event event = erepo.findById(eventid)
-				.orElseThrow(() -> new ResourceNotFoundException("No event with id: " + eventid + " found"));
-		
-		//tallentaa bodyna tulevan
-		orrepo.save(or);
-		
-		//Haetaan bodysta pcs eli lippujen lkm
-		int pcs = or.getPcs();
-		String orderid = or.getOrderid();
-		String ttypeid = or.getTickettypeid();
-
-		//Periaatteessa orElseen ei mennä koska TicketType on pakollinen, mutta jatkoa varten näin..
-		TicketType ttype = ttrepo.findById(Long.parseLong(ttypeid)).orElse(new TicketType());
-		
-//========================================================================================
-		
-		//Luodaan niin monta lippua kuin bodyssa maaritelty
-		for(int i=1; i<= pcs; i++) { 
-			Ticket t = new Ticket();
-			//Varmistetaan että lippuja on saatavilla
-			if (event.getTicketInventory() > 0) {
-				t.setEvent(event);				
+				t.setEvent(event);
 				t.setValid(true);
-				if (orderid != null) {
-					Order o = orepo.findById(Long.parseLong(orderid)).orElse(new Order());
-					orepo.save(o);
-					t.setOrders(o);					
-				}
-				t.setType(ttype);
-				//Hinta = eventin hinta jos lipputyyppi on 3 eli aikuinen
-				if (ttype.getTicketypeid() == 3) {
-					t.setPrice(event.getPrice());
-				} else {
-					t.setPrice(event.getPrice() * ttype.getDiscount());
-				}
-				//Vähennetään yksi inventorysta
-				event.setTicketInventory(event.getTicketInventory()-1);
+				t.setPrice(event.getPrice());
 				Long tid = trepo.save(t).getTicketid();
 				tickets.add(trepo.findById(tid).get());
-				
-			} // entä jos lippuja ei saatavilla?
-			
+			}
+
+			return tickets;
+		} catch (Exception e) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+					"Tarkista pakolliset kentät, orderid, pcs ja tyckettypeid", e);
+
 		}
-		
-		return tickets;
-	}	
-	
-*/	
+	}
+
+	/*
+	 * POISTETAAN MYÖHEMMIN - TESTIVERSIO //Lähetetään bodyssa OrderRow, jossa:
+	 * orderid, tickettypeid (esim. 4, 5 tai 3) ja pcs lippujen lkm // LUODAAN UUSI
+	 * LIPPU TAPAHTUMAAN, EDELLYTTÄEN, ETTÄ LIPPUJA ON VIELÄ SAATAVILLA
+	 * 
+	 * @PostMapping(value = "/api/events/{eventid}/tickets")
+	 * 
+	 * @ResponseStatus(value = HttpStatus.CREATED) public @ResponseBody List<Ticket>
+	 * tickets(@PathVariable("eventid") Long eventid, @RequestBody OrderRow or) {
+	 * 
+	 * List <Ticket>tickets = new ArrayList<>();
+	 * 
+	 * //Hakee eventin bodyssa tulevalla eventid:lla Event event =
+	 * erepo.findById(eventid) .orElseThrow(() -> new
+	 * ResourceNotFoundException("No event with id: " + eventid + " found"));
+	 * 
+	 * //tallentaa bodyna tulevan orrepo.save(or);
+	 * 
+	 * //Haetaan bodysta pcs eli lippujen lkm int pcs = or.getPcs(); String orderid
+	 * = or.getOrderid(); String ttypeid = or.getTickettypeid();
+	 * 
+	 * //Periaatteessa orElseen ei mennä koska TicketType on pakollinen, mutta
+	 * jatkoa varten näin.. TicketType ttype =
+	 * ttrepo.findById(Long.parseLong(ttypeid)).orElse(new TicketType());
+	 * 
+	 * //===========================================================================
+	 * =============
+	 * 
+	 * //Luodaan niin monta lippua kuin bodyssa maaritelty for(int i=1; i<= pcs;
+	 * i++) { Ticket t = new Ticket(); //Varmistetaan että lippuja on saatavilla if
+	 * (event.getTicketInventory() > 0) { t.setEvent(event); t.setValid(true); if
+	 * (orderid != null) { Order o =
+	 * orepo.findById(Long.parseLong(orderid)).orElse(new Order()); orepo.save(o);
+	 * t.setOrders(o); } t.setType(ttype); //Hinta = eventin hinta jos lipputyyppi
+	 * on 3 eli aikuinen if (ttype.getTicketypeid() == 3) {
+	 * t.setPrice(event.getPrice()); } else { t.setPrice(event.getPrice() *
+	 * ttype.getDiscount()); } //Vähennetään yksi inventorysta
+	 * event.setTicketInventory(event.getTicketInventory()-1); Long tid =
+	 * trepo.save(t).getTicketid(); tickets.add(trepo.findById(tid).get());
+	 * 
+	 * } // entä jos lippuja ei saatavilla?
+	 * 
+	 * }
+	 * 
+	 * return tickets; }
+	 * 
+	 */
 }
