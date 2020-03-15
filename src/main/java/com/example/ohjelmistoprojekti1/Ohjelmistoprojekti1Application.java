@@ -64,8 +64,6 @@ public class Ohjelmistoprojekti1Application {
 					+ " Soittimina tusina sadeputkea ja märkä rätti");
 			event.setPrice(50);
 			event.setVenue("Nipen takapiha. Kelivaraus. Poudan yllättäessä siirrymme roskakatokseen");
-//			event.setDate("2020-09-16");
-//			event.setTime("19:00");
 			event.setStartTime("2020-09-16T19:00:00");
 			event.setEndTime("2020-09-16T21:00:00");
 			event.setTicketInventory(2);
@@ -76,7 +74,6 @@ public class Ohjelmistoprojekti1Application {
 			ruisrock.setDescription("Esiintyjinä mm. Major Lazer");
 			ruisrock.setPrice(200);
 			ruisrock.setVenue("Turun ruissalo");
-//			ruisrock.setDate("2020-07-16");
 			ruisrock.setStartTime("2020-07-16T19:00:00");
 			ruisrock.setEndTime("2020-07-05T23:59:00");
 			ruisrock.setTicketInventory(200);

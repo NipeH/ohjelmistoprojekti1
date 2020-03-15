@@ -46,7 +46,10 @@ public class Event {
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
 	private List<Ticket> tickets;
-
+//
+//	@OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
+//	private List<TicketType> eventOrganizersTicketTypes;
+//	
 	public Event() {
 		super();
 	}
