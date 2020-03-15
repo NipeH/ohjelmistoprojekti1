@@ -29,16 +29,13 @@ public class Order {
 	private ZonedDateTime timestamp;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "orders")
-	@JsonIgnore
 	private List<Ticket> tickets;
 
 	@ManyToOne
-	@JsonIgnore
 	@JoinColumn(name = "userid")
 	private User user;
 
 	@ManyToOne
-	@JsonIgnore
 	@JoinColumn(name = "customerid")
 	private Customer customer;
 
