@@ -38,6 +38,8 @@ public class Ticket {
 
 	private boolean isValid;
 
+
+
 	public Ticket() {
 		super();
 	}
@@ -124,5 +126,9 @@ public class Ticket {
 	public boolean isValid() {
 		return this.isValid;
 	}
+
+
+
+
 
 }

@@ -182,6 +182,11 @@ public class Event {
 */
 	
 
+
+	//public int getTicketInventory() {
+	//	return this.ticketInventory;
+	//}
+
 	public void setTicketInventory(int ticketInventory) {
 		this.ticketInventory = ticketInventory;
 	}

@@ -54,7 +54,8 @@ public class User {
 	}
 
 
-	public User(@NotNull(message = "Anna etunimi") String firstname,
+	public User(
+			@NotNull(message = "Anna etunimi") String firstname,
 			@NotNull(message = "Anna sukuniminimi") String lastname,
 			@NotNull(message = "Anna puhelinnumero") String phonenumber,
 			@NotNull(message = "Anna sähköpostiosoite") String email,
