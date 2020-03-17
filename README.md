@@ -164,7 +164,8 @@ Tällä hetkellä kaikki endpointit ovat avoimia, myöhemmin asianmukaisen auten
 ...
 
 ## Toteutuksen yleisiä ratkaisuja, esim. turvallisuus. 
-
+## Turvallisuus
+Käyttäjätietojen hallinta on toistaiseksi toteutettu kovakoodaamalla käyttäjätiedot suoraan ohjelmaan. Autorisoinnissa käytetään JSON Web Tokenia jonka avulla käyttäjä varmennetaan allekirjoituksella pääsyn ohjelman sisältöön.
 ## Tämän lisäksi 
 
 ohjelmakoodin tulee olla kommentoitua 
