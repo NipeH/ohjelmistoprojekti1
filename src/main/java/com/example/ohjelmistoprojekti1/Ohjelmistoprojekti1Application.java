@@ -132,7 +132,17 @@ public class Ohjelmistoprojekti1Application {
 			user.setUsertype(userTypeRepo.findByUsertype("user").get(0));
 			userRepo.save(user);
 			
-		
+			//Admin
+			User admin = new User();
+			admin.setFirstname("Mestari");
+			admin.setLastname("Johtaja");
+			admin.setEmail("@netti.se");
+			admin.setPhonenumber("0666");
+			admin.setUsername("Admin");
+			admin.setPassword("Admin");
+			admin.setUsertype(userTypeRepo.findByUsertype("admin").get(0));
+			userRepo.save(admin);
+			
 			userRepo.save(new User ("Essi", "Kissa", "0408786", "1234@gmail.fi", "essi", "essi", userTypeRepo.findByUsertype("user").get(0)));
 			userRepo.save(new User ("Kissa-admin", "Kissa", "0408786", "1234@gmail.fi", "essi", "essi", userTypeRepo.findByUsertype("admin").get(0)));
 
