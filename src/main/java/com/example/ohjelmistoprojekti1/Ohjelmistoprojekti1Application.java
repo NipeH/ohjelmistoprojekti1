@@ -149,6 +149,7 @@ public class Ohjelmistoprojekti1Application {
 
 			userRepo.save(new User ("Essi", "Kissa", "0408786", "1234@gmail.fi", "essi", "essi", userTypeRepo.findByUsertype("user").get(0)));
 			userRepo.save(new User ("Kissa-admin", "Kissa", "0408786", "1234@gmail.fi", "essi", "essi", userTypeRepo.findByUsertype("admin").get(0)));
+			userRepo.save(new User ("Admin", "Kissa", "0408786", "1234@gmail.fi", "admin", "admin", userTypeRepo.findByUsertype("admin").get(0)));			
 			userRepo.save(new User("Niilo", "Nakki",  "0442420666", "asd@gmail.com", "niilo", "salasana" , userTypeRepo.findByUsertype("user").get(0)));
 			
 

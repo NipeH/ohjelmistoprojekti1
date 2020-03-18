@@ -7,6 +7,7 @@ import javax.validation.constraints.Min;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,6 +34,7 @@ public class TicketController {
 	private TicketTypeRepository ttrepo;
 
 	// Muokkaa lippua, ainakin deaktivointi, lähetetään bodyssa "isValid": "true" tai "false"
+	@PreAuthorize("hasAuthority('admin')") //TÄMÄ TESTINÄ VAAN TÄSSÄ
 	@PatchMapping("/api/tickets/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public Ticket editTicket (@RequestBody Map<String, Object> isValid, @PathVariable("id") Long id) {

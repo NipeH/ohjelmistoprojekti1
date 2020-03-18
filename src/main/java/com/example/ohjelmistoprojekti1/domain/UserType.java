@@ -58,6 +58,10 @@ public class UserType {
 	public void setUsertype(String usertype) {
 		this.usertype = usertype;
 	}
+	
+	
+	
+	
 
 	public List<User> getUsers() {
 		return users;

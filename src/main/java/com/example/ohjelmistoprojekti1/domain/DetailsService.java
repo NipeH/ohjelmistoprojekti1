@@ -15,14 +15,17 @@ public class DetailsService implements UserDetailsService {
     UserRepository users;
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = users.findByUsername(username);
+    	
+    	User user = users.findByUsername(username);
         if (user == null){
             throw new UsernameNotFoundException(username + " was not found");
         }
+       
         return new org.springframework.security.core.userdetails.User(
                 user.getUsername(),
                 user.getPassword(),
-                AuthorityUtils.createAuthorityList()
-        );
+                AuthorityUtils.createAuthorityList(user.getUsertype().getUsertype()));
+        
+
     }
 }

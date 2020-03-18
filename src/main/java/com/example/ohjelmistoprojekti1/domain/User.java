@@ -48,7 +48,6 @@ public class User {
 	private String password;
 	
 	@ManyToOne
-	@JsonIgnore
 	@JoinColumn(name = "usertypeid")
 	private UserType usertype;
 	
