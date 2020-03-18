@@ -13,10 +13,16 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Entity
 public class User {
-	
+
+
+
+
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long userid;
@@ -34,9 +40,11 @@ public class User {
 	private String email;
 	
 	@NotNull(message="Anna käyttäjätunnus")
+	@JsonIgnore
 	private String username;
 	
 	@NotNull(message="Anna salasana")
+	@JsonIgnore
 	private String password;
 	
 	@ManyToOne
@@ -46,7 +54,8 @@ public class User {
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="user")
 	private List<Order> orders;
-	
+
+	public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
 
 	public User() {
 		super();
@@ -67,7 +76,8 @@ public class User {
 		this.phonenumber = phonenumber;
 		this.email = email;
 		this.username = username;
-		this.password = password;
+		setPassword(password); // Basic auth
+		//this.password = password;
 		this.usertype = usertype;
 		this.orders = orders;
 	}
@@ -87,7 +97,8 @@ public class User {
 		this.phonenumber = phonenumber;
 		this.email = email;
 		this.username = username;
-		this.password = password;
+		setPassword(password); // Basic auth
+		//this.password = password;
 		this.usertype = usertype;
 	}
 
@@ -157,8 +168,10 @@ public class User {
 	}
 
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPassword(String password)
+	{
+		this.password = PASSWORD_ENCODER.encode(password);
+
 	}
 
 

@@ -1,5 +1,7 @@
 package com.example.ohjelmistoprojekti1.domain;
 
+
+/*
 public class AuthenticationResponse {
 // tarvitaan tokenissa
 	private final String jwt;
@@ -12,3 +14,6 @@ public class AuthenticationResponse {
 		return jwt;
 	}
 }
+
+
+ */

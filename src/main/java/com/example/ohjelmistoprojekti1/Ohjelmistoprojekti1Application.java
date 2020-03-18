@@ -1,6 +1,7 @@
 package com.example.ohjelmistoprojekti1;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -120,7 +121,9 @@ public class Ohjelmistoprojekti1Application {
 			userTypeRepo.save(new UserType ("user"));
 			userTypeRepo.save(new UserType ("admin"));
 
-			
+
+
+
 			//User
 			User user = new User();
 			user.setFirstname("Nipe");
@@ -142,12 +145,14 @@ public class Ohjelmistoprojekti1Application {
 			admin.setPassword("Admin");
 			admin.setUsertype(userTypeRepo.findByUsertype("admin").get(0));
 			userRepo.save(admin);
-			
+
+
 			userRepo.save(new User ("Essi", "Kissa", "0408786", "1234@gmail.fi", "essi", "essi", userTypeRepo.findByUsertype("user").get(0)));
 			userRepo.save(new User ("Kissa-admin", "Kissa", "0408786", "1234@gmail.fi", "essi", "essi", userTypeRepo.findByUsertype("admin").get(0)));
+			userRepo.save(new User("Niilo", "Nakki",  "0442420666", "asd@gmail.com", "niilo", "salasana" , userTypeRepo.findByUsertype("user").get(0)));
+			
 
-			
-			
+
 			//Customer
 			Customer customer = new Customer();	
 			customer.setFirstname("Essi");

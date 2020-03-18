@@ -1,5 +1,7 @@
 package com.example.ohjelmistoprojekti1.domain;
 
+
+/*
 public class AuthenticationRequest {
 // tässä tiedot autentikoinnista apille
 	
@@ -31,3 +33,6 @@ public class AuthenticationRequest {
 	
 	
 }
+
+
+*/
