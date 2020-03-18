@@ -155,7 +155,7 @@ public class CustomerController {
 	// hae parametrina tulevalla sukunimellä
 	@RequestMapping(value = "/customer/{name}", method = RequestMethod.GET)
 	public @ResponseBody List<Customer> customerByLastName(@PathVariable("lastname") String lastname) {
-		return crepo.findByLastNameIgnoreCase(lastname);
+		return crepo.findByLastnameIgnoreCase(lastname);
 	}
 
 	// muokkaa
