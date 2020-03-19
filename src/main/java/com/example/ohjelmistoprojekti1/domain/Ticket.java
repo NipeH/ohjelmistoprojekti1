@@ -19,57 +19,52 @@ public class Ticket {
 
 	@NotNull
 	@ManyToOne
-	//@JsonIgnore
+	// @JsonIgnore
 	@JoinColumn(name = "eventid")
 	private Event event;
 
 	private double price;
 
-	
 	@ManyToOne
-	//@JsonIgnore
+	// @JsonIgnore
 	@JoinColumn(name = "tickettypeid")
 	private TicketType type;
 
 	@ManyToOne
-	//@JsonIgnore
+	// @JsonIgnore
 	@JoinColumn(name = "orderid")
 	private Order orders;
 
 	private boolean isValid;
-	
+
 	private LocalDateTime used;
-	
-
-
 
 	public Ticket() {
 		super();
+		used = null;
 	}
 
-	public Ticket(@NotNull Event event,  TicketType type) {
+	public Ticket(@NotNull Event event, TicketType type) {
 		super();
 		this.event = event;
 		this.type = type;
 	}
 
-	public Ticket(@NotNull Event event, double price,  TicketType type) {
+	public Ticket(@NotNull Event event, double price, TicketType type) {
 		super();
 		this.event = event;
 		this.price = price;
 		this.type = type;
 	}
 
-	public Ticket(@NotNull Event event, double price,  TicketType type, Order orders) {
+	public Ticket(@NotNull Event event, double price, TicketType type, Order orders) {
 		super();
 		this.event = event;
 		this.price = price;
 		this.type = type;
 		this.orders = orders;
 	}
-	
-	
-	
+
 	public Ticket(@NotNull Event event, double price, @NotNull TicketType type, Order orders, boolean isValid) {
 		super();
 		this.event = event;
@@ -138,8 +133,14 @@ public class Ticket {
 		this.used = used;
 	}
 
+	public boolean read() {
+		if (used == null) {
+			used = LocalDateTime.now();
+			return true;
 
-
-
+		} else {
+			return false;
+		}
+	}
 
 }
