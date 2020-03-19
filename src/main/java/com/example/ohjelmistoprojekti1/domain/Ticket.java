@@ -1,5 +1,7 @@
 package com.example.ohjelmistoprojekti1.domain;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,8 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Ticket {
@@ -37,6 +37,9 @@ public class Ticket {
 	private Order orders;
 
 	private boolean isValid;
+	
+	private LocalDateTime used;
+	
 
 
 
@@ -125,6 +128,14 @@ public class Ticket {
 
 	public boolean isValid() {
 		return this.isValid;
+	}
+
+	public LocalDateTime getUsed() {
+		return used;
+	}
+
+	public void setUsed(LocalDateTime used) {
+		this.used = used;
 	}
 
 
