@@ -134,7 +134,7 @@ public class Ticket {
 	}
 
 	public boolean read() {
-		if (used == null) {
+		if (used == null && isValid) {
 			used = LocalDateTime.now();
 			return true;
 
