@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -15,14 +16,9 @@ import org.springframework.stereotype.Component;
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    DetailsService detailsService;
+    private DetailsService detailsService;
 
-    
-    //fix
-    protected void configure(AuthenticationManagerBuilder auth)
-        throws Exception {
-            auth.userDetailsService(detailsService).passwordEncoder(User.PASSWORD_ENCODER);
-    }
+   
 
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
@@ -32,4 +28,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable();
     }
+    
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(detailsService).passwordEncoder(new BCryptPasswordEncoder());
+    }  
 }
