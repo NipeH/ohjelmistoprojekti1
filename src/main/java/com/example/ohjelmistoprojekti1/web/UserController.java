@@ -9,6 +9,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -64,7 +65,7 @@ public class UserController {
 	
 	
 	
-
+	//Lähetetään bodyssa seuraavat, atm pakollista username ja salasana, username tulee olla unique
 	/*
 	 *  {
         "firstname": "kuuu",
@@ -78,8 +79,8 @@ public class UserController {
 	 * 
 	 * */
 	
-	
-	
+	//Vain admin voi lisätä käyttäjiä
+	@PreAuthorize("hasAuthority('admin')") 
 	// Uusi käyttäjä
 	@PostMapping(value = "/api/users")
 	@ResponseStatus(value = HttpStatus.CREATED)

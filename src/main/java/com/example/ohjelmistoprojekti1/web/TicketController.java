@@ -2,6 +2,7 @@ package com.example.ohjelmistoprojekti1.web;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.validation.constraints.Min;
 
@@ -34,7 +35,6 @@ public class TicketController {
 	private TicketTypeRepository ttrepo;
 
 	// Muokkaa lippua, ainakin deaktivointi, lähetetään bodyssa "isValid": "true" tai "false"
-	@PreAuthorize("hasAuthority('admin')") //TÄMÄ TESTINÄ VAAN TÄSSÄ
 	@PatchMapping("/api/tickets/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public Ticket editTicket (@RequestBody Map<String, Object> isValid, @PathVariable("id") Long id) {
@@ -56,6 +56,27 @@ public class TicketController {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	//Hae lipun tiedot lippukoodin perusteella (URL)
+	@GetMapping("/api/tickets/{code}")
+	@ResponseStatus(HttpStatus.OK)
+	public Ticket getTicket (@PathVariable("code") UUID tcode) {
+		try {
+			
+			return trepo.findByTicketcode(tcode).get(0);
+			
+		}	catch (Exception e) {
+			e.printStackTrace();
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 }
 
