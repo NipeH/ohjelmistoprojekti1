@@ -71,10 +71,23 @@ public class TicketController {
 		}
 	}
 	
-	
-	
-	
-	
+	//tämä urli on vähäh huono, voisi vaihtaa
+	//Lue lippu / käytä lippu
+	@PatchMapping("/api/tickets/read/{code}")
+	@ResponseStatus(HttpStatus.OK)
+	public Ticket readTicket (@PathVariable("code") UUID tcode) {
+		Ticket ticket = trepo.findByTicketcode(tcode).get(0);		
+		
+		try {	
+			ticket.read();
+			return trepo.save(ticket);
+			
+		
+		}	catch (Exception e) {
+			e.printStackTrace();
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+		}
+	}	
 	
 	
 	
