@@ -1,7 +1,9 @@
 package com.example.ohjelmistoprojekti1.domain;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Ticket {
@@ -31,13 +35,16 @@ public class Ticket {
 	private TicketType type;
 
 	@ManyToOne
-	// @JsonIgnore
+	@JsonIgnore //pakko olla tässä päällä
 	@JoinColumn(name = "orderid")
 	private Order orders;
 
 	private boolean isValid;
 
 	private LocalDateTime used;
+	
+	@Column(name = "ticketcode", unique = true) 
+	private UUID ticketcode;
 
 	public Ticket() {
 		super();
@@ -72,6 +79,40 @@ public class Ticket {
 		this.type = type;
 		this.orders = orders;
 		this.isValid = isValid;
+	}
+	
+
+	public Ticket(@NotNull Event event, double price, TicketType type, Order orders, boolean isValid,  UUID ticketcode) {
+		super();
+		this.event = event;
+		this.price = price;
+		this.type = type;
+		this.orders = orders;
+		this.isValid = isValid;
+		this.ticketcode = ticketcode;
+	}
+	
+	
+	
+
+	public Ticket(@NotNull Event event, double price, TicketType type, Order orders, boolean isValid,
+			LocalDateTime used, UUID ticketcode) {
+		super();
+		this.event = event;
+		this.price = price;
+		this.type = type;
+		this.orders = orders;
+		this.isValid = isValid;
+		this.used = used;
+		this.ticketcode = ticketcode;
+	}
+
+	public UUID getTicketcode() {
+		return ticketcode;
+	}
+
+	public void setTicketcode(UUID ticketcode) {
+		this.ticketcode = ticketcode;
 	}
 
 	public void setValid(boolean isValid) {
