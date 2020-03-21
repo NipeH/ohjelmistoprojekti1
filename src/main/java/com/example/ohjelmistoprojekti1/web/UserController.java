@@ -46,12 +46,11 @@ public class UserController {
 		
 
 		try {
-			//entä jos username on jo varattu ? unique value
-			String passw = user.getPassword();
-			BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
-			String hash = bc.encode(passw);		
-			user.setPassword(hash);
+
+			
+			
 			return urepo.save(user);
+			
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
 					"Käyttäjän luonti ei onnistunut, tarkista pakolliset kentät", e);
@@ -59,8 +58,8 @@ public class UserController {
 		}
 	
 	}
-	*/
 	
+	/*
 	
 	
 	
@@ -78,6 +77,9 @@ public class UserController {
     	}
 	 * 
 	 * */
+	
+	
+	
 	// Uusi käyttäjä
 	@PostMapping(value = "/api/users")
 	@ResponseStatus(value = HttpStatus.CREATED)
@@ -97,9 +99,7 @@ public class UserController {
 				String email = String.valueOf(userinfo.get("email"));
 	
 				String username = String.valueOf(userinfo.get("username"));
-				
-				
-
+		
 				String password = String.valueOf(userinfo.get("password"));
 				String hash = bc.encode(password);
 

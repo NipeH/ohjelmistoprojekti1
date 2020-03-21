@@ -25,24 +25,21 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long userid;
 	
-	//@NotNull(message="Anna etunimi")
 	private String firstname;
 	
-	//@NotNull(message="Anna sukuniminimi")
 	private String lastname;
 	
-	//@NotNull(message="Anna puhelinnumero")
 	private String phonenumber;
 	
-	//@NotNull(message="Anna sähköpostiosoite")
+	
 	private String email;
 	
     @Column(name = "username", unique = true) 
-	//@NotNull(message="Anna käyttäjätunnus")
+	@NotNull(message="Anna käyttäjätunnus")
 	@JsonIgnore
 	private String username;
 	
-	//@NotNull(message="Anna salasana")
+	@NotNull(message="Anna salasana")
 	//@JsonIgnore
 	private String password;
 	
@@ -55,7 +52,6 @@ public class User {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="user")
 	private List<Order> orders;
 
-	//public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
 
 	public User() {
 		super();
@@ -65,9 +61,10 @@ public class User {
 
 
 
+
 	public User(String firstname, String lastname, String phonenumber, String email,
-			 String username,
-			String password, UserType usertype, List<Order> orders) {
+			@NotNull(message = "Anna käyttäjätunnus") String username,
+			@NotNull(message = "Anna salasana") String password, UserType usertype, List<Order> orders) {
 		super();
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -81,10 +78,11 @@ public class User {
 
 
 
-	
 
-	public User(String firstname, String lastname, String phonenumber, String email, String username,
-		 String password, UserType usertype) {
+
+	public User(String firstname, String lastname, String phonenumber, String email,
+			@NotNull(message = "Anna käyttäjätunnus") String username,
+			@NotNull(message = "Anna salasana") String password, UserType usertype) {
 		super();
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -94,8 +92,8 @@ public class User {
 		this.password = password;
 		this.usertype = usertype;
 	}
-	
-	
+
+
 
 
 
