@@ -21,53 +21,11 @@ import com.example.ohjelmistoprojekti1.domain.UserTypeRepository;
 @Controller
 public class AppController {
 	
-	@Autowired
-	private CustomerRepository crepo;
-	@Autowired
-	private EventRepository erepo;
-	@Autowired 
-	private OrderRepository orepo;
-	@Autowired
-	private TicketRepository trepo;
-	@Autowired
-	private TicketTypeRepository ttrepo;
-	@Autowired
-	private UserRepository urepo;
-	@Autowired
-	private UserTypeRepository utrepo;	
 	
-	@RequestMapping(value = "/add")
-	public String addEvent (Model model) {
-	model.addAttribute("event", new Event());
-	return "add";
-	}
-	
-	@RequestMapping(value="/save",  method= RequestMethod.POST)
-	public String saveEvent(Event event, Model model) {
-		erepo.save(event);
-		return "redirect:index";
-	}
-	
-	@RequestMapping(value = {"/index", "/", "events"})
-	public String allEvents(Model model) {
-		model.addAttribute("events", erepo.findAll());
-		return "events";
-	}
-	
-	//muokkaa - template puuttuu
-    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    public String editEvent(@PathVariable("id") Long eventid, Model model){
-    model.addAttribute("event", erepo.findById(eventid));
-    return "edit";
-}
-    
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public String deleteEvent(@PathVariable("id") Long eventid) {
-    erepo.deleteById(eventid);
-    return "redirect:../events";
-    
-
-}
+	@RequestMapping(value = {"/index", "/"})
+	public String index() {
+		return "index";
+	}	
 
 }
 

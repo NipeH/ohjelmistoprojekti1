@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8"/>
+        <title>TESTI SIVU </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+ 
+    <body onLoad='main();'>
+
+    </body>
+
+<script type="text/javascript">
+
+function main()
+{
+
+    $.ajax
+    ({
+        dataType: "json",
+        url: "http://localhost:8080/api/events/",
+		headers: {
+			"Authorization": "Basic " + btoa("niilo" + ":" + "salasana")
+		},
+        success: function(data)
+        {
+            console.log("log response on success:");
+            console.log(data);
+        }
+    });
+}
+
+</script>
+
+</html>
