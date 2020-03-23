@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8"/>
+        <title>LIPUT</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+ 	<body>
+<!--     <body onLoad='main();'> -->
+    
+    <form action="findTicket" method ="get" > 
+    <br><br>
+	<label for="ticketcode">Anna lipun koodi:</label>
+	<br><br>
+  	<input type="search" name="ticketcode" id="ticketcode">
+	<br><br>
+    <input type="submit" name ="Hae" >
+	</form>
+	<br><br>
+	<br><br>
+	<div id="info">lipun tiedot</div>
+	
+    </body>
+
+<script type="text/javascript">
+
+// function main()
+// {
+
+//     $.ajax
+//     ({
+//         dataType: "json",
+//         url: "http://localhost:8080/api/events/" ,
+// 		headers: {
+// 			"Authorization": "Basic " + btoa("niilo" + ":" + "salasana")
+// 		},
+//         success: function(data)
+//         {
+//             console.log("log response on success:");
+//             console.log(data);
+//         }
+//     });
+// }
+
+function findTicket()
+{ var ticketcode=document.getElementById("ticketcode");
+	
+// 	if(ticketcode !=null){
+// 		document.getElementById("info").InnerHTML = "Anna lipun koodi";
+// 	}//if
+// 	else{
+		$.ajax ({
+			dataType: "json",
+		url:"http//localhost:/api/events/" + ticketcode,
+		headers: {
+			"Authorization": "Basic " + btoa("niilo" + ":" + "salasana")},//headers
+			succes: function(data){
+				//document.getElementById("info") = data;
+				console.log(data);
+			}//data
+			
+		});//ajax
+
+		
+// 	}//else
+return index;
+}//function
+	
+
+
+</script>
+
+</html>
