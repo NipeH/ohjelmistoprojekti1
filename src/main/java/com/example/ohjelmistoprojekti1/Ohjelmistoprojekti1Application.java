@@ -3,7 +3,9 @@ package com.example.ohjelmistoprojekti1;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
+import org.apache.commons.logging.Log;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -108,6 +110,9 @@ public class Ohjelmistoprojekti1Application {
 			ticket3.setEvent(eventRepo.findByName("Ruisrock").get(0));
 			ticket3.setType(ticketTypeRepo.findByType("student").get(0));
 			ticket3.setValid(true);
+			UUID ticketcode = UUID.randomUUID();
+			ticket3.setTicketcode(ticketcode);
+			System.out.println("TESTILIPPUKOODI:" + ticketcode);
 			ticketRepo.save(ticket3);
 			
 			Ticket ticket2 = new Ticket();

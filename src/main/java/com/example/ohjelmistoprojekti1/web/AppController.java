@@ -48,6 +48,11 @@ public class AppController {
 		return "index";
 	}	
 	
+	@RequestMapping(value = {"/essi"})
+	public String essi() {
+		return "essi";
+	}
+	
 	/*
 	 * @RequestMapping(value = "/findTicket") public @ResponseBody List<Event>
 	 * RestEvents() { return (List<Event>) erepo.findAll(); }
