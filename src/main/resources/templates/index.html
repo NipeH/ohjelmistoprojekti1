@@ -1,26 +1,45 @@
 <!DOCTYPE html>
-<html>
 
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="utf-8"/>
         <title>LIPUT</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        
     </head>
  	<body>
 <!--     <body onLoad='main();'> -->
-    
-    <form action="findTicket" method ="get" > 
+
+
+    <form onsubmit="findTicket">
     <br><br>
 	<label for="ticketcode">Anna lipun koodi:</label>
 	<br><br>
   	<input type="search" name="ticketcode" id="ticketcode">
 	<br><br>
+	<input type ="hidden" name="msg" id="msg">
+	<br><br>
     <input type="submit" name ="Hae" >
 	</form>
 	<br><br>
 	<br><br>
-	<div id="info">lipun tiedot</div>
+	<div id="info">Lipun tiedot</div>
+	<br><br>
 	
+			<div id="showInfo">
+				<table data-role="table" id="infoTable" class="ui-responsive">
+					<thead>
+						<tr>
+							<th>Tapahtuma</th>
+							<th>Tyyppi</th>
+							<th>Hinta</th>							
+						</tr>
+					</thead>
+					<tbody>					
+					</tbody>
+				</table>
+			</div>
+
     </body>
 
 <script type="text/javascript">
@@ -43,31 +62,29 @@
 //     });
 // }
 
-function findTicket()
-{ var ticketcode=document.getElementById("ticketcode");
-	
-// 	if(ticketcode !=null){
-// 		document.getElementById("info").InnerHTML = "Anna lipun koodi";
-// 	}//if
-// 	else{
-		$.ajax ({
-			dataType: "json",
-		url:"http//localhost:/api/events/" + ticketcode,
-		headers: {
-			"Authorization": "Basic " + btoa("niilo" + ":" + "salasana")},//headers
-			succes: function(data){
-				//document.getElementById("info") = data;
-				console.log(data);
-			}//data
+		function findTicket(){
+			var ticketcode = document.getElementById("ticketcode");
 			
-		});//ajax
-
-		
-// 	}//else
-return index;
-}//function
+			if(ticketcode =""){
+				document.getElementById("msg").innerHTML = "Anna Lippukoodi"
+			}else{
+			$("#infoTable tbody").html("");
+			$.getJSON("http://localhost:8080/api/tickets/" + ticketcode, function(result){
+				
+				
+				$.each(result, function(i, field) {					
+					$("#infotable tbody").append("<tr><td>"
+													+field.event
+													+"</td><td>"	
+													+field.tickettype
+													+"</td><td>"
+													+field.price
+													+"</td></tr>");								
+				});//each
+			});//json
+		}//else
 	
-
+		}//function
 
 </script>
 

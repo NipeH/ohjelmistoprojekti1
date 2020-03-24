@@ -21,6 +21,8 @@ import com.example.ohjelmistoprojekti1.domain.OrderRepository;
 import com.example.ohjelmistoprojekti1.domain.Ticket;
 import com.example.ohjelmistoprojekti1.domain.TicketRepository;
 import com.example.ohjelmistoprojekti1.domain.TicketTypeRepository;
+import com.example.ohjelmistoprojekti1.domain.EventRepository;
+
 
 @RestController
 public class TicketController {
@@ -33,6 +35,9 @@ public class TicketController {
 
 	@Autowired
 	private TicketTypeRepository ttrepo;
+	
+	@Autowired
+	private EventRepository erepo;
 
 	// Muokkaa lippua, ainakin deaktivointi, lähetetään bodyssa "isValid": "true" tai "false"
 	@PatchMapping("/api/tickets/{id}")
