@@ -3,7 +3,9 @@ package com.example.ohjelmistoprojekti1;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
+import org.apache.commons.logging.Log;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -108,6 +110,9 @@ public class Ohjelmistoprojekti1Application {
 			ticket3.setEvent(eventRepo.findByName("Ruisrock").get(0));
 			ticket3.setType(ticketTypeRepo.findByType("student").get(0));
 			ticket3.setValid(true);
+			UUID ticketcode = UUID.randomUUID();
+			ticket3.setTicketcode(ticketcode);
+			System.out.println("TESTILIPPUKOODI:" + ticketcode);
 			ticketRepo.save(ticket3);
 			
 			Ticket ticket2 = new Ticket();
@@ -146,11 +151,13 @@ public class Ohjelmistoprojekti1Application {
 			admin.setUsertype(userTypeRepo.findByUsertype("admin").get(0));
 			userRepo.save(admin);
 
-
-			userRepo.save(new User ("Essi", "Kissa", "0408786", "1234@gmail.fi", "essi", "essi", userTypeRepo.findByUsertype("user").get(0)));
-			userRepo.save(new User ("Kissa-admin", "Kissa", "0408786", "1234@gmail.fi", "essi", "essi", userTypeRepo.findByUsertype("admin").get(0)));
-			userRepo.save(new User ("Admin", "Kissa", "0408786", "1234@gmail.fi", "admin", "admin", userTypeRepo.findByUsertype("admin").get(0)));			
-			userRepo.save(new User("Niilo", "Nakki",  "0442420666", "asd@gmail.com", "niilo", "salasana" , userTypeRepo.findByUsertype("user").get(0)));
+			//vain $2a alkuiset toimii, tällä saa: https://www.browserling.com/tools/bcrypt
+			userRepo.save(new User ("Essi", "Kissa", "0408786", "1234@gmail.fi", "essi", "$2a$10$P.cgawwkrHmeCVQxxwIEJ.bIWfeAaqps.sVlVzxDEF9fcXZ4zag7i", userTypeRepo.findByUsertype("user").get(0)));
+			//passw = essi
+			userRepo.save(new User ("Admin", "Kissa", "0408786", "1234@gmail.fi", "admin", "$2a$10$WJzZRs49Nl5iTVQ3HaYIJOIi5Krqzd9z92bTeERbcMdkXR7ZFvarm", userTypeRepo.findByUsertype("admin").get(0)));	
+			//passw = admin
+			userRepo.save(new User("Niilo", "Nakki",  "0442420666", "asd@gmail.com", "niilo", "$2a$10$rOHR9t/k65shG6KwD1MED.xro5RYTDiSjS1X3LOWX6V/80uKQ7RiS" , userTypeRepo.findByUsertype("user").get(0)));
+			// passw = salasana
 			
 
 

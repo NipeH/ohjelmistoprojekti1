@@ -1,5 +1,9 @@
 package com.example.ohjelmistoprojekti1.domain;
 
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,54 +23,55 @@ public class Ticket {
 
 	@NotNull
 	@ManyToOne
-	//@JsonIgnore
+	// @JsonIgnore
 	@JoinColumn(name = "eventid")
 	private Event event;
 
 	private double price;
 
-	
 	@ManyToOne
-	//@JsonIgnore
+	// @JsonIgnore
 	@JoinColumn(name = "tickettypeid")
 	private TicketType type;
 
 	@ManyToOne
-	//@JsonIgnore
+	@JsonIgnore //pakko olla tässä päällä
 	@JoinColumn(name = "orderid")
 	private Order orders;
 
 	private boolean isValid;
 
-
+	private LocalDateTime used;
+	
+	@Column(name = "ticketcode", unique = true) 
+	private UUID ticketcode;
 
 	public Ticket() {
 		super();
+		used = null;
 	}
 
-	public Ticket(@NotNull Event event,  TicketType type) {
+	public Ticket(@NotNull Event event, TicketType type) {
 		super();
 		this.event = event;
 		this.type = type;
 	}
 
-	public Ticket(@NotNull Event event, double price,  TicketType type) {
+	public Ticket(@NotNull Event event, double price, TicketType type) {
 		super();
 		this.event = event;
 		this.price = price;
 		this.type = type;
 	}
 
-	public Ticket(@NotNull Event event, double price,  TicketType type, Order orders) {
+	public Ticket(@NotNull Event event, double price, TicketType type, Order orders) {
 		super();
 		this.event = event;
 		this.price = price;
 		this.type = type;
 		this.orders = orders;
 	}
-	
-	
-	
+
 	public Ticket(@NotNull Event event, double price, @NotNull TicketType type, Order orders, boolean isValid) {
 		super();
 		this.event = event;
@@ -74,6 +79,40 @@ public class Ticket {
 		this.type = type;
 		this.orders = orders;
 		this.isValid = isValid;
+	}
+	
+
+	public Ticket(@NotNull Event event, double price, TicketType type, Order orders, boolean isValid,  UUID ticketcode) {
+		super();
+		this.event = event;
+		this.price = price;
+		this.type = type;
+		this.orders = orders;
+		this.isValid = isValid;
+		this.ticketcode = ticketcode;
+	}
+	
+	
+	
+
+	public Ticket(@NotNull Event event, double price, TicketType type, Order orders, boolean isValid,
+			LocalDateTime used, UUID ticketcode) {
+		super();
+		this.event = event;
+		this.price = price;
+		this.type = type;
+		this.orders = orders;
+		this.isValid = isValid;
+		this.used = used;
+		this.ticketcode = ticketcode;
+	}
+
+	public UUID getTicketcode() {
+		return ticketcode;
+	}
+
+	public void setTicketcode(UUID ticketcode) {
+		this.ticketcode = ticketcode;
 	}
 
 	public void setValid(boolean isValid) {
@@ -127,8 +166,22 @@ public class Ticket {
 		return this.isValid;
 	}
 
+	public LocalDateTime getUsed() {
+		return used;
+	}
 
+	public void setUsed(LocalDateTime used) {
+		this.used = used;
+	}
 
+	public boolean read() {
+		if (used == null && isValid) {
+			used = LocalDateTime.now();
+			return true;
 
+		} else {
+			return false;
+		}
+	}
 
 }

@@ -3,6 +3,7 @@ package com.example.ohjelmistoprojekti1.domain;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,41 +21,37 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class User {
 
 
-
-
-
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long userid;
 	
-	@NotNull(message="Anna etunimi")
 	private String firstname;
 	
-	@NotNull(message="Anna sukuniminimi")
 	private String lastname;
 	
-	@NotNull(message="Anna puhelinnumero")
 	private String phonenumber;
 	
-	@NotNull(message="Anna sähköpostiosoite")
+	
 	private String email;
 	
+    @Column(name = "username", unique = true) 
 	@NotNull(message="Anna käyttäjätunnus")
 	@JsonIgnore
 	private String username;
 	
 	@NotNull(message="Anna salasana")
-	@JsonIgnore
+	//@JsonIgnore
 	private String password;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "usertypeid")
 	private UserType usertype;
-	
+
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="user")
 	private List<Order> orders;
 
-	public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
 
 	public User() {
 		super();
@@ -62,11 +59,10 @@ public class User {
 	}
 
 
-	public User(
-			@NotNull(message = "Anna etunimi") String firstname,
-			@NotNull(message = "Anna sukuniminimi") String lastname,
-			@NotNull(message = "Anna puhelinnumero") String phonenumber,
-			@NotNull(message = "Anna sähköpostiosoite") String email,
+
+
+
+	public User(String firstname, String lastname, String phonenumber, String email,
 			@NotNull(message = "Anna käyttäjätunnus") String username,
 			@NotNull(message = "Anna salasana") String password, UserType usertype, List<Order> orders) {
 		super();
@@ -75,19 +71,16 @@ public class User {
 		this.phonenumber = phonenumber;
 		this.email = email;
 		this.username = username;
-		setPassword(password); // Basic auth
-		//this.password = password;
+		this.password = password;
 		this.usertype = usertype;
 		this.orders = orders;
 	}
-	
-	
 
 
-	public User(@NotNull(message = "Anna etunimi") String firstname,
-			@NotNull(message = "Anna sukuniminimi") String lastname,
-			@NotNull(message = "Anna puhelinnumero") String phonenumber,
-			@NotNull(message = "Anna sähköpostiosoite") String email,
+
+
+
+	public User(String firstname, String lastname, String phonenumber, String email,
 			@NotNull(message = "Anna käyttäjätunnus") String username,
 			@NotNull(message = "Anna salasana") String password, UserType usertype) {
 		super();
@@ -96,10 +89,12 @@ public class User {
 		this.phonenumber = phonenumber;
 		this.email = email;
 		this.username = username;
-		setPassword(password); // Basic auth
-		//this.password = password;
+		this.password = password;
 		this.usertype = usertype;
 	}
+
+
+
 
 
 	public long getUserid() {
@@ -165,13 +160,14 @@ public class User {
 	public String getPassword() {
 		return password;
 	}
+	
 
 
-	public void setPassword(String password)
-	{
-		this.password = PASSWORD_ENCODER.encode(password);
-
+	public void setPassword(String password) {
+		this.password = password;
 	}
+
+
 
 
 	public UserType getUsertype() {

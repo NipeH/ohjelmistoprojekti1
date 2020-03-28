@@ -1,16 +1,25 @@
 package com.example.ohjelmistoprojekti1.web;
 
+import java.util.List;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.example.ohjelmistoprojekti1.domain.CustomerRepository;
 import com.example.ohjelmistoprojekti1.domain.Event;
 import com.example.ohjelmistoprojekti1.domain.EventRepository;
 import com.example.ohjelmistoprojekti1.domain.OrderRepository;
+import com.example.ohjelmistoprojekti1.domain.Ticket;
 import com.example.ohjelmistoprojekti1.domain.TicketRepository;
 import com.example.ohjelmistoprojekti1.domain.TicketTypeRepository;
 import com.example.ohjelmistoprojekti1.domain.UserRepository;
@@ -22,54 +31,54 @@ import com.example.ohjelmistoprojekti1.domain.UserTypeRepository;
 public class AppController {
 	
 	@Autowired
-	private CustomerRepository crepo;
-	@Autowired
-	private EventRepository erepo;
-	@Autowired 
 	private OrderRepository orepo;
+
 	@Autowired
 	private TicketRepository trepo;
+
 	@Autowired
 	private TicketTypeRepository ttrepo;
+	
 	@Autowired
-	private UserRepository urepo;
-	@Autowired
-	private UserTypeRepository utrepo;	
+	private EventRepository erepo;
 	
-	@RequestMapping(value = "/add")
-	public String addEvent (Model model) {
-	model.addAttribute("event", new Event());
-	return "add";
+	
+	@RequestMapping(value = {"/index", "/"})
+	public String index() {
+		return "index";
+	}	
+	
+	@RequestMapping(value = {"/essi"})
+	public String essi() {
+		return "essi";
 	}
 	
-	@RequestMapping(value="/save",  method= RequestMethod.POST)
-	public String saveEvent(Event event, Model model) {
-		erepo.save(event);
-		return "redirect:index";
-	}
-	
-	@RequestMapping(value = {"/index", "/", "events"})
-	public String allEvents(Model model) {
-		model.addAttribute("events", erepo.findAll());
-		return "events";
-	}
-	
-	//muokkaa - template puuttuu
-    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    public String editEvent(@PathVariable("id") Long eventid, Model model){
-    model.addAttribute("event", erepo.findById(eventid));
-    return "edit";
-}
+	/*
+	 * @RequestMapping(value = "/findTicket") public @ResponseBody List<Event>
+	 * RestEvents() { return (List<Event>) erepo.findAll(); }
+	 */
+    @RequestMapping(value= "/findTicket{id}")
+    public String EventList(Model model) {	
+        model.addAttribute("events", erepo.findAll());
+        return "index";
+    }
     
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public String deleteEvent(@PathVariable("id") Long eventid) {
-    erepo.deleteById(eventid);
-    return "redirect:../events";
-    
-
+	@RequestMapping("/findTicket{code}")
+	@ResponseStatus(HttpStatus.OK)
+	public Ticket getTicket (@PathVariable("code") UUID tcode) {
+		try {
+			
+			return trepo.findByTicketcode(tcode).get(0);
+			
+		}	catch (Exception e) {
+			e.printStackTrace();
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+		}
+		
+	}
+	
 }
 
-}
 
 
 

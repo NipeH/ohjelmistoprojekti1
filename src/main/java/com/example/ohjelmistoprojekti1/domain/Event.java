@@ -50,10 +50,11 @@ public class Event {
 //	@OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
 //	private List<TicketType> eventOrganizersTicketTypes;
 //	
+
 	public Event() {
 		super();
+
 	}
-	
 
 
 
