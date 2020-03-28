@@ -1,5 +1,6 @@
 package com.example.ohjelmistoprojekti1.web;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -100,8 +101,9 @@ public class TicketController {
 		}
 	}
 	
-	//tämä urli on vähäh huono, voisi vaihtaa
-	//Lue lippu / käytä lippu
+
+	/*
+	//Lue lippu / käytä lippu 
 	@PatchMapping("/api/tickets/read/{code}")
 	@ResponseStatus(HttpStatus.OK)
 	public Ticket readTicket (@PathVariable("code") UUID tcode) {
@@ -117,6 +119,39 @@ public class TicketController {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 		}
 	}	
+	
+	
+*/	
+	
+	
+	
+	@PatchMapping("/api/tickets/read/{code}")
+	@ResponseStatus(HttpStatus.OK)
+	public String readTicket (@PathVariable("code") UUID tcode) {
+		Ticket ticket = trepo.findByTicketcode(tcode).get(0);		
+		
+		try {
+			
+			LocalDateTime used = ticket.getUsed();
+			
+			if (ticket.isValid() && used == null) {
+				ticket.read();
+				trepo.save(ticket);
+				return "OK";
+			} else {
+				return "Lippu on jo käytetty tai peruttu";
+			}
+			
+			
+		
+		}	catch (Exception e) {
+			e.printStackTrace();
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+		}
+	}	
+	
+	
+	
 	
 	
 	
