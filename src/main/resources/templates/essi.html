@@ -7,6 +7,8 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>    
+        <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>     
     </head>
     
 <body>
@@ -30,15 +32,20 @@
   <div class="col-sm-7" id="result">
   </div>
  
+<div id="qrcode"></div>
+ 
   
 </div>
 
 
 
 <script type="text/javascript">
-	 
-			 
+
+
+			
 			 $( document ).ready(function() {
+				 
+				 
 				  
 				  // Kun painetaan submit
 				  $("#getTicket").click(function(event){
@@ -54,7 +61,7 @@
 				
 			
 				  
-			 
+			 //Hae lippu
 			  function ajaxGet(){
 				  
 				     var ticketcode = $("#code").val();
@@ -66,8 +73,24 @@
 				 		headers: {"Authorization": "Basic " + btoa("niilo" + ":" + "salasana")},
 						url : "http://localhost:8080/api/tickets/" + ticketcode,
 						success: function(result){
-				          $('#result').empty();				          
-				          $("#result").html("<p> Tapahtuma:" +result.event.name+ "<br> Lippukoodi:" + result.ticketcode + "<br> Lipputyyppi: "+ result.type.type+ "<br> Hinta: " +result.price+ "</p>");
+				          $('#result').empty();
+				          
+							//QRKOODI
+							
+				   			$("#qrcode").val("");							
+							var qrcode = new QRCode("qrcode");				
+							function makeCode () {		
+								var elText = result.ticketcode;					
+								qrcode.makeCode(elText);
+							}				
+							makeCode();
+							//QR-KOODI LOPPUU
+				          
+				          $("#result").html("<p> Tapahtuma:" 
+				        		  +result.event.name+ "<br> Lippukoodi:" 
+				        		  + result.ticketcode + "<br> Lipputyyppi: "
+				        		  + result.type.type+ "<br> Hinta: " 
+				        		  +result.price+ "</p>");
 				          console.log(result);	        
 				      },
 				      
@@ -80,6 +103,44 @@
 				    $("#code").val("");  
 				    
 				  }
+			 
+			 
+					
+					
+					
+					
+					
+					/*				
+					//QRKOODI
+				var qrcode = new QRCode("qrcode");
+				
+				function makeCode () {		
+					var elText = document.getElementById("text");
+					
+					if (!elText.value) {
+						alert("Input a text");
+						elText.focus();
+						return;
+					}
+					
+					qrcode.makeCode(elText.value);
+				}
+				
+				makeCode();
+				
+				$("#text").
+					on("blur", function () {
+						makeCode();
+					}).
+					on("keydown", function (e) {
+						if (e.keyCode == 13) {
+							makeCode();
+						}
+					});
+					//QR-KOODI LOPPUU
+					*/
+			  
+			
 			  
 			  
 			  function ajaxPatch(){
