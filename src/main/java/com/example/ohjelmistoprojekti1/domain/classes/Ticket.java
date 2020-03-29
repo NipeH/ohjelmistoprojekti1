@@ -1,4 +1,4 @@
-package com.example.ohjelmistoprojekti1.domain;
+package com.example.ohjelmistoprojekti1.domain.classes;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

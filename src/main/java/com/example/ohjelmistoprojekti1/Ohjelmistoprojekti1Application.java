@@ -13,20 +13,20 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.example.ohjelmistoprojekti1.domain.Customer;
-import com.example.ohjelmistoprojekti1.domain.CustomerRepository;
-import com.example.ohjelmistoprojekti1.domain.Event;
-import com.example.ohjelmistoprojekti1.domain.EventRepository;
-import com.example.ohjelmistoprojekti1.domain.Order;
-import com.example.ohjelmistoprojekti1.domain.OrderRepository;
-import com.example.ohjelmistoprojekti1.domain.Ticket;
-import com.example.ohjelmistoprojekti1.domain.TicketRepository;
-import com.example.ohjelmistoprojekti1.domain.TicketType;
-import com.example.ohjelmistoprojekti1.domain.TicketTypeRepository;
-import com.example.ohjelmistoprojekti1.domain.User;
-import com.example.ohjelmistoprojekti1.domain.UserRepository;
-import com.example.ohjelmistoprojekti1.domain.UserType;
-import com.example.ohjelmistoprojekti1.domain.UserTypeRepository;
+import com.example.ohjelmistoprojekti1.domain.classes.Customer;
+import com.example.ohjelmistoprojekti1.domain.classes.Event;
+import com.example.ohjelmistoprojekti1.domain.classes.Order;
+import com.example.ohjelmistoprojekti1.domain.classes.Ticket;
+import com.example.ohjelmistoprojekti1.domain.classes.TicketType;
+import com.example.ohjelmistoprojekti1.domain.classes.User;
+import com.example.ohjelmistoprojekti1.domain.classes.UserType;
+import com.example.ohjelmistoprojekti1.domain.repositories.CustomerRepository;
+import com.example.ohjelmistoprojekti1.domain.repositories.EventRepository;
+import com.example.ohjelmistoprojekti1.domain.repositories.OrderRepository;
+import com.example.ohjelmistoprojekti1.domain.repositories.TicketRepository;
+import com.example.ohjelmistoprojekti1.domain.repositories.TicketTypeRepository;
+import com.example.ohjelmistoprojekti1.domain.repositories.UserRepository;
+import com.example.ohjelmistoprojekti1.domain.repositories.UserTypeRepository;
 
 @SpringBootApplication
 public class Ohjelmistoprojekti1Application {

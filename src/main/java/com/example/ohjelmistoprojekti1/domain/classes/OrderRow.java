@@ -1,4 +1,4 @@
-package com.example.ohjelmistoprojekti1.domain;
+package com.example.ohjelmistoprojekti1.domain.classes;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
