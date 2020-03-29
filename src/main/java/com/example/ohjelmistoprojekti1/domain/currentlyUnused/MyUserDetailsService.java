@@ -1,4 +1,4 @@
-package com.example.ohjelmistoprojekti1.domain;
+package com.example.ohjelmistoprojekti1.domain.currentlyUnused;
 
 /*
 import java.util.ArrayList;

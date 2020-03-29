@@ -18,12 +18,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.example.ohjelmistoprojekti1.domain.OrderRepository;
-import com.example.ohjelmistoprojekti1.domain.Ticket;
-import com.example.ohjelmistoprojekti1.domain.TicketRepository;
-import com.example.ohjelmistoprojekti1.domain.TicketTypeRepository;
-import com.example.ohjelmistoprojekti1.domain.EventRepository;
-
+import com.example.ohjelmistoprojekti1.domain.classes.Ticket;
+import com.example.ohjelmistoprojekti1.domain.repositories.EventRepository;
+import com.example.ohjelmistoprojekti1.domain.repositories.OrderRepository;
+import com.example.ohjelmistoprojekti1.domain.repositories.TicketRepository;
+import com.example.ohjelmistoprojekti1.domain.repositories.TicketTypeRepository;
 
 import java.util.List;
 import java.util.Map;
@@ -41,12 +40,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-
-import com.example.ohjelmistoprojekti1.domain.OrderRepository;
-import com.example.ohjelmistoprojekti1.domain.Ticket;
-import com.example.ohjelmistoprojekti1.domain.TicketRepository;
-import com.example.ohjelmistoprojekti1.domain.TicketTypeRepository;
-import com.example.ohjelmistoprojekti1.domain.EventRepository;
 
 
 @RestController
