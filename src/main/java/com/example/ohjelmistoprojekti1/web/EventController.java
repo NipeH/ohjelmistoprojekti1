@@ -32,12 +32,14 @@ import org.springframework.web.server.ResponseStatusException;
 import com.example.ohjelmistoprojekti1.domain.classes.Event;
 import com.example.ohjelmistoprojekti1.domain.classes.Order;
 import com.example.ohjelmistoprojekti1.domain.classes.OrderRow;
+import com.example.ohjelmistoprojekti1.domain.classes.Raport;
 import com.example.ohjelmistoprojekti1.domain.classes.Ticket;
 import com.example.ohjelmistoprojekti1.domain.classes.TicketType;
 import com.example.ohjelmistoprojekti1.domain.repositories.CustomerRepository;
 import com.example.ohjelmistoprojekti1.domain.repositories.EventRepository;
 import com.example.ohjelmistoprojekti1.domain.repositories.OrderRepository;
 import com.example.ohjelmistoprojekti1.domain.repositories.OrderRowRepository;
+import com.example.ohjelmistoprojekti1.domain.repositories.RaportRepository;
 import com.example.ohjelmistoprojekti1.domain.repositories.TicketRepository;
 import com.example.ohjelmistoprojekti1.domain.repositories.TicketTypeRepository;
 import com.example.ohjelmistoprojekti1.domain.repositories.UserRepository;
@@ -63,10 +65,85 @@ public class EventController {
 	private TicketTypeRepository ttrepo;
 
 	@Autowired
-	private UserRepository urepo;
+	private RaportRepository rrepo;
 
-	@Autowired
-	private UserTypeRepository utrepo;
+	//Myyntiraportti
+	@GetMapping(value = "api/events/{id}/raport")
+	@ResponseStatus(HttpStatus.OK)
+	public List<Raport> raport (@PathVariable("id") Long id){
+		
+		try {
+			Event event = erepo.findById(id).get();
+			List<Ticket> alltickets = event.getTickets();
+			
+			TicketType children = ttrepo.findByType("children").get(0);
+			TicketType student = ttrepo.findByType("student").get(0);			
+			TicketType normal = ttrepo.findByType("normal").get(0);
+			
+			List<Ticket> adults = new ArrayList();
+			List<Ticket> kids = new ArrayList();
+			List<Ticket> students = new ArrayList();
+			
+			for (int i = 0; i < alltickets.size(); i++) {
+				if (alltickets.get(i).getType().getType() == "normal") {
+					adults.add(alltickets.get(i));
+					
+				} 
+				else if (alltickets.get(i).getType().getType() == "children") {
+					kids.add(alltickets.get(i));
+				}
+				else if (alltickets.get(i).getType().getType() == "student") {
+					students.add(alltickets.get(i));
+				}
+			}
+			
+			
+	
+			Raport adult = new Raport();
+				adult.setTickettype("Adults");
+				adult.setPcs(adults.size());
+				double total = 0.0;
+				for (int i= 0; i < adults.size(); i++) {					
+					total = total + adults.get(i).getPrice();
+				}
+				adult.setTotal(total);
+				rrepo.save(adult);
+				
+			Raport kid = new Raport();
+				kid.setTickettype("Children");
+				kid.setPcs(kids.size());
+				double kidstotal = 0.0;
+				for (int i= 0; i < kids.size(); i++) {					
+					kidstotal = kidstotal + kids.get(i).getPrice();
+				}
+				kid.setTotal(kidstotal);
+				rrepo.save(kid);
+				
+			Raport studs = new Raport();
+				studs.setTickettype("Student");
+				studs.setPcs(kids.size());
+				double studtotal = 0.0;
+				for (int i= 0; i < students.size(); i++) {					
+					studtotal = studtotal + students.get(i).getPrice();
+				}
+				studs.setTotal(studtotal);
+				rrepo.save(studs);				
+				
+					
+		List<Raport> raport = new ArrayList();
+
+		
+		raport.add(studs);
+		raport.add(adult);
+		raport.add(kid);
+		
+		return raport;
+		
+			
+		} catch (Exception e) {
+				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Entity Not Found", e);
+		}		
+	}
 
 	// PALAUTTAA 500?????
 	// lisää tapahtuma

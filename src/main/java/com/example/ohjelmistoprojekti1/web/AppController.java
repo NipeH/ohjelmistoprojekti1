@@ -27,6 +27,8 @@ import com.example.ohjelmistoprojekti1.domain.repositories.UserTypeRepository;
 
 
 
+
+//Controller for pages
 @Controller
 public class AppController {
 	
@@ -48,34 +50,6 @@ public class AppController {
 		return "index";
 	}	
 	
-	@RequestMapping(value = {"/essi"})
-	public String essi() {
-		return "essi";
-	}
-	
-	/*
-	 * @RequestMapping(value = "/findTicket") public @ResponseBody List<Event>
-	 * RestEvents() { return (List<Event>) erepo.findAll(); }
-	 */
-    @RequestMapping(value= "/findTicket{id}")
-    public String EventList(Model model) {	
-        model.addAttribute("events", erepo.findAll());
-        return "index";
-    }
-    
-	@RequestMapping("/findTicket{code}")
-	@ResponseStatus(HttpStatus.OK)
-	public Ticket getTicket (@PathVariable("code") UUID tcode) {
-		try {
-			
-			return trepo.findByTicketcode(tcode).get(0);
-			
-		}	catch (Exception e) {
-			e.printStackTrace();
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-		}
-		
-	}
 	
 }
 
