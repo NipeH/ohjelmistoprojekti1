@@ -143,6 +143,8 @@ Muokkaa tapahtumaa [PUT or PATCH /api/events/{eventid}](https://github.com/NipeH
 
 Poista tapahtuma DELETE /api/events/{id}
 
+Hae tapahtuman myyntitiedot [GET/api/events/{eventid}/raport](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/eventRaport.md)
+
 
 ### Tilaustapahtumat / Orders:
 Hae tilaustapahtumat: [GET /api/orders](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/getorders.md)
