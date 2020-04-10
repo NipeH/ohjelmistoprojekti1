@@ -27,7 +27,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
    
 
     protected void configure(HttpSecurity http) throws Exception {
-        http
+        http.headers().frameOptions().disable();
+    	http
         		.cors()
         		.and()
         		.authorizeRequests()
