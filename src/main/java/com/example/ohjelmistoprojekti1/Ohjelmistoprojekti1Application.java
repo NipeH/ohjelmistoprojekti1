@@ -98,12 +98,11 @@ public class Ohjelmistoprojekti1Application {
 			// TicketType
 			TicketType normalTicket = new TicketType();
 			ticketTypeRepo.save(normalTicket);
-
 			ticketTypeRepo.save(new TicketType ("children", 0.5));
 			ticketTypeRepo.save(new TicketType ("student", 0.8));
 			
 			// Ticket		
-			
+			/*
 			ticketRepo.save(new Ticket (eventRepo.findByName("Ruisrock").get(0), ticketTypeRepo.findByType("children").get(0)));
 			
 			Ticket ticket3 = new Ticket();
@@ -120,40 +119,14 @@ public class Ohjelmistoprojekti1Application {
 			ticket2.setType(ticketTypeRepo.findByType("student").get(0));
 			ticket2.setValid(true);
 			ticketRepo.save(ticket2);
-			
+			*/
 			
 			//Usertype
 			userTypeRepo.save(new UserType ("user"));
 			userTypeRepo.save(new UserType ("admin"));
 
 
-
-
-			//User
-			User user = new User();
-			user.setFirstname("Nipe");
-			user.setLastname("Koira");
-			user.setEmail("@gmail.vom");
-			user.setPhonenumber("3435");
-			user.setUsername("Nipe");
-			user.setPassword("Nipe");
-			user.setUsertype(userTypeRepo.findByUsertype("user").get(0));
-			userRepo.save(user);
-			
-			//Admin
-			User admin = new User();
-			admin.setFirstname("Mestari");
-			admin.setLastname("Johtaja");
-			admin.setEmail("@netti.se");
-			admin.setPhonenumber("0666");
-			admin.setUsername("Admin");
-			admin.setPassword("Admin");
-			admin.setUsertype(userTypeRepo.findByUsertype("admin").get(0));
-			userRepo.save(admin);
-
-			//vain $2a alkuiset toimii, tällä saa: https://www.browserling.com/tools/bcrypt
-			userRepo.save(new User ("Essi", "Kissa", "0408786", "1234@gmail.fi", "essi", "$2a$10$P.cgawwkrHmeCVQxxwIEJ.bIWfeAaqps.sVlVzxDEF9fcXZ4zag7i", userTypeRepo.findByUsertype("user").get(0)));
-			//passw = essi
+			//Käyttäjädataa
 			userRepo.save(new User ("Admin", "Kissa", "0408786", "1234@gmail.fi", "admin", "$2a$10$WJzZRs49Nl5iTVQ3HaYIJOIi5Krqzd9z92bTeERbcMdkXR7ZFvarm", userTypeRepo.findByUsertype("admin").get(0)));	
 			//passw = admin
 			userRepo.save(new User("Niilo", "Nakki",  "0442420666", "asd@gmail.com", "niilo", "$2a$10$rOHR9t/k65shG6KwD1MED.xro5RYTDiSjS1X3LOWX6V/80uKQ7RiS" , userTypeRepo.findByUsertype("user").get(0)));
@@ -172,6 +145,7 @@ public class Ohjelmistoprojekti1Application {
 			
 			
 			//Order
+			/*
 			Order order = new Order();
 			order.setTotal(30.5);
 			order.setUser(null);
@@ -201,6 +175,7 @@ public class Ohjelmistoprojekti1Application {
 			
 			
 			orderRepo.save(tilaus2);
+			*/
 			
 			System.out.println("\nEnd of commandLineRunner\n");
 		};

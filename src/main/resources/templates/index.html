@@ -71,7 +71,7 @@
 						type: "GET",
 				        dataType: "json",						
 				 		headers: {"Authorization": "Basic " + btoa("niilo" + ":" + "salasana")},
-						url : "http://localhost:8080/api/tickets/" + ticketcode,
+						url : "http://ticketguru.herokuapp.com/api/tickets/" + ticketcode,
 						success: function(result){
 						
 						  //Tyhjennä lipun tiedot ja qrkoodi

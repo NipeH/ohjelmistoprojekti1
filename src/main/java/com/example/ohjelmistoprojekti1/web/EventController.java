@@ -66,8 +66,10 @@ public class EventController {
 
 	@Autowired
 	private RaportRepository rrepo;
+	
+	
 
-	//Myyntiraportti
+	//Myyntiraportti (katso dokumentaatio readme:stä)
 	@GetMapping(value = "api/events/{id}/raport")
 	@ResponseStatus(HttpStatus.OK)
 	public List<Raport> raport (@PathVariable("id") Long id){
@@ -84,28 +86,36 @@ public class EventController {
 			List<Ticket> kids = new ArrayList();
 			List<Ticket> students = new ArrayList();
 			
+			
 			for (int i = 0; i < alltickets.size(); i++) {
-				if (alltickets.get(i).getType().getType() == "normal") {
+				//tickettypeid 4 = adult
+				if (alltickets.get(i).getType().getTicketypeid() == 4) {
 					adults.add(alltickets.get(i));
-					
+
 				} 
-				else if (alltickets.get(i).getType().getType() == "children") {
+				//tickettypeid 5 = children
+				else if (alltickets.get(i).getType().getTicketypeid() == 5)  {
 					kids.add(alltickets.get(i));
 				}
-				else if (alltickets.get(i).getType().getType() == "student") {
+				//tickettypeid 6 = student
+				else if (alltickets.get(i).getType().getTicketypeid() == 6)  {
 					students.add(alltickets.get(i));
 				}
 			}
 			
 			
-	
+			//Luodaan uusi raportti pohja aikuiset
 			Raport adult = new Raport();
+				//asetetaan raportin tyyppi
 				adult.setTickettype("Adults");
+				//asetetaan kpl-määrään kuinka monta aikuisten lippua tapahtuman liput sisältävät
 				adult.setPcs(adults.size());
 				double total = 0.0;
+				//Käydään aikuisten liput läpi ja ynnätään niistä maksetut hinnat
 				for (int i= 0; i < adults.size(); i++) {					
 					total = total + adults.get(i).getPrice();
 				}
+				//asetetaan ynnäys raportin totaliin
 				adult.setTotal(total);
 				rrepo.save(adult);
 				
@@ -120,14 +130,25 @@ public class EventController {
 				rrepo.save(kid);
 				
 			Raport studs = new Raport();
-				studs.setTickettype("Student");
-				studs.setPcs(kids.size());
+				studs.setTickettype("Students");
+				studs.setPcs(students.size());
 				double studtotal = 0.0;
 				for (int i= 0; i < students.size(); i++) {					
 					studtotal = studtotal + students.get(i).getPrice();
 				}
 				studs.setTotal(studtotal);
-				rrepo.save(studs);				
+				rrepo.save(studs);
+				
+			Raport totalsales = new Raport();
+				totalsales.setTickettype("Total");
+				totalsales.setPcs(alltickets.size());
+				double totalamount = 0.0;
+				for (int i= 0; i < alltickets.size(); i++) {					
+					totalamount = totalamount + alltickets.get(i).getPrice();
+				}
+				//asetetaan ynnäys raportin totaliin
+				totalsales.setTotal(totalamount);
+				rrepo.save(totalsales);
 				
 					
 		List<Raport> raport = new ArrayList();
@@ -136,6 +157,7 @@ public class EventController {
 		raport.add(studs);
 		raport.add(adult);
 		raport.add(kid);
+		raport.add(totalsales);
 		
 		return raport;
 		
@@ -145,6 +167,11 @@ public class EventController {
 		}		
 	}
 
+	
+	
+	
+	
+	
 	// PALAUTTAA 500?????
 	// lisää tapahtuma
 	@PostMapping(value = "/api/events")
@@ -159,7 +186,7 @@ public class EventController {
 		}
 	}
 
-	// poista tapahtuma
+	// POISTA TAPAHTUMA
 	@DeleteMapping("/api/events/{id}")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT) // 204 jos onnistuu
 	public void deleteEvent(@PathVariable("id") @Min(1) Long eventid) {// parametri väh.1:n pituinen
@@ -175,7 +202,7 @@ public class EventController {
 		}
 	}
 
-	// muokkaa PUT-metodilla -> ylikirjoittava, idempotentti metodi
+	// MUOKKAA PUT-metodilla -> ylikirjoittava, idempotentti metodi
 	@PutMapping("/api/events/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public Event overrideEvent(@Valid @RequestBody Event editEvent, @PathVariable("id") @Min(1) Long eventid) {
@@ -257,7 +284,7 @@ public class EventController {
 		return event.getTickets();
 	}
 
-	// muokkaa
+	// MUOKKAA TIETYILLÄ ANNETUILLA ARVOILLA (MITÄ REQUEST SISÄLTÄÄ)
 	@PatchMapping("/api/events/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public Event editEvent(@Valid @RequestBody Map<String, Object> newEventProperties,
@@ -303,6 +330,8 @@ public class EventController {
 		}
 	}
 
+	
+	//HAE KAIKKI TAPAHTUMAAN MYYDYT LIPUT
 	@GetMapping(value = "/api/events/{eventid}/tickets")
 	@ResponseStatus(value = HttpStatus.OK)
 	public List<Ticket> getTicketOnEvent(@PathVariable("eventid") Long eventid) {
@@ -311,37 +340,8 @@ public class EventController {
 		return event.getTickets();
 	}
 
-	/*
-	 * //Lähetetään bodyssa orderid, ticketType (esim. 4, 5 tai 3) // LUODAAN UUSI
-	 * LIPPU TAPAHTUMAAN, EDELLYTTÄEN, ETTÄ LIPPUJA ON VIELÄ SAATAVILLA
-	 * 
-	 * @PostMapping(value = "/api/events/{eventid}/tickets")
-	 * 
-	 * @ResponseStatus(value = HttpStatus.CREATED) public @ResponseBody Ticket
-	 * addTicketOnEvent(@PathVariable("eventid") Long eventid,
-	 * 
-	 * @RequestBody Map<String, Object> ticketprops) {
-	 * 
-	 * //Hakee eventin bodyssa tulevalla eventid:lla Event event =
-	 * erepo.findById(eventid) .orElseThrow(() -> new
-	 * ResourceNotFoundException("No event with id: " + eventid + " found"));
-	 * 
-	 * Ticket t = new Ticket(); if (event.getTicketInventory() > 0) {
-	 * t.setEvent(event); //jos bodyssa tulee orderid -> if
-	 * (ticketprops.containsKey("orderid")) { //asetetaan orderidksi bodysta tuleva
-	 * orderid orderin idksi Long orderid = Long.valueOf((String)
-	 * ticketprops.get("orderid")); Order o = orepo.findById(orderid).orElse(new
-	 * Order()); //o.addTicket(t); orepo.save(o); t.setOrders(o); }
-	 * 
-	 * //hae bodyssa tuleva tickettype string if
-	 * (ticketprops.containsKey("tickettypeid")) { Long ttid = Long.valueOf((String)
-	 * ticketprops.get("ticketType")); TicketType tt =
-	 * ttrepo.findById(ttid).orElse(new TicketType()); t.setType(tt); }
-	 * 
-	 * trepo.save(t); } return t; }
-	 */
 
-	// NO NULL VALUES
+	// NO NULL VALUES ?? 
 	// Lähetetään bodyssa olemassa oleva (esim. 15 kovakoodattu) orderid,
 	// tickettypeid (esim. 4, 5 tai 3) ja pcs lippujen lkm
 	// LUODAAN UUSI LIPPU TAPAHTUMAAN, EDELLYTTÄEN, ETTÄ LIPPUJA ON VIELÄ SAATAVILLA
@@ -429,7 +429,7 @@ public class EventController {
 		}
 	}
 
-	// TULOSTETAAN MYYMÄTTÄ OLEVAT LIPUT
+	// TULOSTETAAN MYYMÄTTÄ OLEVAT LIPUT OVELLE
 	@PostMapping(value = "/api/events/{eventid}/available_tickets")
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public @ResponseBody List<Ticket> tickets(@PathVariable("eventid") Long eventid) {
@@ -463,51 +463,5 @@ public class EventController {
 		}
 	}
 
-	/*
-	 * POISTETAAN MYÖHEMMIN - TESTIVERSIO //Lähetetään bodyssa OrderRow, jossa:
-	 * orderid, tickettypeid (esim. 4, 5 tai 3) ja pcs lippujen lkm // LUODAAN UUSI
-	 * LIPPU TAPAHTUMAAN, EDELLYTTÄEN, ETTÄ LIPPUJA ON VIELÄ SAATAVILLA
-	 * 
-	 * @PostMapping(value = "/api/events/{eventid}/tickets")
-	 * 
-	 * @ResponseStatus(value = HttpStatus.CREATED) public @ResponseBody List<Ticket>
-	 * tickets(@PathVariable("eventid") Long eventid, @RequestBody OrderRow or) {
-	 * 
-	 * List <Ticket>tickets = new ArrayList<>();
-	 * 
-	 * //Hakee eventin bodyssa tulevalla eventid:lla Event event =
-	 * erepo.findById(eventid) .orElseThrow(() -> new
-	 * ResourceNotFoundException("No event with id: " + eventid + " found"));
-	 * 
-	 * //tallentaa bodyna tulevan orrepo.save(or);
-	 * 
-	 * //Haetaan bodysta pcs eli lippujen lkm int pcs = or.getPcs(); String orderid
-	 * = or.getOrderid(); String ttypeid = or.getTickettypeid();
-	 * 
-	 * //Periaatteessa orElseen ei mennä koska TicketType on pakollinen, mutta
-	 * jatkoa varten näin.. TicketType ttype =
-	 * ttrepo.findById(Long.parseLong(ttypeid)).orElse(new TicketType());
-	 * 
-	 * //===========================================================================
-	 * =============
-	 * 
-	 * //Luodaan niin monta lippua kuin bodyssa maaritelty for(int i=1; i<= pcs;
-	 * i++) { Ticket t = new Ticket(); //Varmistetaan että lippuja on saatavilla if
-	 * (event.getTicketInventory() > 0) { t.setEvent(event); t.setValid(true); if
-	 * (orderid != null) { Order o =
-	 * orepo.findById(Long.parseLong(orderid)).orElse(new Order()); orepo.save(o);
-	 * t.setOrders(o); } t.setType(ttype); //Hinta = eventin hinta jos lipputyyppi
-	 * on 3 eli aikuinen if (ttype.getTicketypeid() == 3) {
-	 * t.setPrice(event.getPrice()); } else { t.setPrice(event.getPrice() *
-	 * ttype.getDiscount()); } //Vähennetään yksi inventorysta
-	 * event.setTicketInventory(event.getTicketInventory()-1); Long tid =
-	 * trepo.save(t).getTicketid(); tickets.add(trepo.findById(tid).get());
-	 * 
-	 * } // entä jos lippuja ei saatavilla?
-	 * 
-	 * }
-	 * 
-	 * return tickets; }
-	 * 
-	 */
+	
 }
