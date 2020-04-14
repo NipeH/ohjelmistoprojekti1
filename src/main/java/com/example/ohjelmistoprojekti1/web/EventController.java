@@ -89,16 +89,16 @@ public class EventController {
 			
 			for (int i = 0; i < alltickets.size(); i++) {
 				//tickettypeid 4 = adult
-				if (alltickets.get(i).getType().getTicketypeid() == 4) {
+				if ("adult".equals(alltickets.get(i).getType().getTicketypeid())) {
 					adults.add(alltickets.get(i));
 
 				} 
 				//tickettypeid 5 = children
-				else if (alltickets.get(i).getType().getTicketypeid() == 5)  {
+				else if (  "children".equals( alltickets.get(i).getType().getTicketypeid() ))  {
 					kids.add(alltickets.get(i));
 				}
 				//tickettypeid 6 = student
-				else if (alltickets.get(i).getType().getTicketypeid() == 6)  {
+				else if ("student".equals(alltickets.get(i).getType().getTicketypeid())) {
 					students.add(alltickets.get(i));
 				}
 			}
