@@ -159,9 +159,10 @@ Lisää tilaustapahtuma [POST/orders/{eventid}/{typeid}/{lkm}](https://github.co
 
 ### Liput / Tickets:
 Luodaan lippu tapahtumaan: [POST /api/events/{eventid}/tickets](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/eventTickets.md)
+Deaktivoidaan tai aktivoidaan lippu (peruutustilanteet:) [PATCH /api/tickets/{ticketid}](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/ticketActivate.md)
 
 ### Avoimet ja autentikointia vaativat endpointit
-Tällä hetkellä kaikki endpointit ovat avoimia, myöhemmin asianmukaisen autentikoinnin ja autorisoinnin taakse tulevat kaikki muut paitsi POST:/login ja GET:events/...
+Kaikki endpointit vaativat sisäänkirjautumisen. Käyttäjien hallinta on myös autorisoinnin takana, vain admin-oikeuksilla käytettävissä oleva toiminto.
 
 ...
 
