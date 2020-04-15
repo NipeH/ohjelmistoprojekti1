@@ -121,10 +121,11 @@ Keskeisten rajapintojen kuvaukset, esimerkit REST-rajapinta. Tarvittaessa voidaa
 ## REST-API:t
 
 Ohjelman API:t pyrkivät toteuttamaan REST-rajapintojen ominaisuudet. Rajapintojen toteutuksessa on käytetty yleisesti käytössä olevia käytänteitä koskien mm. palveluiden nimeämistä. Iteraatiosta kolme alkaen ohjelma tarjoaa oleellisimmat toiminnot ja endpointit JSON-muotoisina API:nä. 
-<details>
-<summary>
- 
+
 ### basepath
+<details>
+<summary>read more about basepath.. click here..
+
 </summary>
 Kehitysvaiheen ohjelman basepath on http:localhost:8080/api 
 Tuotantovaiheen ohjelman basepath jatkaa samalla käytännöllä siten, että API-palveluiden osoite on muotoa www.ticketguru.com/api, missä www.ticketguru.com on ohjelman etusivu. Jatkossa tässä dokumentissa viitataan basepathiin merkinnällä ".../api/", milloin ei ole 
