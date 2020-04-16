@@ -274,15 +274,30 @@ public class EventController {
 		return found;
 	}
 
-	// Hae tapahtumaan myydyt liput
+	// Hae tapahtumaan myydyt liput esim. lipun tarkastajalle, VALIDIT
 	@GetMapping(value = "api/events/{eventid}/tickets_sold")
 	@ResponseStatus(value = HttpStatus.OK)
 	public List<Ticket> getTicketsOnEvent(@PathVariable("eventid") Long eventid) {
+		
+		List<Ticket> tickets = new ArrayList();
+		List<Ticket> ok = new ArrayList();
+		
 		Event event = erepo.findById(eventid)
 				.orElseThrow(() -> new ResourceNotFoundException("No event with an id of " + eventid + " found"));
+		
+		tickets = event.getTickets();
+		
+		for (int i = 0; i < tickets.size(); i++) {
+			Ticket ticket = tickets.get(i);
+			if (ticket.isValid()) {
+				ok.add(ticket);
+			}
+			
+		}
 
-		return event.getTickets();
+		return ok;
 	}
+	
 
 	// MUOKKAA TIETYILLÄ ANNETUILLA ARVOILLA (MITÄ REQUEST SISÄLTÄÄ)
 	@PatchMapping("/api/events/{id}")
@@ -331,7 +346,7 @@ public class EventController {
 	}
 
 	
-	//HAE KAIKKI TAPAHTUMAAN MYYDYT LIPUT
+	//HAE KAIKKI TAPAHTUMAAN MYYDYT LIPUT myös ei validit
 	@GetMapping(value = "/api/events/{eventid}/tickets")
 	@ResponseStatus(value = HttpStatus.OK)
 	public List<Ticket> getTicketOnEvent(@PathVariable("eventid") Long eventid) {
@@ -430,8 +445,8 @@ public class EventController {
 	}
 
 	// TULOSTETAAN MYYMÄTTÄ OLEVAT LIPUT OVELLE
-	@PostMapping(value = "/api/events/{eventid}/available_tickets")
-	@ResponseStatus(value = HttpStatus.CREATED)
+	@GetMapping(value = "/api/events/{eventid}/available_tickets")
+	@ResponseStatus(value = HttpStatus.OK)
 	public @ResponseBody List<Ticket> tickets(@PathVariable("eventid") Long eventid) {
 
 		List<Ticket> tickets = new ArrayList<>();
