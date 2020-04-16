@@ -26,23 +26,25 @@ Tapahtuman id lähetetään URL:issa.
 ```json
 [
     {
-        "id": 54,
         "tickettype": "Student",
-        "pcs": 6,
-        "total": 1280.0
+        "pcs": 2,
+        "total": 16.0
     },
     {
-        "id": 52,
         "tickettype": "Adults",
-        "pcs": 5,
-        "total": 1000.0
+        "pcs": 1,
+        "total": 10.0
     },
     {
-        "id": 53,
         "tickettype": "Children",
-        "pcs": 6,
-        "total": 500.0
-    }
+        "pcs": 1,
+        "total": 5.0
+    },
+    {
+        "tickettype": "Total",
+        "pcs": 4,
+        "total": 31.0
+    }    
 ]
 ```
 
