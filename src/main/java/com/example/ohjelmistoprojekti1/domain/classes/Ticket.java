@@ -51,19 +51,6 @@ public class Ticket {
 		used = null;
 	}
 
-	public Ticket(@NotNull Event event, TicketType type) {
-		super();
-		this.event = event;
-		this.type = type;
-	}
-
-	public Ticket(@NotNull Event event, double price, TicketType type) {
-		super();
-		this.event = event;
-		this.price = price;
-		this.type = type;
-	}
-
 	public Ticket(@NotNull Event event, double price, TicketType type, Order orders) {
 		super();
 		this.event = event;
@@ -82,6 +69,7 @@ public class Ticket {
 	}
 	
 
+	//Used in tickettest class
 	public Ticket(@NotNull Event event, double price, TicketType type, Order orders, boolean isValid,  UUID ticketcode) {
 		super();
 		this.event = event;

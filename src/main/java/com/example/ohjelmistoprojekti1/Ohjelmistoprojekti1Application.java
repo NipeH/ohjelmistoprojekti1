@@ -102,8 +102,7 @@ public class Ohjelmistoprojekti1Application {
 			ticketTypeRepo.save(new TicketType ("student", 0.8));
 			
 			// Ticket		
-			/*
-			ticketRepo.save(new Ticket (eventRepo.findByName("Ruisrock").get(0), ticketTypeRepo.findByType("children").get(0)));
+			
 			
 			Ticket ticket3 = new Ticket();
 			ticket3.setEvent(eventRepo.findByName("Ruisrock").get(0));
@@ -119,7 +118,7 @@ public class Ohjelmistoprojekti1Application {
 			ticket2.setType(ticketTypeRepo.findByType("student").get(0));
 			ticket2.setValid(true);
 			ticketRepo.save(ticket2);
-			*/
+			
 			
 			//Usertype
 			userTypeRepo.save(new UserType ("user"));
@@ -145,37 +144,11 @@ public class Ohjelmistoprojekti1Application {
 			
 			
 			//Order
-			/*
+			//Printout orderid for salesevent
 			Order order = new Order();
-			order.setTotal(30.5);
-			order.setUser(null);
-			order.setCustomer(customer);
-			List<Ticket> liput = new ArrayList<>();
-			for (int i = 0; i < 10; i++) {
-			liput.add(new Ticket(event, 5.0, normalTicket));
-			
-			}
-			
-			order.setTickets(liput);
-			orderRepo.save(order);
-			
-			Order tilaus2 = new Order();
-			tilaus2.setTotal(20.0);
-			tilaus2.setCustomer(customer);
-			tilaus2.setUser(null);
-			event.setEventid(1);
-			event.setTicketInventory(-1);
-			List<Ticket> liput2 = new ArrayList<>();
-			for (int i = 0; i < 10; i++) {
-			liput2.add(new Ticket(event, 20.0, normalTicket));
-			
-			}
-			
-			order.setTickets(liput2);
+			System.out.println(order.getOrderid());
 			
 			
-			orderRepo.save(tilaus2);
-			*/
 			
 			System.out.println("\nEnd of commandLineRunner\n");
 		};
