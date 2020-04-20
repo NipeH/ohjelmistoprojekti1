@@ -42,7 +42,7 @@ public class TicketTest {
 	public void notUsed() {
 		
 		Event jazz = new Event();
-		jazz.setName("Huhuu");
+		jazz.setName("Jazzit");
 		jazz.setDescription("Esiintyjinä Essi");
 		jazz.setPrice(100);
 		jazz.setVenue("Pori");
