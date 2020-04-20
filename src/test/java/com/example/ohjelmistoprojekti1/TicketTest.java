@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.example.ohjelmistoprojekti1.domain.classes.Event;
@@ -24,6 +25,7 @@ import com.example.ohjelmistoprojekti1.domain.repositories.TicketTypeRepository;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
+@ActiveProfiles("test")
 public class TicketTest {
 	
 	@Autowired
@@ -40,7 +42,7 @@ public class TicketTest {
 	public void notUsed() {
 		
 		Event jazz = new Event();
-		jazz.setName("Jazzit");
+		jazz.setName("Huhuu");
 		jazz.setDescription("Esiintyjinä Essi");
 		jazz.setPrice(100);
 		jazz.setVenue("Pori");

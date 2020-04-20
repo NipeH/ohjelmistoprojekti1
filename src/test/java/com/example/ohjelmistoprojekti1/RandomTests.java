@@ -7,9 +7,9 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.example.ohjelmistoprojekti1.domain.classes.Event;
-//import com.example.ohjelmistoprojekti1.domain.classes.Order;
 //import com.example.ohjelmistoprojekti1.domain.classes.Ticket;
 import com.example.ohjelmistoprojekti1.domain.repositories.EventRepository;
 import com.example.ohjelmistoprojekti1.domain.repositories.TicketRepository;
@@ -22,7 +22,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-//import java.util.UUID;
+
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class RandomTests {
@@ -74,7 +74,7 @@ public class RandomTests {
 	        URI uri = new URI(baseUrl);
 	        //add user details
 	  		TestRestTemplate testRestTemplate = new TestRestTemplate("niilo", "salasana");
-	        Event event = new Event("Adam Pier show", "Adam esiintyy", 13.0, "Tampere", 3);
+	        Event event = new Event("Meneekö kantaan", "Adam esiintyy", 13.0, "Tampere", 3);
 	        
 	        /* if needed add to request below
 	        HttpHeaders headers = new HttpHeaders();
