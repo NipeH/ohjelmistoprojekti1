@@ -33,6 +33,8 @@ public class TicketTest {
 	@Autowired
 	private TicketRepository ticketRepo;
 	
+
+	
 	@Test
 	//check that new tickets are valid for use = used = null
 	public void notUsed() {

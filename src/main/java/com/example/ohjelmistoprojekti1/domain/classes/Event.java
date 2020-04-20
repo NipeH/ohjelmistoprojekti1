@@ -55,6 +55,21 @@ public class Event {
 		super();
 
 	}
+	
+	
+
+
+	//this is for a test in RandomTests
+	public Event(@NotNull String name, @NotNull String description, double price, @NotNull String venue, int ticketInventory) {
+	super();
+	this.name = name;
+	this.description = description;
+	this.price = price;
+	this.venue = venue;
+	this.ticketInventory = ticketInventory;
+}
+
+
 
 
 
