@@ -36,6 +36,6 @@ public class UserTest {
 		user.setUsertype(userTypeRepo.findByUsertype("admin").get(0));
 		userRepo.save(user);		
 		
-		assertEquals(user.getFirstname(), "Testi");
+		equals(userRepo.findByUsername("TestaajaT"));
 	}
 }
