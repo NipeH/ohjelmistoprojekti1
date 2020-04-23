@@ -3,8 +3,7 @@
 Testit ovat e2e-testejä, postman lähettää http/https-pyynnön palvelimelle, pyyntö käsitellään palvelinohjelmiston controllerissa, joka puolestaan välittää pyynnöstä laaditun kyselyn tietokantaan. Kontrolleri lähettää vastauksensa takaisin http-clientille (Postman), joka suorittaa sen jälkeen testausskriptin, joka vertaa testaajan määrittämiä oletuksia palvelimelta saatuun vastaukseen.
 Koska testit läpäisevät kaikki tietotasot UI:ta lukuunottamatta, ne käsitetään e2e-testeiksi. 
 
-Testien toteutuksessa on käytetty ensinnäkin Postmanin ydintoiminnallisuuksiin kuuluvaa mahdollisuutta lähettää tarkoin muotoiltuja http-pyyntöjä. pyyntöjen onnistuminen esitetään ensimmäisessä sarakkeessa, tästä voidaan jo päätellä, että ainakin järjestelmä on toimintakunnossa ja vastaa pyyntöihin, joissa on asianmukainen autentikointi, ja että vaadittavat toiminnallisuudet ovat toteutettu odotetusti. 
-200-alkuiset vastaukset näkyvät vihreinä ja 400 ja 500-alkuiset vastaukset punaisena. 
+Testien toteutuksessa on käytetty ensinnäkin Postmanin ydintoiminnallisuuksiin kuuluvaa mahdollisuutta lähettää tarkoin muotoiltuja http-pyyntöjä. Pyyntöjen vastauskoodista voidaan jo mahdollisesti tehdä tiettyjä johtopäätöksiä. (vastausten ei pitäisi sisältää ainakaan 500-alkuisia statuksia (internal server error)).
 
 Testien tarkentamiseen käytetään javascript-kielellä kirjoitettuja skriptejä, joissa verrataan vastausta tiettyihin ennakko-odotuksiin. Postmanin skriptit mahdollistavat myös ei-toiminnallisten vaatimusten testaamisen. Tässä on toteutettu kaikkien pyyntöjen osalta testivaatimus palvelimen vastausnopeudesta (alle 200 ms).  
 
