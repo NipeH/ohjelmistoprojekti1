@@ -10,7 +10,7 @@ Testien tarkentamiseen käytetään javascript-kielellä kirjoitettuja skriptej�
 
 Testausskriptien toteutuksessa on soveltuvin osin pyritty hyödyntämään 'snippettejä' eli Postmanin tarjoamia valmiita koodinpätkiä, jotka testaavat yleisimpiä sovellusten ongelmakohtia/yleisimpiä toivottuja testauskohteita. Lisäksi on käytetty testausympäristöön integroituvia Tiny Validator-validointeja. 
 
-Jo pelkästään em. toiminnallisuuksia hyödyntämällä saadaan ohjelmiston kehitysvaiheeseen nähden melko kattava kuva sen toimintaedellytyksistä. Testausta pystytään helposti myös automatisoimaan. Tällä hetkellä testausproseduuri käydään läpi vain manuaalisesti käynnistämällä, koska lähdekoodin kanssa ollaan tekemisissä joka tapauksessa päivittäin. Ylläpitovaiheessa/sprinttien harventuessa otetaan käyttöön oletettavasti kerran vuorokaudessa tapahtuva testaaminen. 
+Jo pelkästään em. toiminnallisuuksia hyödyntämällä saadaan ohjelmiston kehitysvaiheeseen nähden melko kattava kuva sen toimintaedellytyksistä. Testausta pystytään helposti myös automatisoimaan. Tällä hetkellä testausproseduuri käydään läpi vain manuaalisesti käynnistämällä, koska lähdekoodin kanssa ollaan tekemisissä joka tapauksessa päivittäin. Ylläpitovaiheessa/sprinttien harventuessa voidaan ottaa käyttöön esimerkiksi kerran vuorokaudessa tapahtuva testaaminen. 
 
 Testien kattavuutta pyritään lisäämään ajan ja resurssien puitteissa, sekä aina lisättäessä ohjelmaan uusia ominaisuuksia/tehtäessä muutoksia, joilla voi olettaa olevan mahdollisia vaikutuksia ohjelman toimintaan. 
 
