@@ -1,24 +1,20 @@
 package com.example.ohjelmistoprojekti1;
 
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.ActiveProfiles;
 
 import com.example.ohjelmistoprojekti1.domain.classes.Event;
-//import com.example.ohjelmistoprojekti1.domain.classes.Ticket;
-import com.example.ohjelmistoprojekti1.domain.repositories.EventRepository;
-import com.example.ohjelmistoprojekti1.domain.repositories.TicketRepository;
-import com.example.ohjelmistoprojekti1.domain.repositories.TicketTypeRepository;
 
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-//import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
+
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -30,35 +26,26 @@ public class RandomTests {
 	@LocalServerPort
 	private int port;
 
-	@Autowired
-	private TestRestTemplate restTemplate;
-	
-	@Autowired
-	private EventRepository eventRepo;
-	@Autowired
-	private TicketTypeRepository ticketTypeRepo;
-	@Autowired
-	private TicketRepository ticketRepo;
 	
 		@Test
-		//Test that login returns 401 with wrong creds, integ
+		//Test that login returns 401 with wrong creds, 
 		public void checkCredidentials() throws Exception {
 			TestRestTemplate testRestTemplate = new TestRestTemplate("niilo", "kissakoira");
-			ResponseEntity<String> response = testRestTemplate.
-			  getForEntity("http://localhost:" + port + "/", String.class);
+		    final String baseUrl = "http://localhost:" + port + "/";
+		    URI uri = new URI(baseUrl);
+			ResponseEntity<String> response = testRestTemplate.getForEntity(uri, String.class);
 			  
 			assertEquals(response.getStatusCode(), (HttpStatus.UNAUTHORIZED));
 		}
 	
 
 	  	@Test
-	  	//Test get-method api/events, integ
+	  	//Test get-method api/events, 
 		public void getEventListing() throws URISyntaxException {
 	        //add user details
 			TestRestTemplate testRestTemplate = new TestRestTemplate("niilo", "salasana");
 		    final String baseUrl = "http://localhost:" + port + "/api/events";
 		    URI uri = new URI(baseUrl);
-		 
 		    ResponseEntity<String> result = testRestTemplate.getForEntity(uri, String.class);
 
 		    assertEquals(200, result.getStatusCodeValue());
@@ -68,12 +55,11 @@ public class RandomTests {
 	  	
 	    @Test
 	    //test adding event, e2e
-	    public void testAddEvent() throws URISyntaxException 
-	    {
-	        final String baseUrl = "http://localhost:"+port+"/api/events/";
-	        URI uri = new URI(baseUrl);
+	    public void testAddEvent() throws URISyntaxException {
 	        //add user details
 	  		TestRestTemplate testRestTemplate = new TestRestTemplate("niilo", "salasana");
+	        final String baseUrl = "http://localhost:"+port+"/api/events/";
+	        URI uri = new URI(baseUrl);
 	        Event event = new Event("Meneekö kantaan", "Adam esiintyy", 13.0, "Tampere", 3);
 	        
 	        /* if needed add to request below
@@ -81,8 +67,7 @@ public class RandomTests {
 	        headers.set("add header here", "true");      
 	 		*/
 	        
-	        HttpEntity<Event> request = new HttpEntity<>(event);
-	         
+	        HttpEntity<Event> request = new HttpEntity<>(event);         
 	        ResponseEntity<String> result = testRestTemplate.postForEntity(uri, request, String.class);
 	         
 	        assertEquals(201, result.getStatusCodeValue());
