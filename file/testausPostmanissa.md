@@ -1,4 +1,4 @@
-#Testaaminen käyttäen Postmania
+##Testaaminen käyttäen Postmania
 
 Testit ovat e2e-testejä, postman lähettää http/https-pyynnön palvelimelle, pyyntö käsitellään palvelinohjelmiston controllerissa, joka puolestaan välittää pyynnöstä laaditun kyselyn tietokantaan. Kontrolleri lähettää vastauksensa takaisin http-clientille (Postman), joka suorittaa sen jälkeen testausskriptin, joka vertaa testaajan määrittämiä oletuksia palvelimelta saatuun vastaukseen.
 Koska testit läpäisevät kaikki tietotasot UI:ta lukuunottamatta, ne käsitetään e2e-testeiksi. 
