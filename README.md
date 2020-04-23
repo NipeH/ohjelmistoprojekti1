@@ -135,6 +135,12 @@ erityistä syytä korostaa maininnan koskevan erikseen joko kehitys- tai tuotant
 ### Rajapinnat
 Ensimmäisenä on luotu rajapinta tapahtumille, joihin Ticketguru myy lippuja. Kaikki luodut tapahtumat löytyvät osoitteesta .../api/events Sivu sisältää JSON-muotoisen taulukon, joka sisältää tapahtuma-objektit ja relaatiot. Yksittäisiin objekteihin pääsee käsiksi osoitteesta .../api/events/{id} missä {id} on tapahtuman yksilöllinen id.
 
+<details>
+
+<summary>
+ Yksityiskohtainen kuvaus rajapintojen käytöstä ja toteutuksesta.
+ </summary>
+ 
 ### Tapahtumat / Events:
 
 Hae tapahtumat: [GET /api/events](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/getevents.md)
@@ -169,6 +175,8 @@ Deaktivoidaan tai aktivoidaan lippu (peruutustilanteet:) [PATCH /api/tickets/{ti
 
 ### Avoimet ja autentikointia vaativat endpointit
 Kaikki endpointit vaativat sisäänkirjautumisen. Käyttäjien hallinta on myös autorisoinnin takana, vain admin-oikeuksilla käytettävissä oleva toiminto.
+
+</details>
 
 ...
 
