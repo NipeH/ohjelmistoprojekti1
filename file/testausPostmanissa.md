@@ -18,31 +18,93 @@ Testien kattavuutta pyritään lisäämään ajan ja resurssien puitteissa, sek�
   <summary>LUO TILAUSPOHJA 
   </summary>
   <h3> ODOTUKSET </h3>
-  <ul>
+  <ol>
     <li>Odotetaan, että vastaus on "onnistunut POST-pyyntö" ts. joko 201 tai 202. </li>
     <li>Vastauksen odotetaan saapuvan alle 200 ms.</li>
     <li>Vastauksessa odotetaan olevan Content-Type-header.</li>
-  </ul>
+  </ol>
     <h3> PYYNTÖ </h3>
   POST: https://ticketguru.herokuapp.com/api/orders <br/>
   AUTH: Basic auth <br/>
   BODY: {} <br/>
     <h3> TESTISKRIPTI </h3>
-  TESTS: <br/>
+  
+  <details>
+  <summary>
+  TESTS:
+  </summary>
+  
+  
   <code>
+    
+ 1
   
       pm.test("Successful POST request", function () {
         pm.expect(pm.response.code).to.be.oneOf([201,202]);
     });
+    
+ 2
+ 
     pm.test("Response time is less than 200ms", function () {
         pm.expect(pm.response.responseTime).to.be.below(200);
     });
+
+3
 
     pm.test("Content-Type is present", function () {
         pm.response.to.have.header("Content-Type");
     });
 
 </code>
+</details>
+</details>
+
+
+<details>
+  <summary>HAE TILAUKSET  
+  </summary>
+  <h3> ODOTUKSET </h3>
+  <ol>
+    <li>Odotetaan, että vastaus on "onnistunut GET-pyyntö", 200 OK. </li>
+    <li>Odotetaan, että vastaus sisältää edellisessä testissä luodun tilauksen orderid:n </li>
+  </ol>
+    <h3> PYYNTÖ </h3>
+  GET: https://ticketguru.herokuapp.com/api/orders <br/>
+  AUTH: Basic auth, inherited (admin) <br/>
+  BODY: Ei bodya <br/>
+    <h3> TESTISKRIPTI </h3>
+  
+  <details>
+  <summary>
+  TESTS: 
+  </summary>
+  
+  <code>
+  
+1  
+   
+    pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+    });
+    
+2
+
+    pm.test("Edellä luodun tilauksen orderid löytyy vastauksesta", 
+    function () {
+        var jsonData = pm.response.json();
+        var expectedOID = pm.globals.get("expectedOID");
+        
+    var foundOIDs = [];
+    for (var i = 0; i < jsonData.length; i++) {
+            foundOIDs.push(jsonData[i].orderid);
+        }
+        
+        var loytyi = foundOIDs.includes(expectedOID);
+        
+        pm.expect(Boolean(loytyi)).to.eql(Boolean(true));
+     });
+</code>
+</details>
 </details>
   
 
