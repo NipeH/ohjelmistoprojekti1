@@ -186,6 +186,8 @@ ohjelmiston pitää olla organisoitu komponentteihin niin, että turhalta toisto
 ## Testaus 
 
 [Testausta](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/testaus.md)
+
+
 [Testaaminen Postman-ohjelmalla](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/testausPostmanissa.md)
 
 Tässä kohdin selvitetään, miten ohjelmiston oikea toiminta varmistetaan testaamalla projektin aikana: millaisia testauksia tehdään ja missä vaiheessa. Testauksen tarkemmat sisällöt ja testisuoritusten tulosten raportit kirjataan erillisiin dokumentteihin. 
