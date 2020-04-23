@@ -1,4 +1,4 @@
-##Testaaminen käyttäen Postmania
+## Testaaminen käyttäen Postmania
 
 Testit ovat e2e-testejä, postman lähettää http/https-pyynnön palvelimelle, pyyntö käsitellään palvelinohjelmiston controllerissa, joka puolestaan välittää pyynnöstä laaditun kyselyn tietokantaan. Kontrolleri lähettää vastauksensa takaisin http-clientille (Postman), joka suorittaa sen jälkeen testausskriptin, joka vertaa testaajan määrittämiä oletuksia palvelimelta saatuun vastaukseen.
 Koska testit läpäisevät kaikki tietotasot UI:ta lukuunottamatta, ne käsitetään e2e-testeiksi. 
@@ -14,5 +14,35 @@ Jo pelkästään em. toiminnallisuuksia hyödyntämällä saadaan ohjelmiston ke
 
 Testien kattavuutta pyritään lisäämään ajan ja resurssien puitteissa, sekä aina lisättäessä ohjelmaan uusia ominaisuuksia/tehtäessä muutoksia, joilla voi olettaa olevan mahdollisia vaikutuksia ohjelman toimintaan. 
 
+<details>
+  <summary>LUO TILAUSPOHJA 
+  </summary>
+  <h3> ODOTUKSET </h3>
+  <ul>
+    <li>Odotetaan, että vastaus on "onnistunut POST-pyyntö" ts. joko 201 tai 202. </li>
+    <li>Vastauksen odotetaan saapuvan alle 200 ms.</li>
+    <li>Vastauksessa odotetaan olevan Content-Type-header.</li>
+  </ul>
+    <h3> PYYNTÖ </h3>
+  POST: https://ticketguru.herokuapp.com/api/orders <br/>
+  AUTH: Basic auth <br/>
+  BODY: {} <br/>
+    <h3> TESTISKRIPTI </h3>
+  TESTS: <br/>
+  <code>
+  
+      pm.test("Successful POST request", function () {
+        pm.expect(pm.response.code).to.be.oneOf([201,202]);
+    });
+    pm.test("Response time is less than 200ms", function () {
+        pm.expect(pm.response.responseTime).to.be.below(200);
+    });
 
+    pm.test("Content-Type is present", function () {
+        pm.response.to.have.header("Content-Type");
+    });
+
+</code>
+</details>
+  
 
