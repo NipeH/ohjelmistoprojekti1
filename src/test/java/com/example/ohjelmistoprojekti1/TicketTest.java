@@ -74,6 +74,8 @@ public class TicketTest {
 		
 		assertTrue(time.isBefore(ticket.getUsed()) || time.isEqual(ticket.getUsed())  );
 	}
+	
+	
 
 
 }

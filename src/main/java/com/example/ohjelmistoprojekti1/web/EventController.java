@@ -32,6 +32,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.example.ohjelmistoprojekti1.domain.classes.Event;
 import com.example.ohjelmistoprojekti1.domain.classes.Order;
 import com.example.ohjelmistoprojekti1.domain.classes.OrderRow;
+import com.example.ohjelmistoprojekti1.domain.classes.Raport;
 //import com.example.ohjelmistoprojekti1.domain.classes.Raport;
 import com.example.ohjelmistoprojekti1.domain.classes.Ticket;
 import com.example.ohjelmistoprojekti1.domain.classes.TicketType;
@@ -39,6 +40,7 @@ import com.example.ohjelmistoprojekti1.domain.repositories.CustomerRepository;
 import com.example.ohjelmistoprojekti1.domain.repositories.EventRepository;
 import com.example.ohjelmistoprojekti1.domain.repositories.OrderRepository;
 import com.example.ohjelmistoprojekti1.domain.repositories.OrderRowRepository;
+import com.example.ohjelmistoprojekti1.domain.repositories.RaportRepository;
 //import com.example.ohjelmistoprojekti1.domain.repositories.RaportRepository;
 import com.example.ohjelmistoprojekti1.domain.repositories.TicketRepository;
 import com.example.ohjelmistoprojekti1.domain.repositories.TicketTypeRepository;
@@ -64,80 +66,109 @@ public class EventController {
 	@Autowired
 	private TicketTypeRepository ttrepo;
 
-//	@Autowired
-	//private RaportRepository rrepo;
+	@Autowired
+	private RaportRepository rrepo;
 	
 	
 
 	//Myyntiraportti (katso dokumentaatio readme:stä)
-	/*
-	 * @GetMapping(value = "api/events/{id}/raport")
-	 * 
-	 * @ResponseStatus(HttpStatus.OK) public List<Raport> raport
-	 * (@PathVariable("id") Long id){
-	 * 
-	 * try { Event event = erepo.findById(id).get(); List<Ticket> alltickets =
-	 * event.getTickets();
-	 * 
-	 * TicketType children = ttrepo.findByType("children").get(0); TicketType
-	 * student = ttrepo.findByType("student").get(0); TicketType normal =
-	 * ttrepo.findByType("normal").get(0);
-	 * 
-	 * List<Ticket> adults = new ArrayList(); List<Ticket> kids = new ArrayList();
-	 * List<Ticket> students = new ArrayList();
-	 * 
-	 * 
-	 * for (int i = 0; i < alltickets.size(); i++) { //tickettypeid 4 = adult if
-	 * ("adult".equals(alltickets.get(i).getType().getTicketypeid())) {
-	 * adults.add(alltickets.get(i));
-	 * 
-	 * } //tickettypeid 5 = children else if ( "children".equals(
-	 * alltickets.get(i).getType().getTicketypeid() )) {
-	 * kids.add(alltickets.get(i)); } //tickettypeid 6 = student else if
-	 * ("student".equals(alltickets.get(i).getType().getTicketypeid())) {
-	 * students.add(alltickets.get(i)); } }
-	 * 
-	 * 
-	 * //Luodaan uusi raportti pohja aikuiset Raport adult = new Raport();
-	 * //asetetaan raportin tyyppi adult.setTickettype("Adults"); //asetetaan
-	 * kpl-määrään kuinka monta aikuisten lippua tapahtuman liput sisältävät
-	 * adult.setPcs(adults.size()); double total = 0.0; //Käydään aikuisten liput
-	 * läpi ja ynnätään niistä maksetut hinnat for (int i= 0; i < adults.size();
-	 * i++) { total = total + adults.get(i).getPrice(); } //asetetaan ynnäys
-	 * raportin totaliin adult.setTotal(total); rrepo.save(adult);
-	 * 
-	 * Raport kid = new Raport(); kid.setTickettype("Children");
-	 * kid.setPcs(kids.size()); double kidstotal = 0.0; for (int i= 0; i <
-	 * kids.size(); i++) { kidstotal = kidstotal + kids.get(i).getPrice(); }
-	 * kid.setTotal(kidstotal); rrepo.save(kid);
-	 * 
-	 * Raport studs = new Raport(); studs.setTickettype("Students");
-	 * studs.setPcs(students.size()); double studtotal = 0.0; for (int i= 0; i <
-	 * students.size(); i++) { studtotal = studtotal + students.get(i).getPrice(); }
-	 * studs.setTotal(studtotal); rrepo.save(studs);
-	 * 
-	 * Raport totalsales = new Raport(); totalsales.setTickettype("Total");
-	 * totalsales.setPcs(alltickets.size()); double totalamount = 0.0; for (int i=
-	 * 0; i < alltickets.size(); i++) { totalamount = totalamount +
-	 * alltickets.get(i).getPrice(); } //asetetaan ynnäys raportin totaliin
-	 * totalsales.setTotal(totalamount); rrepo.save(totalsales);
-	 * 
-	 * 
-	 * List<Raport> raport = new ArrayList();
-	 * 
-	 * 
-	 * raport.add(studs); raport.add(adult); raport.add(kid);
-	 * raport.add(totalsales);
-	 * 
-	 * return raport;
-	 * 
-	 * 
-	 * } catch (Exception e) { throw new
-	 * ResponseStatusException(HttpStatus.NOT_FOUND, "Entity Not Found", e); } }
-	 */
-	
-	
-	
+		@GetMapping(value = "api/events/{id}/raport")
+		@ResponseStatus(HttpStatus.OK)
+		public List<Raport> raport (@PathVariable("id") Long id){
+			
+			try {
+				Event event = erepo.findById(id).get();
+				List<Ticket> alltickets = event.getTickets();
+				
+				TicketType children = ttrepo.findByType("children").get(0);
+				TicketType student = ttrepo.findByType("student").get(0);			
+				TicketType normal = ttrepo.findByType("normal").get(0);
+				
+				List<Ticket> adults = new ArrayList();
+				List<Ticket> kids = new ArrayList();
+				List<Ticket> students = new ArrayList();
+				
+				
+				for (int i = 0; i < alltickets.size(); i++) {
+					//tickettypeid 4 = adult
+					if ("normal".equals(alltickets.get(i).getType().getType())) {
+						adults.add(alltickets.get(i));
+
+					} 
+					//tickettypeid 5 = children
+					else if (  "children".equals( alltickets.get(i).getType().getType() ))  {
+						kids.add(alltickets.get(i));
+					}
+					//tickettypeid 6 = student
+					else if ("student".equals(alltickets.get(i).getType().getType())) {
+						students.add(alltickets.get(i));
+					}
+				}
+				
+				
+				//Luodaan uusi raportti pohja aikuiset
+				Raport adult = new Raport();
+					//asetetaan raportin tyyppi
+					adult.setTickettype("Adults");
+					//asetetaan kpl-määrään kuinka monta aikuisten lippua tapahtuman liput sisältävät
+					adult.setPcs(adults.size());
+					double total = 0.0;
+					//Käydään aikuisten liput läpi ja ynnätään niistä maksetut hinnat
+					for (int i= 0; i < adults.size(); i++) {					
+						total = total + adults.get(i).getPrice();
+					}
+					//asetetaan ynnäys raportin totaliin
+					adult.setTotal(total);
+					rrepo.save(adult);
+					
+				Raport kid = new Raport();
+					kid.setTickettype("Children");
+					kid.setPcs(kids.size());
+					double kidstotal = 0.0;
+					for (int i= 0; i < kids.size(); i++) {					
+						kidstotal = kidstotal + kids.get(i).getPrice();
+					}
+					kid.setTotal(kidstotal);
+					rrepo.save(kid);
+					
+				Raport studs = new Raport();
+					studs.setTickettype("Students");
+					studs.setPcs(students.size());
+					double studtotal = 0.0;
+					for (int i= 0; i < students.size(); i++) {					
+						studtotal = studtotal + students.get(i).getPrice();
+					}
+					studs.setTotal(studtotal);
+					rrepo.save(studs);
+					
+				Raport totalsales = new Raport();
+					totalsales.setTickettype("Total");
+					totalsales.setPcs(alltickets.size());
+					double totalamount = 0.0;
+					for (int i= 0; i < alltickets.size(); i++) {					
+						totalamount = totalamount + alltickets.get(i).getPrice();
+					}
+					//asetetaan ynnäys raportin totaliin
+					totalsales.setTotal(totalamount);
+					rrepo.save(totalsales);
+					
+						
+			List<Raport> raport = new ArrayList();
+
+			
+			raport.add(studs);
+			raport.add(adult);
+			raport.add(kid);
+			raport.add(totalsales);
+			
+			return raport;
+			
+				
+			} catch (Exception e) {
+					throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Entity Not Found", e);
+			}		
+		}
+
 	
 	
 	// PALAUTTAA 500?????

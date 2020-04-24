@@ -13,7 +13,7 @@ olevan "UNAUTHORIZED". Vastauksen statusta ja oletusta verrataan assertEquals fu
 Tietokannasta hakua testataan kutsumalla /api/events endpointia oikeilla tunnuksilla ja vastauksen statuksen oletetaan olevan OK 200 ja vastauksen
 bodyn sisältävän eventien listauksien ominaisuuksia, eli esim. "eventid":n. Vastausta ja oletuksia verrataan assertEquals funktiolla.
 
-Tietokantaan lisäystä testataan kutsumalla /api/events endpointia oikeilla tunnuksilla ja lähettämällä uuden Event-olio kutsun bodyssa. Vastauksen
+Tietokantaan lisäystä testataan kutsumalla /api/events endpointia oikeilla tunnuksilla ja lähettämällä uusi Event-olio kutsun bodyssa. Vastauksen
 statuksen oletetaan olevan 201, lisätty. Vastausta ja oletusta verrataan assertEquals funktiolla.
 
 Lippuluokan ominaisuuksista testataan uuden lipun luontia sekä lipun lukemista. Testit määritetään käyttämään H2-tietokantaa @ActiveProfiles('test')

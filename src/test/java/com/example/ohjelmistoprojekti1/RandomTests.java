@@ -54,13 +54,13 @@ public class RandomTests {
 	  	
 	  	
 	    @Test
-	    //test adding event, e2e
+	    //test adding event
 	    public void testAddEvent() throws URISyntaxException {
 	        //add user details
 	  		TestRestTemplate testRestTemplate = new TestRestTemplate("niilo", "salasana");
 	        final String baseUrl = "http://localhost:"+port+"/api/events/";
 	        URI uri = new URI(baseUrl);
-	        Event event = new Event("Meneekö kantaan", "Adam esiintyy", 13.0, "Tampere", 3);
+	        Event event = new Event("Moi", "Adam esiintyy", 13.0, "Tampere", 3);
 	        
 	        /* if needed add to request below
 	        HttpHeaders headers = new HttpHeaders();
