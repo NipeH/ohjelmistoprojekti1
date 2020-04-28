@@ -149,10 +149,11 @@ public class Ticket {
 	}
 
 	public String getUsed() {
-		if (used.toString() == null) {
-			return "unused";
-		} else {
-			return used.toString();
+		try {
+			return this.used.toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "-";
 		}
 	}
 
