@@ -119,14 +119,14 @@ public class TicketController {
 
 		try {
 
-			LocalDateTime used = ticket.getUsed();
-
-			if (ticket.isValid() && used == null) {
-				ticket.read();
-				trepo.save(ticket);
-				return "OK";
+			if (!ticket.isValid()) {
+				return "Lippu on peruttu";
+			}
+			if (!(ticket.getUsed() == null)) {
+				return "Lippu on jo käytetty";
 			} else {
-				return "Lippu on jo käytetty tai peruttu";
+				ticket.read();
+				return "OK!";
 			}
 
 		} catch (Exception e) {
