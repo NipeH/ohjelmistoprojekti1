@@ -45,12 +45,8 @@ public class Order {
 		tickets = new ArrayList<>();
 	}
 
-	public ZonedDateTime getTimestamp() {
-		return timestamp;
-	}
-
-	public void setTimestamp(ZonedDateTime timestamp) {
-		this.timestamp = timestamp;
+	public String getTimestamp() {
+		return timestamp.toString();
 	}
 
 	public long getOrderid() {

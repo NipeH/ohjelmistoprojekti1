@@ -280,8 +280,8 @@ public class EventController {
 	@ResponseStatus(value = HttpStatus.OK)
 	public List<Ticket> getTicketsOnEvent(@PathVariable("eventid") Long eventid) {
 		
-		List<Ticket> tickets = new ArrayList();
-		List<Ticket> ok = new ArrayList();
+		List<Ticket> tickets = new ArrayList<>();
+		List<Ticket> ok = new ArrayList<>();
 		
 		Event event = erepo.findById(eventid)
 				.orElseThrow(() -> new ResourceNotFoundException("No event with an id of " + eventid + " found"));
