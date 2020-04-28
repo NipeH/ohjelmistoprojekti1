@@ -1,7 +1,6 @@
 package com.example.ohjelmistoprojekti1.domain.classes;
 
-//import java.sql.Date;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -31,112 +30,67 @@ public class Event {
 	@NotNull
 	private String venue;
 
-//	@NotNull
-//	private Date date;
-//	private String time;
-
 	// Tapahtuman alkamisaika
-	private LocalDateTime startTime;
+	private ZonedDateTime startTime;
 	// Tapahtuman päättymisaika
-	private LocalDateTime endTime;
+	private ZonedDateTime endTime;
 
-//	@NotNull
 	private int ticketInventory;
 
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
 	private List<Ticket> tickets;
-//
-//	@OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
-//	private List<TicketType> eventOrganizersTicketTypes;
-//	
 
 	public Event() {
 		super();
 
 	}
-	
-	
 
-
-	//this is for a test in RandomTests
-	public Event(@NotNull String name, @NotNull String description, double price, @NotNull String venue, int ticketInventory) {
-	super();
-	this.name = name;
-	this.description = description;
-	this.price = price;
-	this.venue = venue;
-	this.ticketInventory = ticketInventory;
-}
-
-
-
-
+	// this is for a test in RandomTests
+	public Event(@NotNull String name, @NotNull String description, double price, @NotNull String venue,
+			int ticketInventory) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.venue = venue;
+		this.ticketInventory = ticketInventory;
+	}
 
 	/**
 	 * Set starting time for event, for
-	 * Example:\n"1988-05-18T03:57:00"\n=>18.5.1988, klo 03:57 @param
-	 * yyyy-mm-ddThh:mm:ss
+	 * Example:\n"2020-04-28T11:47:54.294+03:00[Europe/Helsinki]@param
+	 * yyyy-mm-ddThh:mm:ss.msm+hh:mm[TimeZone]
 	 */
 	public void setStartTime(String startTime) {
 		try {
-			DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-			this.startTime = LocalDateTime.parse(startTime, formatter);
+			this.startTime = ZonedDateTime.parse(startTime);
 		} catch (Exception e) {
 			System.out.println("Alkuajan asettaminen epäonnnistui, tarkista syöte: " + e.getMessage());
 		}
+
 	}
 
-	public LocalDateTime getStartTime() {
+	public ZonedDateTime getStartTime() {
 		return this.startTime;
 	}
 
 	/**
-	 * Set ending time for event, for Example:\n"1988-05-18T03:57:00"\n=>18.5.1988,
-	 * klo 03:57 @param yyyy-mm-ddThh:mm:ss
+	 * Set ending time for event, for
+	 * Example:\n"2020-04-28T11:47:54.294+03:00[Europe/Helsinki]@param
+	 * yyyy-mm-ddThh:mm:ss.msm+hh:mm[TimeZone]
 	 */
 	public void setEndTime(String endTime) {
 		try {
-			DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-			this.endTime = LocalDateTime.parse(endTime, formatter);
+			this.endTime = ZonedDateTime.parse(endTime);
 		} catch (Exception e) {
 			System.out.println("Loppuajan asettaminen epäonnnistui, tarkista syöte: " + e.getMessage());
 		}
 	}
 
-	public LocalDateTime getEndTime() {
-		return this.endTime;
+	public String getEndTime() {
+		return this.endTime.toString();
 	}
-
-//	public void setTime(String time) {
-//		try {
-//			String[] psc = time.split(":");
-//			int tunnit = Integer.parseInt(psc[0]);
-//			int minuutit = Integer.parseInt(psc[1]);
-//			if (tunnit > 24) {
-//				tunnit = 24;
-//			}
-//			if (tunnit < 0) {
-//				tunnit = 0;
-//			}
-//			if (minuutit > 60) {
-//				minuutit = 60;
-//			}
-//			if (minuutit < 0) {
-//				minuutit = 0;
-//			}
-//			time = tunnit + ":" + minuutit;
-//		} catch (Exception e) {
-//			System.out.println("Virhe ajan asettamisessa: " + e.getMessage());
-//		}
-//		this.time = time;
-//	}
-//
-//	public String getTime() {
-//		return this.time;
-//	}
-//	
-//	
 
 	public List<Ticket> getTickets() {
 		return tickets;
@@ -178,43 +132,13 @@ public class Event {
 		this.venue = venue;
 	}
 
-//	public Date getDate() {
-//		return date;
-//	}
-
-//	public void setDate(Date date) {
-//		this.date = date;
-//	}
-
-	/** @param date parameter in form: "yyyy-mm-dd" */
-//	public void setDate(String date) {
-//		this.date = java.sql.Date.valueOf(date);
-//	}
-
-/* Tää tälläisenään "rikkoo" post eventin niin, ettei se palauta jsonina vastausta :/
-	public int getTicketInventory() {
-		return this.ticketInventory - tickets.size();
-	}
-*/
-	
-
-
-	//public int getTicketInventory() {
-	//	return this.ticketInventory;
-	//}
-
 	public void setTicketInventory(int ticketInventory) {
 		this.ticketInventory = ticketInventory;
 	}
 
-
-
 	public int getTicketInventory() {
 		return ticketInventory;
 	}
-
-
-
 
 	public double getPrice() {
 		return price;

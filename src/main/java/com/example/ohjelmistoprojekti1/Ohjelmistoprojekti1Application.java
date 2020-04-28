@@ -1,5 +1,6 @@
 package com.example.ohjelmistoprojekti1;
 
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -151,6 +152,7 @@ public class Ohjelmistoprojekti1Application {
 			
 			
 			System.out.println("\nEnd of commandLineRunner\n");
+			System.out.println("AIKA: " + ZonedDateTime.now());
 		};
 	}
 }
