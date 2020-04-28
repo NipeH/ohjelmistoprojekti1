@@ -8,6 +8,7 @@ import javax.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -131,6 +132,22 @@ public class TicketController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	// POISTA LIPPU
+	@DeleteMapping("/api/tickets/{id}")
+	@ResponseStatus(value = HttpStatus.NO_CONTENT) // 204 jos onnistuu
+	public void deleteTicket(@PathVariable("id") @Min(1) Long id) {// parametri väh.1:n pituinen
+		try {
+			trepo.deleteById(id);
+		} catch (Exception e) {
+			// palauttaa status 404, jos id:tä vastaavaa eventiä ei löydy
+			if (!trepo.findById(id).isPresent()) {
+				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Entity Not Found", e);
+			} else {
+				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unable to delete event", e);
+			}
 		}
 	}
 
