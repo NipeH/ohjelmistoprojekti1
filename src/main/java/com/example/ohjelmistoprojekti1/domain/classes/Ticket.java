@@ -1,6 +1,6 @@
 package com.example.ohjelmistoprojekti1.domain.classes;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -23,27 +23,25 @@ public class Ticket {
 
 	@NotNull
 	@ManyToOne
-	// @JsonIgnore
 	@JoinColumn(name = "eventid")
 	private Event event;
 
 	private double price;
 
 	@ManyToOne
-	// @JsonIgnore
 	@JoinColumn(name = "tickettypeid")
 	private TicketType type;
 
 	@ManyToOne
-	@JsonIgnore //pakko olla tässä päällä
+	@JsonIgnore // pakko olla tässä päällä
 	@JoinColumn(name = "orderid")
 	private Order orders;
 
 	private boolean isValid;
 
-	private LocalDateTime used;
-	
-	@Column(name = "ticketcode", unique = true) 
+	private ZonedDateTime used;
+
+	@Column(name = "ticketcode", unique = true)
 	private UUID ticketcode;
 
 	public Ticket() {
@@ -67,10 +65,9 @@ public class Ticket {
 		this.orders = orders;
 		this.isValid = isValid;
 	}
-	
 
-	//Used in tickettest class
-	public Ticket(@NotNull Event event, double price, TicketType type, Order orders, boolean isValid,  UUID ticketcode) {
+	// Used in tickettest class
+	public Ticket(@NotNull Event event, double price, TicketType type, Order orders, boolean isValid, UUID ticketcode) {
 		super();
 		this.event = event;
 		this.price = price;
@@ -79,12 +76,9 @@ public class Ticket {
 		this.isValid = isValid;
 		this.ticketcode = ticketcode;
 	}
-	
-	
-	
 
 	public Ticket(@NotNull Event event, double price, TicketType type, Order orders, boolean isValid,
-			LocalDateTime used, UUID ticketcode) {
+			ZonedDateTime used, UUID ticketcode) {
 		super();
 		this.event = event;
 		this.price = price;
@@ -154,17 +148,17 @@ public class Ticket {
 		return this.isValid;
 	}
 
-	public LocalDateTime getUsed() {
-		return used;
+	public String getUsed() {
+		return used.toString();
 	}
 
-	public void setUsed(LocalDateTime used) {
-		this.used = used;
+	public void setUsed(String used) {
+		this.used = ZonedDateTime.parse(used);
 	}
 
 	public boolean read() {
 		if (used == null && isValid) {
-			used = LocalDateTime.now();
+			used = ZonedDateTime.now();
 			return true;
 
 		} else {
