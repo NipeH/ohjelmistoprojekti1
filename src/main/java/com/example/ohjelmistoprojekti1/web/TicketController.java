@@ -90,6 +90,12 @@ public class TicketController {
 		}
 	}
 
+	// hakee kaikki liput
+	@GetMapping(value = "/api/tickets")
+	public @ResponseBody List<Ticket> getAllTickets() {
+		return (List<Ticket>) trepo.findAll();
+	}
+
 	// Hae lipun tiedot lippukoodin perusteella (URL)
 	@GetMapping("/api/tickets/{code}")
 	@ResponseStatus(HttpStatus.OK)
