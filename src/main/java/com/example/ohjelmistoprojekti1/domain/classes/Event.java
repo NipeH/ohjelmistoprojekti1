@@ -69,12 +69,12 @@ public class Event {
 	}
 
 	public String getStartTime() {
-
-		if (this.startTime.toString() == null) {
-			return "-";
-		} else {
+		try {
 			return this.startTime.toString();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		return "-";
 	}
 
 	/**
@@ -91,13 +91,15 @@ public class Event {
 	}
 
 	public String getEndTime() {
-
-		if (this.endTime.toString() == null) {
-			return "-";
-		} else {
+		
+		try {
 			return this.endTime.toString();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-
+		return "-";
+		
 	}
 
 	public List<Ticket> getTickets() {
