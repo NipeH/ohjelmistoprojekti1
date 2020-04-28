@@ -68,8 +68,9 @@ public class Ohjelmistoprojekti1Application {
 					+ " Soittimina tusina sadeputkea ja märkä rätti");
 			event.setPrice(50);
 			event.setVenue("Nipen takapiha. Kelivaraus. Poudan yllättäessä siirrymme roskakatokseen");
-			event.setStartTime("2020-09-16T19:00:00");
-			event.setEndTime("2020-09-16T21:00:00");
+			// sample time presentation: 2020-04-28T13:34:52.408+03:00[Europe/Helsinki]
+			event.setStartTime("2020-09-16T19:00:00.078+03:00[Europe/Helsinki]");
+			event.setEndTime("2020-09-16T21:00:00.000+03:00[Europe/Helsinki]");
 			event.setTicketInventory(2);
 			eventRepo.save(event);
 			
@@ -78,8 +79,8 @@ public class Ohjelmistoprojekti1Application {
 			ruisrock.setDescription("Esiintyjinä mm. Major Lazer");
 			ruisrock.setPrice(200);
 			ruisrock.setVenue("Turun ruissalo");
-			ruisrock.setStartTime("2020-07-16T19:00:00");
-			ruisrock.setEndTime("2020-07-05T23:59:00");
+			ruisrock.setStartTime("2020-07-16T19:00:00.000+03:00[Europe/Helsinki]");
+			ruisrock.setEndTime("2020-07-05T23:59:00.000+03:00[Europe/Helsinki]");
 			ruisrock.setTicketInventory(200);
 			eventRepo.save(ruisrock);
 			
@@ -88,8 +89,8 @@ public class Ohjelmistoprojekti1Application {
 			jazz.setDescription("Esiintyjinä Jazz");
 			jazz.setPrice(100);
 			jazz.setVenue("Pori");
-			jazz.setStartTime("2020-07-16T19:00:00");
-			jazz.setEndTime("2020-07-05T23:59:00");
+			jazz.setStartTime("2020-07-16T19:00:00.000+03:00[Europe/Helsinki]");
+			jazz.setEndTime("2020-07-05T23:59:00.000+03:00[Europe/Helsinki]");
 			jazz.setTicketInventory(9);
 			eventRepo.save(jazz);	
 

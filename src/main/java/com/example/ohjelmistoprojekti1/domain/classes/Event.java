@@ -23,12 +23,9 @@ public class Event {
 	private long eventid;
 
 	@NotNull
-	private String name, description;
+	private String name, description, venue;
 
 	private double price;
-
-	@NotNull
-	private String venue;
 
 	// Tapahtuman alkamisaika
 	private ZonedDateTime startTime;
@@ -71,8 +68,13 @@ public class Event {
 
 	}
 
-	public ZonedDateTime getStartTime() {
-		return this.startTime;
+	public String getStartTime() {
+		try {
+			return this.startTime.toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "-";
 	}
 
 	/**
@@ -89,7 +91,15 @@ public class Event {
 	}
 
 	public String getEndTime() {
-		return this.endTime.toString();
+		
+		try {
+			return this.endTime.toString();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "-";
+		
 	}
 
 	public List<Ticket> getTickets() {

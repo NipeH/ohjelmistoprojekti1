@@ -173,7 +173,6 @@ public class EventController {
 
 	
 	
-	// PALAUTTAA 500?????
 	// lisää tapahtuma
 	@PostMapping(value = "/api/events")
 	@ResponseStatus(value = HttpStatus.CREATED) // Palauttaa 201 onnistuessaan
