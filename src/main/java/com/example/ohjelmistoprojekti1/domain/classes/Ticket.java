@@ -153,7 +153,7 @@ public class Ticket {
 			return this.used.toString();
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "-";
+			return "";
 		}
 	}
 

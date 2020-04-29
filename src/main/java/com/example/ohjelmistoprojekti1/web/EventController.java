@@ -356,9 +356,8 @@ public class EventController {
 	}
 
 
-	// NO NULL VALUES ?? 
-	// Lähetetään bodyssa olemassa oleva (esim. 15 kovakoodattu) orderid,
-	// tickettypeid (esim. 4, 5 tai 3) ja pcs lippujen lkm
+	// NO NULL VALUES 
+	// Lähetetään bodyssa orderid, tickettypeid (esim. 4, 5 tai 6) ja pcs lippujen lkm
 	// LUODAAN UUSI LIPPU TAPAHTUMAAN, EDELLYTTÄEN, ETTÄ LIPPUJA ON VIELÄ SAATAVILLA
 	@PostMapping(value = "/api/events/{eventid}/tickets")
 	@ResponseStatus(value = HttpStatus.CREATED)
