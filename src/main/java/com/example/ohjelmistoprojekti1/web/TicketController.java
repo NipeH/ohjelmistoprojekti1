@@ -126,6 +126,7 @@ public class TicketController {
 				return "Lippu on jo käytetty";
 			} else {
 				ticket.read();
+				trepo.save(ticket);
 				return "OK!";
 			}
 
