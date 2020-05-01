@@ -395,7 +395,7 @@ public class EventController {
 			}
 
 			// Haetaan lipputyyppi bodysta tulevalla id:llä, jos sellainen on
-//			Oletuksena tickettypen id on (ttid = 4), eli aikuisten normaalihintainen lippu
+//			Oletuksena tickettypen id on 5 eli aikuisten normaalihintainen lippu
 			Long ttid = (long) 5;
 			TicketType ttype = ttrepo.findById(ttid).get();
 
@@ -426,8 +426,9 @@ public class EventController {
 					t.setValid(true);
 					t.setType(ttype);
 					t.setOrders(o);
-					// Hinta = eventin hinta jos lipputyyppi on 3 eli aikuinen
-					if (ttype.getTicketypeid() == 4) {
+					
+					// Hinta = eventin hinta jos lipputyyppi aikuinen
+					if (ttype.getTicketypeid() == 5) {
 						t.setPrice(event.getPrice());
 						o.setTotal(o.getTotal() + t.getPrice());
 					} else {
