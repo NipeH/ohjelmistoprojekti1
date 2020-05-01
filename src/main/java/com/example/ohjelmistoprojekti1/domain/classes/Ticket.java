@@ -148,13 +148,22 @@ public class Ticket {
 		return this.isValid;
 	}
 
+	/*
 	public String getUsed() {
 		try {
 			return this.used.toString();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
+			
+			//tän tarvii palauttaa nykymuodossaan null, niin palautin ton aiemman metodin joka näyttää ihan toimivan,
+			 * muutan luettavaan muotoon frontissa ! 
 		}
+	}
+	*/
+	
+	public ZonedDateTime getUsed() {
+		return used;
 	}
 
 	public void setUsed(String used) {

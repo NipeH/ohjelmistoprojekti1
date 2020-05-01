@@ -5,8 +5,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import javax.validation.constraints.Min;
+
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -110,7 +113,8 @@ public class TicketController {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 		}
 	}
-
+	
+	
 	// Lukee lipun ja palauttaa ok tai ei ok
 	@PatchMapping("/api/tickets/read/{code}")
 	@ResponseStatus(HttpStatus.OK)
@@ -135,7 +139,9 @@ public class TicketController {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 		}
 	}
-
+	
+	
+	
 	// POISTA LIPPU
 	@DeleteMapping("/api/tickets/{id}")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT) // 204 jos onnistuu
