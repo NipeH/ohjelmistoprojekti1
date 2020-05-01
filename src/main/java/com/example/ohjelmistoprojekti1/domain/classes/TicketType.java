@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class TicketType {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	//@GeneratedValue(strategy = GenerationType.AUTO)
 	private long tickettypeid;
 
 
@@ -32,23 +32,24 @@ public class TicketType {
 
 	public TicketType() {
 		super();
-		this.type = "normal";
-		//this.discount = 0.0; //ehkä tää pois jos kerrotaan nollalla niin tulee nolla ! 
-	}
-
-	public TicketType(String type, double discount) {
-		super();
-		this.type = type;
-		this.discount = discount;
 	}
 	
-//muita?
-	public TicketType(long tickettypeid, @NotNull String type, double discount, List<Ticket> tickets) {
+
+	public TicketType(long tickettypeid, String type, double discount) {
 		super();
 		this.tickettypeid = tickettypeid;
 		this.type = type;
 		this.discount = discount;
-		this.tickets = tickets;
+	}
+
+
+
+	public long getTickettypeid() {
+		return tickettypeid;
+	}
+
+	public void setTickettypeid(long tickettypeid) {
+		this.tickettypeid = tickettypeid;
 	}
 
 	public long getTicketypeid() {

@@ -99,7 +99,7 @@ public class Ohjelmistoprojekti1Application {
 			historyevent.setDescription("Esiintyjinä Jazz");
 			historyevent.setPrice(100);
 			historyevent.setVenue("Pori");
-			historyevent.setStartTime("2020-01-16T19:00:00.078+03:00[Europe/Helsinki]");
+			historyevent.setStartTime("2020-0-16T19:00:00.078+03:00[Europe/Helsinki]");
 			historyevent.setEndTime("2020-02-05T23:59:00.000+03:00[Europe/Helsinki]");
 			historyevent.setTicketInventory(9);
 			eventRepo.save(historyevent);	
@@ -108,11 +108,11 @@ public class Ohjelmistoprojekti1Application {
 		
 			
 			
-			// TicketType
-			TicketType normalTicket = new TicketType();
-			ticketTypeRepo.save(normalTicket);
-			ticketTypeRepo.save(new TicketType ("children", 0.5));
-			ticketTypeRepo.save(new TicketType ("student", 0.8));
+			// TicketType, kovakoodattu -> muutos vaikuttaa moniin luokkiin........... 
+			ticketTypeRepo.save(new TicketType (4, "adult", 0.5));
+			ticketTypeRepo.save(new TicketType (5, "children", 0.5));
+			ticketTypeRepo.save(new TicketType (6, "student", 0.8));
+			
 			
 			// Ticket		
 			
