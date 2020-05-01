@@ -1,6 +1,7 @@
 package com.example.ohjelmistoprojekti1.domain.classes;
 
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -39,7 +40,7 @@ public class Ticket {
 
 	private boolean isValid;
 
-	private ZonedDateTime used;
+	private String used;
 
 	@Column(name = "ticketcode", unique = true)
 	private UUID ticketcode;
@@ -78,7 +79,7 @@ public class Ticket {
 	}
 
 	public Ticket(@NotNull Event event, double price, TicketType type, Order orders, boolean isValid,
-			ZonedDateTime used, UUID ticketcode) {
+			String used, UUID ticketcode) {
 		super();
 		this.event = event;
 		this.price = price;
@@ -156,23 +157,28 @@ public class Ticket {
 			e.printStackTrace();
 			return null;
 			
-			//tän tarvii palauttaa nykymuodossaan null, niin palautin ton aiemman metodin joka näyttää ihan toimivan,
-			 * muutan luettavaan muotoon frontissa ! 
+			//muutan stringiksi heti
 		}
 	}
 	*/
 	
-	public ZonedDateTime getUsed() {
+	public String getUsed() {
 		return used;
 	}
 
+
 	public void setUsed(String used) {
-		this.used = ZonedDateTime.parse(used);
+		this.used = used;
 	}
 
+	
+	
 	public boolean read() {
 		if (used == null && isValid) {
-			used = ZonedDateTime.now();
+			ZonedDateTime zonedDateTimeNow = ZonedDateTime.now();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy - HH:mm:ss z");
+			String formattedString = zonedDateTimeNow.format(formatter);
+			used = formattedString;
 			return true;
 
 		} else {
