@@ -1,5 +1,7 @@
 package com.example.ohjelmistoprojekti1.web;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -31,28 +33,20 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.example.ohjelmistoprojekti1.domain.classes.Event;
 import com.example.ohjelmistoprojekti1.domain.classes.Order;
-import com.example.ohjelmistoprojekti1.domain.classes.OrderRow;
 import com.example.ohjelmistoprojekti1.domain.classes.Raport;
-//import com.example.ohjelmistoprojekti1.domain.classes.Raport;
 import com.example.ohjelmistoprojekti1.domain.classes.Ticket;
 import com.example.ohjelmistoprojekti1.domain.classes.TicketType;
 import com.example.ohjelmistoprojekti1.domain.repositories.CustomerRepository;
 import com.example.ohjelmistoprojekti1.domain.repositories.EventRepository;
 import com.example.ohjelmistoprojekti1.domain.repositories.OrderRepository;
-import com.example.ohjelmistoprojekti1.domain.repositories.OrderRowRepository;
 import com.example.ohjelmistoprojekti1.domain.repositories.RaportRepository;
-//import com.example.ohjelmistoprojekti1.domain.repositories.RaportRepository;
 import com.example.ohjelmistoprojekti1.domain.repositories.TicketRepository;
 import com.example.ohjelmistoprojekti1.domain.repositories.TicketTypeRepository;
-import com.example.ohjelmistoprojekti1.domain.repositories.UserRepository;
-import com.example.ohjelmistoprojekti1.domain.repositories.UserTypeRepository;
 
 @RestController
 @Validated
 public class EventController {
 
-	@Autowired
-	private CustomerRepository crepo;
 
 	@Autowired
 	private EventRepository erepo;
@@ -71,7 +65,7 @@ public class EventController {
 	
 	
 
-	//Myyntiraportti (katso dokumentaatio readme:stä)
+		//Myyntiraportti: jakaa tapahtumaan myydyt liput lippukategorioihin, laskee lkm ja total kategorioittain
 		@GetMapping(value = "api/events/{id}/raport")
 		@ResponseStatus(HttpStatus.OK)
 		public List<Raport> raport (@PathVariable("id") Long id){
@@ -80,29 +74,22 @@ public class EventController {
 				Event event = erepo.findById(id).get();
 				List<Ticket> alltickets = event.getTickets();
 				
-				TicketType children = ttrepo.findByType("children").get(0);
-				TicketType student = ttrepo.findByType("student").get(0);			
-				TicketType normal = ttrepo.findByType("normal").get(0);
+				List<Ticket> adults = new ArrayList<Ticket>();
+				List<Ticket> kids =  new ArrayList<Ticket>();
+				List<Ticket> students =  new ArrayList<Ticket>();
 				
-				List<Ticket> adults = new ArrayList();
-				List<Ticket> kids = new ArrayList();
-				List<Ticket> students = new ArrayList();
-				
-				
+				//käydään kaikki liput läpi ja asetetaan oman kategorionsa listaan
 				for (int i = 0; i < alltickets.size(); i++) {
 					//tickettypeid 4 = adult
 					if (4 == alltickets.get(i).getType().getTicketypeid()) {
-					//if ("normal".equals(alltickets.get(i).getType().getType())) {
 						adults.add(alltickets.get(i));
 					} 
 					//tickettypeid 5 = children
 					else if (5 == alltickets.get(i).getType().getTicketypeid()) {
-					//else if (  "children".equals( alltickets.get(i).getType().getType() ))  {
 						kids.add(alltickets.get(i));
 					}
 					//tickettypeid 6 = student
 					else if (6 == alltickets.get(i).getType().getTicketypeid()) {
-					//else if ("student".equals(alltickets.get(i).getType().getType())) {
 						students.add(alltickets.get(i));
 					}
 				}
@@ -155,7 +142,7 @@ public class EventController {
 					rrepo.save(totalsales);
 					
 						
-			List<Raport> raport = new ArrayList();
+			List<Raport> raport = new ArrayList<Raport>();
 
 			
 			raport.add(studs);
@@ -231,7 +218,35 @@ public class EventController {
 	public @ResponseBody List<Event> RestEvents() {
 		return (List<Event>) erepo.findAll();
 	}
+	
+	
+	// hakee kaikki tulevat tapahtumat
+	@GetMapping(value = "/api/events/upcoming")
+	public List<Event> getUpcomingEvents() {
+		   
+		List<Event> all = (List<Event>) erepo.findAll();	
+		List<Event> comingEvents = new ArrayList<Event>();
+		
+		//käydään kaikki tapahtumat läpi ja lisätään tulevat tapahtumat omalle listalleen joka palautetaan
+		for (int i = 0; i < all.size(); i++) {	
+			ZoneId zid = ZoneId.of("Europe/Helsinki");
+			ZonedDateTime now = ZonedDateTime.now(zid);
+			String time = all.get(i).getStartTime();
+			ZonedDateTime eventTime = ZonedDateTime.parse(time);
+			
+			Event event = all.get(i);
+			
+			if (!eventTime.isBefore(now)) {
+				comingEvents.add(event);
+			} 
+			
+		}
+		return comingEvents;
+		
+	}
 
+	
+	
 	// hae parametrina tulevalla idllä
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "api/events/{id}")

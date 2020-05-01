@@ -44,9 +44,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-/*
- * Author Essi
- * */
+
 
 @RestController
 public class TicketController {
@@ -99,7 +97,7 @@ public class TicketController {
 		return (List<Ticket>) trepo.findAll();
 	}
 
-	// Hae lipun tiedot lippukoodin perusteella (URL)
+	// Hae lipun tiedot lippukoodin perusteella 
 	@GetMapping("/api/tickets/{code}")
 	@ResponseStatus(HttpStatus.OK)
 	public Ticket getTicket(@PathVariable("code") UUID tcode) {

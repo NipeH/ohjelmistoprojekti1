@@ -79,7 +79,7 @@ public class Ohjelmistoprojekti1Application {
 			ruisrock.setDescription("Esiintyjinä mm. Major Lazer");
 			ruisrock.setPrice(200);
 			ruisrock.setVenue("Turun ruissalo");
-			ruisrock.setStartTime("2020-07-16T19:00:00.000+03:00[Europe/Helsinki]");
+			ruisrock.setStartTime("2020-07-04T19:00:00.078+03:00[Europe/Helsinki]");
 			ruisrock.setEndTime("2020-07-05T23:59:00.000+03:00[Europe/Helsinki]");
 			ruisrock.setTicketInventory(200);
 			eventRepo.save(ruisrock);
@@ -89,10 +89,21 @@ public class Ohjelmistoprojekti1Application {
 			jazz.setDescription("Esiintyjinä Jazz");
 			jazz.setPrice(100);
 			jazz.setVenue("Pori");
-			jazz.setStartTime("2020-07-16T19:00:00.000+03:00[Europe/Helsinki]");
+			jazz.setStartTime("2020-07-03T19:00:00.078+03:00[Europe/Helsinki]");
 			jazz.setEndTime("2020-07-05T23:59:00.000+03:00[Europe/Helsinki]");
 			jazz.setTicketInventory(9);
 			eventRepo.save(jazz);	
+			
+			Event historyevent = new Event();
+			historyevent.setName("Jazz");
+			historyevent.setDescription("Esiintyjinä Jazz");
+			historyevent.setPrice(100);
+			historyevent.setVenue("Pori");
+			historyevent.setStartTime("2020-01-16T19:00:00.078+03:00[Europe/Helsinki]");
+			historyevent.setEndTime("2020-02-05T23:59:00.000+03:00[Europe/Helsinki]");
+			historyevent.setTicketInventory(9);
+			eventRepo.save(historyevent);	
+
 
 		
 			
