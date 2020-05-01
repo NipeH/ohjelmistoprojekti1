@@ -80,16 +80,15 @@ public class EventController {
 				
 				//käydään kaikki liput läpi ja asetetaan oman kategorionsa listaan
 				for (int i = 0; i < alltickets.size(); i++) {
-					//tickettypeid 4 = adult
-					if (4 == alltickets.get(i).getType().getTicketypeid()) {
+					if (alltickets.get(i).getType().getType().equalsIgnoreCase("normal")) {	
 						adults.add(alltickets.get(i));
 					} 
-					//tickettypeid 5 = children
-					else if (5 == alltickets.get(i).getType().getTicketypeid()) {
+
+					else if (alltickets.get(i).getType().getType().equalsIgnoreCase("children")) {	
 						kids.add(alltickets.get(i));
 					}
 					//tickettypeid 6 = student
-					else if (6 == alltickets.get(i).getType().getTicketypeid()) {
+					else if (alltickets.get(i).getType().getType().equalsIgnoreCase("student")) {	
 						students.add(alltickets.get(i));
 					}
 				}
@@ -372,7 +371,7 @@ public class EventController {
 
 
 	// NO NULL VALUES 
-	// Lähetetään bodyssa orderid, tickettypeid (esim. 4, 5 tai 6) ja pcs lippujen lkm
+	// Lähetetään bodyssa orderid, tickettypeid (esim.  5, 6 tai 7) ja pcs lippujen lkm
 	// LUODAAN UUSI LIPPU TAPAHTUMAAN, EDELLYTTÄEN, ETTÄ LIPPUJA ON VIELÄ SAATAVILLA
 	@PostMapping(value = "/api/events/{eventid}/tickets")
 	@ResponseStatus(value = HttpStatus.CREATED)
@@ -397,7 +396,7 @@ public class EventController {
 
 			// Haetaan lipputyyppi bodysta tulevalla id:llä, jos sellainen on
 //			Oletuksena tickettypen id on (ttid = 4), eli aikuisten normaalihintainen lippu
-			Long ttid = (long) 4;
+			Long ttid = (long) 5;
 			TicketType ttype = ttrepo.findById(ttid).get();
 
 //			Jos lipun tyyppi mainitaan, se talletetaan muuttujaan ttype

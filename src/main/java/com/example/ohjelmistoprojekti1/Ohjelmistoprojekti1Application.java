@@ -70,7 +70,7 @@ public class Ohjelmistoprojekti1Application {
 			event.setVenue("Nipen takapiha. Kelivaraus. Poudan yllättäessä siirrymme roskakatokseen");
 			// sample time presentation: 2020-04-28T13:34:52.408+03:00[Europe/Helsinki]
 			event.setStartTime("2020-09-16T19:00:00.078+03:00[Europe/Helsinki]");
-			event.setEndTime("2020-09-16T21:00:00.000+03:00[Europe/Helsinki]");
+			event.setEndTime("2020-10-16T21:00:00.000+03:00[Europe/Helsinki]");
 			event.setTicketInventory(2);
 			eventRepo.save(event);
 			
@@ -95,11 +95,11 @@ public class Ohjelmistoprojekti1Application {
 			eventRepo.save(jazz);	
 			
 			Event historyevent = new Event();
-			historyevent.setName("Jazz");
+			historyevent.setName("Historiaa");
 			historyevent.setDescription("Esiintyjinä Jazz");
 			historyevent.setPrice(100);
 			historyevent.setVenue("Pori");
-			historyevent.setStartTime("2020-0-16T19:00:00.078+03:00[Europe/Helsinki]");
+			historyevent.setStartTime("2020-01-03T19:00:00.078+03:00[Europe/Helsinki]");
 			historyevent.setEndTime("2020-02-05T23:59:00.000+03:00[Europe/Helsinki]");
 			historyevent.setTicketInventory(9);
 			eventRepo.save(historyevent);	
@@ -108,11 +108,13 @@ public class Ohjelmistoprojekti1Application {
 		
 			
 			
-			// TicketType, kovakoodattu -> muutos vaikuttaa moniin luokkiin........... 
-			ticketTypeRepo.save(new TicketType (4, "adult", 0.5));
-			ticketTypeRepo.save(new TicketType (5, "children", 0.5));
-			ticketTypeRepo.save(new TicketType (6, "student", 0.8));
+			// TicketType
+			TicketType normalTicket = new TicketType();
+			ticketTypeRepo.save(normalTicket);
+			ticketTypeRepo.save(new TicketType ("children", 0.5));
+			ticketTypeRepo.save(new TicketType ("student", 0.8));
 			
+	
 			
 			// Ticket		
 			
