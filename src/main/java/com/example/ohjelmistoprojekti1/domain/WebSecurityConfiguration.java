@@ -31,8 +31,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     	http
         		.cors()
         		.and()
-        		.authorizeRequests()
-                .anyRequest().authenticated()
+        		.authorizeRequests().antMatchers("/api/events/upcoming").permitAll() //näkyy ilman kirjautumista
+        		.and()
+        		.authorizeRequests().anyRequest().authenticated() //kaikki muut vaatii kirjautumisen
                 .and()
                 .httpBasic()
                 .and()
