@@ -124,7 +124,7 @@ Ohjelman basepath on https://ticketguru.herokuapp.com/
 Endpointin /autoapi/ takaa löytyy JSON-muotoisena kaikki tietokannassa oleva data linkityksineen. Endpoint on on luotu automaattisesti ja se on tarkoitettu lähinnä testausvaiheeseen sekä GET-pyyntöihin. Autentikointi vaadittu.
 Endpointin /api/ takaa löytyy lipunmyyntiin tarvittavat rajapinnat, jotka on on dokumentoitu alla. Ainoastaan tulevat tapahtumat on avoin rajapinta, kaikissa muissa autentikointi on vaadittu. Käyttäjien hallintaan liittyvän endpointit ovat myös autorisoitu.
 
-Yksityiskohtainen kuvaus rajapintojen käytöstä ja toteutuksesta:
+<details><summary>Yksityiskohtainen kuvaus rajapintojen käytöstä ja toteutuksesta:</summary>
  
  
 ### Tapahtumat / Events:
@@ -161,6 +161,8 @@ Luodaan lippu tapahtumaan: [POST /api/events/{eventid}/tickets](https://github.c
 Deaktivoidaan tai aktivoidaan lippu (peruutustilanteet:) [PATCH /api/tickets/{ticketid}](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/ticketActivate.md)
 
 ### Käyttäjät / Users
+
+</details>
 
 ## Toteutuksen yleisiä ratkaisuja, esim. turvallisuus. 
 ## Turvallisuus
