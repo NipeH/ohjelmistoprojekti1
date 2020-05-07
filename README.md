@@ -94,17 +94,10 @@ Rooli 3: Asiakas (Verkkokauppa) 
 ## Käyttöliittymä 
 ![kayttoliittymakaavio](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/kayttoliittymakaavio.png)
 
+
 ## Tietokanta 
 
-Tietokannan kaavio löytyy ajantasaisena linkin takaa:
-
-https://dbdiagram.io/d/5e41478c9e76504e0ef1400c
-
-
-
-tobecontinued....
-
-
+[Tietokantakaavio, tietokannan hakemisto datyyppeineen löytyy]https://dbdiagram.io/d/5e41478c9e76504e0ef1400c
 
 
 
@@ -118,27 +111,23 @@ Palvelintoteutuksen yleiskuvaus: teknologiat, deployment-ratkaisut yms.
 
 Keskeisten rajapintojen kuvaukset, esimerkit REST-rajapinta. Tarvittaessa voidaan rajapinnan käyttöä täsmentää UML-sekvenssikaavioilla. 
 
-## REST-API:t
+## REST-rajapinnat
 
-Ohjelman API:t pyrkivät toteuttamaan REST-rajapintojen ominaisuudet. Rajapintojen toteutuksessa on käytetty yleisesti käytössä olevia käytänteitä koskien mm. palveluiden nimeämistä. Iteraatiosta kolme alkaen ohjelma tarjoaa oleellisimmat toiminnot ja endpointit JSON-muotoisina API:nä. 
+Ohjelman tarkoitus on tarjota REST-rajapinta, jonka avulla voidaan toteuttaa lipunmyynnissä tarvittavia toiminnallisuuksia. Rajapintojen toteutuksessa on käytetty yleisesti käytössä olevia käytänteitä koskien mm. palveluiden nimeämistä. Ohjelma tarjoaa oleellisimmat toiminnot ja endpointit JSON-muotoisina API:nä. 
 
-### basepath
-<details>
-<summary>read more about basepath.. click here..
+### ticketguru.herokuapp.com
 
-</summary>
-Kehitysvaiheen ohjelman basepath on http:localhost:8080/api 
-Tuotantovaiheen ohjelman basepath jatkaa samalla käytännöllä siten, että API-palveluiden osoite on muotoa www.ticketguru.com/api, missä www.ticketguru.com on ohjelman etusivu. Jatkossa tässä dokumentissa viitataan basepathiin merkinnällä ".../api/", milloin ei ole 
-erityistä syytä korostaa maininnan koskevan erikseen joko kehitys- tai tuotantovaiheen sovellusta. 
-</details>
+Ohjelman basepath on https://ticketguru.herokuapp.com/
+ 
+### /api/
 
-### Rajapinnat
-Ensimmäisenä on luotu rajapinta tapahtumille, joihin Ticketguru myy lippuja. Kaikki luodut tapahtumat löytyvät osoitteesta .../api/events Sivu sisältää JSON-muotoisen taulukon, joka sisältää tapahtuma-objektit ja relaatiot. Yksittäisiin objekteihin pääsee käsiksi osoitteesta .../api/events/{id} missä {id} on tapahtuman yksilöllinen id.
+Endpointin /autoapi/ takaa löytyy JSON-muotoisena kaikki tietokannassa oleva data linkityksineen. Endpoint on on luotu automaattisesti ja se on tarkoitettu lähinnä testausvaiheeseen sekä GET-pyyntöihin. Autentikointi vaadittu.
+Endpointin /api/ takaa löytyy lipunmyyntiin tarvittavat rajapinnat, jotka on on dokumentoitu alla. Ainoastaan tulevat tapahtumat on avoin rajapinta, kaikissa muissa autentikointi on vaadittu. Käyttäjien hallintaan liittyvän endpointit ovat myös autorisoitu.
 
 <details>
 
 <summary>
- Yksityiskohtainen kuvaus rajapintojen käytöstä ja toteutuksesta.
+ Yksityiskohtainen kuvaus rajapintojen käytöstä ja toteutuksesta:
  </summary>
  
 ### Tapahtumat / Events:
@@ -171,14 +160,10 @@ Lisää tilaustapahtuma [POST/orders/{eventid}/{typeid}/{lkm}](https://github.co
 
 ### Liput / Tickets:
 Luodaan lippu tapahtumaan: [POST /api/events/{eventid}/tickets](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/eventTickets.md)
+
 Deaktivoidaan tai aktivoidaan lippu (peruutustilanteet:) [PATCH /api/tickets/{ticketid}](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/ticketActivate.md)
 
-### Avoimet ja autentikointia vaativat endpointit
-Kaikki endpointit vaativat sisäänkirjautumisen. Käyttäjien hallinta on myös autorisoinnin takana, vain admin-oikeuksilla käytettävissä oleva toiminto.
-
-</details>
-
-...
+### Käyttäjät / Users
 
 ## Toteutuksen yleisiä ratkaisuja, esim. turvallisuus. 
 ## Turvallisuus
@@ -217,6 +202,4 @@ Asennusohjeesta tulisi ainakin käydä ilmi, miten käytettävä tietokanta ja k
 Tyypillisesti tässä riittää kertoa ohjelman käynnistykseen tarvittava URL sekä mahdolliset kirjautumiseen tarvittavat tunnukset. Jos järjestelmän käynnistämiseen tai käyttöön liittyy joitain muita toimenpiteitä tai toimintajärjestykseen liittyviä asioita, nekin kerrotaan tässä yhteydessä. 
 
 Usko tai älä, tulet tarvitsemaan tätä itsekin, kun tauon jälkeen palaat järjestelmän pariin ! 
-
-
 
