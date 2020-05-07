@@ -124,11 +124,8 @@ Ohjelman basepath on https://ticketguru.herokuapp.com/
 Endpointin /autoapi/ takaa löytyy JSON-muotoisena kaikki tietokannassa oleva data linkityksineen. Endpoint on on luotu automaattisesti ja se on tarkoitettu lähinnä testausvaiheeseen sekä GET-pyyntöihin. Autentikointi vaadittu.
 Endpointin /api/ takaa löytyy lipunmyyntiin tarvittavat rajapinnat, jotka on on dokumentoitu alla. Ainoastaan tulevat tapahtumat on avoin rajapinta, kaikissa muissa autentikointi on vaadittu. Käyttäjien hallintaan liittyvän endpointit ovat myös autorisoitu.
 
-<details>
-
-<summary>
- Yksityiskohtainen kuvaus rajapintojen käytöstä ja toteutuksesta:
- </summary>
+Yksityiskohtainen kuvaus rajapintojen käytöstä ja toteutuksesta:
+ 
  
 ### Tapahtumat / Events:
 
@@ -176,7 +173,7 @@ luokkien, metodien ja muuttujien tulee olla kuvaavasti nimettyjä ja noudattaa j
 
 ohjelmiston pitää olla organisoitu komponentteihin niin, että turhalta toistolta vältytään 
 
-## Testaus 
+### Testaus 
 
 [Testausta](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/testaus.md)
 
@@ -187,7 +184,7 @@ Tässä kohdin selvitetään, miten ohjelmiston oikea toiminta varmistetaan test
 
 Tänne kirjataan myös lopuksi järjestelmän tunnetut ongelmat, joita ei ole korjattu. 
 
-## Asennustiedot 
+### Asennustiedot 
 
 Järjestelmän asennus on syytä dokumentoida kahdesta näkökulmasta: 
 
@@ -197,7 +194,7 @@ järjestelmän asentaminen tuotantoympäristöön: miten järjestelmän saisi as
 
 Asennusohjeesta tulisi ainakin käydä ilmi, miten käytettävä tietokanta ja käyttäjät tulee ohjelmistoa asentaessa määritellä (käytettävä tietokanta, käyttäjätunnus, salasana, tietokannan luonti yms.). 
 
-## Käynnistys- ja käyttöohje 
+### Käynnistys- ja käyttöohje 
 
 Tyypillisesti tässä riittää kertoa ohjelman käynnistykseen tarvittava URL sekä mahdolliset kirjautumiseen tarvittavat tunnukset. Jos järjestelmän käynnistämiseen tai käyttöön liittyy joitain muita toimenpiteitä tai toimintajärjestykseen liittyviä asioita, nekin kerrotaan tässä yhteydessä. 
 
