@@ -1,13 +1,13 @@
-# Ohjelmistoprojekti1
-Haaga-Helia UAS Ohjelmistoprojekti 1 
-
-## TicketGuru
+# Ohjelmistoprojekti I Haaga Helia UAS
 
 Tiimi: OnnenOravat 
 
-## Johdanto 
+## TicketGuru -ohjelma 
 
-Projektimme aiheena on lipunmyyntijärjestelmä TicketGuru lipputoimistoon. Järjestelmän on tarkoitus tulevaisuudessa toimia myös verkkokauppana, joten järjestelmä valmistetaan myös verkkokaupan edellytykset mielessä pitäen. Järjestelmään voidaan lisätä tapahtumia ja tapahtumiin erilaisia lipputyyppejä haluttu määrä. Asiakkaille myydään liput tulostamalla ne liikkeessä. Lippuihin tulostuu asiakkaan nimi ja uniikki lippukoodi. Järjestelmä varmistaa, ettei lippuja myydä liikaa tai esimerkiksi tapahtuman jälkeen. Myymättä jääneet liput tulostetaan tapahtumien ovelle myytäväksi. Lipunmyyjien työtä helpottaaksemme, lippujen etsinnän on oltava helppoa ja lippuja tulee voida ostaa ja tulostaa useampi kerrallaan. Lisäksi järjestelmä tarjoaa omistajalle liiketoiminnan kannalta tarvittavaa dataa, kuten tapahtuman myyntitapahtumat. Projekti luodaan Spring Boot tekniikalla, käyttäen todennäköisesti MariaDB tietokantaa. Tarkoituksena on luoda responsiivinen, ensisijaitsesti kuitenkin desktopille tarkoitettu järjestelmä. 
+Ohjelmistoprojekti I kurssilla toteutimme lipunmyyntiin tarkoitetun ohjelmiston: järjestelmä tarjoaa REST-rajapinnan lipunmyyntiin ja tapahtumien käsittelyyn. Asiakkaan toiveissa oli, että järjestelmän avulla voidaan lisätä, muokata ja poistaa tapahtumia sekä myydä erilaisia lippuja tapahtumiin. Myymättä jääneet liput pitää voida tulostaa ns. ovelle myytäväksi. Lippujen tulee olla myös uniikkeja ja luettavissa olevia. Lisäksi toiveissa oli raportointi tapahtumien myynnistä kertyneistä tuloista ja kappalemääristä. [Toteutimme ohjelman lisäksi yksinkertaisen REST-rajapintaa käyttävän clientin Reactilla](https://github.com/justuskeinanen/front/tree/master/src). Clientilla pystyy demoamaan järjestelmän perustoiminnallisuuksia: lipunmyyntiä, lippujen lukemista sekä tapahtumien raporttien lukua. Tarkoituksena kuitenkin on, että erillinen client-tiimi luo lopullisen käyttöliittymän, jolla voi käyttää kaikkia ohjelman tarjoamia ominaisuuksia.
+
+Projekti on toteutettu pääasiassa seuraavilla teknologioilla: Java, SpringBooti, PostqreSQL ja React.
+
 
 ## Järjestelmän määrittely 
 
@@ -161,30 +161,31 @@ Luodaan lippu tapahtumaan: [POST /api/events/{eventid}/tickets](https://github.c
 Deaktivoidaan tai aktivoidaan lippu (peruutustilanteet:) [PATCH /api/tickets/{ticketid}](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/ticketActivate.md)
 
 ### Käyttäjät / Users
+Käyttäjän lisäys: [POST /api/appusers](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/users.md)
+
 
 </details>
 
-## Toteutuksen yleisiä ratkaisuja, esim. turvallisuus. 
+
 ## Turvallisuus
-Käyttäjätietojen hallinta on toistaiseksi toteutettu kovakoodaamalla käyttäjätiedot suoraan ohjelmaan. Autorisoinnissa käytetään JSON Web Tokenia jonka avulla käyttäjä varmennetaan allekirjoituksella pääsyn ohjelman sisältöön.
-## Tämän lisäksi 
 
-ohjelmakoodin tulee olla kommentoitua 
+Järjestelmän turvallisuus on pyritty varmistamaan lähes kaiken kattavalla autentikoinnilla: lähes jokainen sivu vaatii sisäänkirjautumisen. Autentikoinnissa on käytetty Basic Authenticointia, lisäksi järjestelmään on alustettu JWT-autentikointi mahdollista myöhäisempää käyttöönottoa varten. Käyttäjien hallinta on lisäksi autorisoinnin takana ja vain admin-oikeudelliset käyttäjät pääsevät käsittelemään käyttäjiä. Uusien käyttäjien salasanat enkoodataan tietokantaan. Tällä hetkellä, kun ohjelman kehitystyöt jatkuvat vielä mobiiliversion kehittämisen suhteen, sallitaan Cors-konfiguroinnissa pyynnöt, sisältäen kaikki metodit, kaikista lähteistä. Tämä ei luonnollisesti ole turvallista ja heti kun client-kehitystyö on saatu valmiiksi, muutetaan konfigurointia niin, että se sallii pyynnöt vain tietyistä lähteistä, kuitenkin niin, että kaikki metodit ovat käytettävissä (kirjautuneille).
 
-luokkien, metodien ja muuttujien tulee olla kuvaavasti nimettyjä ja noudattaa johdonmukaisia nimeämiskäytäntöjä 
 
-ohjelmiston pitää olla organisoitu komponentteihin niin, että turhalta toistolta vältytään 
+## Testaus 
 
-### Testaus 
+Järjestelmässä suoritettiin joitain yksikkötestejä, useita integraatiotestejä sekä e2e-testejä. [Testit eivät löydy nykyisellään ohjelmasta, mutta niitä pääsee tarkastelemaan historiasta linkin takaa](https://github.com/NipeH/ohjelmistoprojekti1/tree/8593bb630ff3c1704e7610c983f96d42df4a39a0/src/test)
 
-[Testausta](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/testaus.md)
+Testauksen raportointi:
 
+[JUnit 5 testausta](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/testaus.md)
 
 [Testaaminen Postman-ohjelmalla](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/testausPostmanissa.md)
 
-Tässä kohdin selvitetään, miten ohjelmiston oikea toiminta varmistetaan testaamalla projektin aikana: millaisia testauksia tehdään ja missä vaiheessa. Testauksen tarkemmat sisällöt ja testisuoritusten tulosten raportit kirjataan erillisiin dokumentteihin. 
 
-Tänne kirjataan myös lopuksi järjestelmän tunnetut ongelmat, joita ei ole korjattu. 
+### Korjattavaa ja huomioita jatkokehitykseen
+
+/api/appusers antaa lisätä käyttäjiä ilman usernamea, vaikka username on @NotNull
 
 ### Asennustiedot 
 
@@ -201,4 +202,5 @@ Asennusohjeesta tulisi ainakin käydä ilmi, miten käytettävä tietokanta ja k
 Tyypillisesti tässä riittää kertoa ohjelman käynnistykseen tarvittava URL sekä mahdolliset kirjautumiseen tarvittavat tunnukset. Jos järjestelmän käynnistämiseen tai käyttöön liittyy joitain muita toimenpiteitä tai toimintajärjestykseen liittyviä asioita, nekin kerrotaan tässä yhteydessä. 
 
 Usko tai älä, tulet tarvitsemaan tätä itsekin, kun tauon jälkeen palaat järjestelmän pariin ! 
+
 
