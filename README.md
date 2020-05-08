@@ -4,26 +4,24 @@ Tiimi: OnnenOravat
 
 ## TicketGuru -ohjelma 
 
-Ohjelmistoprojekti I kurssilla toteutimme lipunmyyntiin tarkoitetun ohjelmiston: järjestelmä tarjoaa REST-rajapinnan lipunmyyntiin ja tapahtumien käsittelyyn. Asiakkaan toiveissa oli, että järjestelmän avulla voidaan lisätä, muokata ja poistaa tapahtumia sekä myydä erilaisia lippuja tapahtumiin. Myymättä jääneet liput pitää voida tulostaa ns. ovelle myytäväksi. Lippujen tulee olla myös uniikkeja ja luettavissa olevia. Lisäksi toiveissa oli raportointi tapahtumien myynnistä kertyneistä tuloista ja kappalemääristä. [Toteutimme ohjelman lisäksi yksinkertaisen REST-rajapintaa käyttävän clientin Reactilla](https://github.com/justuskeinanen/front/tree/master/src). Clientilla pystyy demoamaan järjestelmän perustoiminnallisuuksia: lipunmyyntiä, lippujen lukemista sekä tapahtumien raporttien lukua. Tarkoituksena kuitenkin on, että erillinen client-tiimi luo lopullisen käyttöliittymän, jolla voi käyttää kaikkia ohjelman tarjoamia ominaisuuksia.
+Ohjelmistoprojekti I kurssilla toteutimme lipunmyyntiin tarkoitetun ohjelmiston: järjestelmä tarjoaa REST-rajapinnan lipunmyyntiin ja tapahtumien käsittelyyn. Asiakkaan toiveissa oli, että järjestelmän avulla voidaan lisätä, muokata ja poistaa tapahtumia sekä myydä eri tyyppisiä lippuja tapahtumiin. Myymättä jääneet liput pitää voida tulostaa ovelle myytäväksi. Lippujen tulee olla uniikkeja ja luettavissa olevia. Lisäksi asiakkaan toiveissa oli raportointi tapahtumien myynnistä kertyneistä tuloista ja kappalemääristä. [Toteutimme ohjelman lisäksi yksinkertaisen REST-rajapintaa käyttävän clientin Reactilla](https://github.com/justuskeinanen/front/tree/master/src). Clientilla pystytään demoamaan järjestelmän perustoiminnallisuuksia: lipunmyyntiä, lippujen lukemista sekä tapahtumien raporttien lukua. Tarkoituksena kuitenkin on, että erillinen client-tiimi luo lopullisen käyttöliittymän, jolla voi käyttää kaikkia ohjelman tarjoamia ominaisuuksia.
 
-Projekti on toteutettu pääasiassa seuraavilla teknologioilla: Java, SpringBooti, PostqreSQL ja React.
+Projekti on toteutettu pääasiassa seuraavilla teknologioilla: Java, SpringBoot, PostqreSQL ja React.
 
 
 ## Järjestelmän määrittely 
 
-Ohessa kuvattu järjestelmän käyttäjäryhmät ja heidän roolinsa yrityksessä. Käyttäjistä on luotu käyttäjätarinat, joiden pohjalta on luotu projektion työjono Trelloon sekä tarkempi toiminnallisten ominaisuuksien erittely. 
+Järjestelmän tärkein käyttäjäryhmä on lipunmyyjät (rooli 1), lisäksi järjestelmää käyttävät järjestelmänvalvojat (rooli 2) sekä tulevaisuudessa mahdollisesti myös asiakkaat (rooli 3), mikäli järjestelmästä kehitetään verkkokauppasovellus. Asiakkaan roolia sivutaan, mutta ei käsitellä tässä kohtaa. Järjestelmän määrittely on tehty luomalla myyjän ja järjestelmänvalvojan käyttäjärooleista käyttäjätarinoita, joiden perusteella on identifioitu toiminnallisia ja ei toiminnallisia vaatimuksia. 
 
-Rooli 1: Lipunmyyjä  
-Rooli 2: Admin-käyttäjä / järjestelmänvalvoja 
-Rooli 3: Asiakas (Verkkokauppa)  
+<details><summary>Käyttäjätarinat ja toiminnallisuudet käyttäjäryhmittäin</summary>
   
-### Rooli 1: Lipunmyyjä (ja fyysinen asiakas) käyttäjätarinat
+### Rooli 1: Lipunmyyjän käyttäjätarinat
 * Lipunmyyjänä haluan etsiä lipun, jota asiakas toivoo kaupassa, jotta voin myydä sen hänelle. 
 * Lipunmyyjänä haluan tulostaa lipun asiakkaalle, jotta asiakas saa lipun ja pääsee keikalle. 
 * Lipun myyjäni haluan nähdä, onko haluttua lipputyyppiä saatavilla, jotta tiedän, voinko myydä lipun asiakkaalle. 
 * Lipun myyjänä haluan lisätä halutut tuotteet ostoskoriin, jotta voin laskuttaa kaikki kerralla asiakkaalta. 
 * Lipun myyjänä haluan löytää asiakkaan ostaman lipun tietokannasta nimellä tai koodilla, jotta asiakkaan esimerkiksi hukatessa lipun voin tulostaa hänelle uuden. 
-* Asiakkaana haluan valita lipputyypin, jotta saan mahdollisesti alennusta. 
+* Lipunmyyjänä tahdon tarjota asiakkaalle lipun, jossa on hänelle oikeutettu hinnanalennus.
 * Lipunmyyjänä en halua myydä lippuja, joita ei ole enää saatavilla, sillä se olisi huonoa asiakaspalvelua 
 * Lipunmyyjänä edustan omistajaa, enkä halua, että samalla lipulla pääsee useampi sisälle, sillä haluan maksimoida tuotot 
 
@@ -89,7 +87,7 @@ Rooli 3: Asiakas (Verkkokauppa) 
 * Sovelluksen on oltava asiakkaan saatavilla 24/7  
 * Sovellusta on mahdollista käyttää mobiilisti  
 
- 
+ </details>
 
 ## Käyttöliittymä 
 ![kayttoliittymakaavio](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/kayttoliittymakaavio.png)
@@ -113,18 +111,18 @@ Keskeisten rajapintojen kuvaukset, esimerkit REST-rajapinta. Tarvittaessa voidaa
 
 ## REST-rajapinnat
 
-Ohjelman tarkoitus on tarjota REST-rajapinta, jonka avulla voidaan toteuttaa lipunmyynnissä tarvittavia toiminnallisuuksia. Rajapintojen toteutuksessa on käytetty yleisesti käytössä olevia käytänteitä koskien mm. palveluiden nimeämistä. Ohjelma tarjoaa oleellisimmat toiminnot ja endpointit JSON-muotoisina API:nä. 
+Ohjelman tarkoitus on tarjota REST-rajapinta, jonka avulla voidaan toteuttaa lipunmyynnissä tarvittavia toiminnallisuuksia. Rajapintojen toteutuksessa on käytetty yleisesti käytössä olevia käytänteitä koskien mm. palveluiden nimeämistä. Ohjelma tarjoaa oleellisimmat toiminnot ja endpointit JSON-muotoisina rajapintoina. 
 
 ### ticketguru.herokuapp.com
 
 Ohjelman basepath on https://ticketguru.herokuapp.com/
  
-### /api/
+### /autoapi/ ja /api/
 
 Endpointin /autoapi/ takaa löytyy JSON-muotoisena kaikki tietokannassa oleva data linkityksineen. Endpoint on on luotu automaattisesti ja se on tarkoitettu lähinnä testausvaiheeseen sekä GET-pyyntöihin. Autentikointi vaadittu.
 Endpointin /api/ takaa löytyy lipunmyyntiin tarvittavat rajapinnat, jotka on on dokumentoitu alla. Ainoastaan tulevat tapahtumat on avoin rajapinta, kaikissa muissa autentikointi on vaadittu. Käyttäjien hallintaan liittyvän endpointit ovat myös autorisoitu.
 
-<details><summary>Yksityiskohtainen kuvaus rajapintojen käytöstä ja toteutuksesta:</summary>
+<details><summary>Yksityiskohtainen kuvaus /api/ rajapintojen käytöstä ja toteutuksesta:</summary>
  
  
 ### Tapahtumat / Events:
@@ -187,7 +185,7 @@ Testauksen raportointi:
 
 /api/appusers antaa lisätä käyttäjiä ilman usernamea, vaikka username on @NotNull
 
-### Asennustiedot 
+## Asennustiedot 
 
 Järjestelmän asennus on syytä dokumentoida kahdesta näkökulmasta: 
 
@@ -197,7 +195,7 @@ järjestelmän asentaminen tuotantoympäristöön: miten järjestelmän saisi as
 
 Asennusohjeesta tulisi ainakin käydä ilmi, miten käytettävä tietokanta ja käyttäjät tulee ohjelmistoa asentaessa määritellä (käytettävä tietokanta, käyttäjätunnus, salasana, tietokannan luonti yms.). 
 
-### Käynnistys- ja käyttöohje 
+## Käynnistys- ja käyttöohje 
 
 Tyypillisesti tässä riittää kertoa ohjelman käynnistykseen tarvittava URL sekä mahdolliset kirjautumiseen tarvittavat tunnukset. Jos järjestelmän käynnistämiseen tai käyttöön liittyy joitain muita toimenpiteitä tai toimintajärjestykseen liittyviä asioita, nekin kerrotaan tässä yhteydessä. 
 
