@@ -92,11 +92,11 @@ Järjestelmän tärkein käyttäjäryhmä on lipunmyyjät (rooli 1), lisäksi j�
 ## Käyttöliittymä 
 ![kayttoliittymakaavio](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/kayttoliittymakaavio.png)
 
+(suunnitteluvaiheessa toteutettu käyttöliittymä poikkeaa nykytilanteesta)
 
 ## Tietokanta 
 
-[Tietokantakaavio, tietokannan hakemisto datyyppeineen löytyy]https://dbdiagram.io/d/5e41478c9e76504e0ef1400c
-
+[Tietokantakaavio ja datatyypit](https://dbdiagram.io/d/5e41478c9e76504e0ef1400c)
 
 
 ## Tekninen kuvaus 
