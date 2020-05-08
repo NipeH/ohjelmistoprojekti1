@@ -195,6 +195,37 @@ järjestelmän asentaminen tuotantoympäristöön: miten järjestelmän saisi as
 
 Asennusohjeesta tulisi ainakin käydä ilmi, miten käytettävä tietokanta ja käyttäjät tulee ohjelmistoa asentaessa määritellä (käytettävä tietokanta, käyttäjätunnus, salasana, tietokannan luonti yms.). 
 
+### Järjestelmän kehitysympäristön asennus
+
+Asenna/tarkista, että sinulla on asennettuna seuraavat apuvälineet, kirjastot ja työkalut:
+<ul>
+ <li>java</li>
+ <li>jdk</li>
+ <li>java ide</li>
+ <li>postgre</li>
+ <li>pgadmin tai postgresql:n komentorivityökalu</li>
+ <li>node</li>
+ <li>npm</li>
+ <li>jos haluat hallinnoida herokua komentoriviltä käsin, niin heroku cli</li>
+</ul>
+
+ Lisäksi tarvitset käyttäjätilin ja -tunnukset tietokantaan ja versionhallintaan: 
+ 
+ <ul>
+  <li>postgresql-tunnukset, luodaan postgresql:n asennuksen yhteydessä</li>
+  <li>github-tunnukset, jos ei ole oikeuksia tähän projektiin, voit forkata sen ja lähettää tarkistettavaksi. </li>
+  <li>heroku tunnukset (ei välttämätön, jos et joudu tekemään muutoksia herokussa)</li>
+ </ul>
+ 
+ **Lue huolellisesti dokumentaatio.**
+ Voit ladata viimeisimmän version githubista https://github.com/NipeH/ohjelmistoprojekti1
+ luo kehitystyölle oma branch 
+ mene valitsemaasi kehitysympäristöön ja tuo projekti sinne. 
+ muista vaihtaa `application.properties` -tiedostossa postgresql- tunnukset omiksesi, jotta voit testata tietokanta-toimintoja paikallisesti. Älä kuitenkaan lähetä näitä muutoksia gitiin. 
+ herokuun päivittyy kaikki projektin githubrepositoryn master-haaraan tehtävät muutokset. Kun versio on valmis ja testattu, kehityksessä käytetty haara voidaan yhdistää masteriin, jolloin muutokset päivittyvät myös herokussa olevaan tuotantoversioon. 
+ Muista tehdä vähintään kaikki automatisoidut testit ennen julkaisua(et.yksikkötestit) ja sen jälkeen (E2E-testipatteri Postmanissa). 
+ 
+
 ## Käynnistys- ja käyttöohje 
 
 Tyypillisesti tässä riittää kertoa ohjelman käynnistykseen tarvittava URL sekä mahdolliset kirjautumiseen tarvittavat tunnukset. Jos järjestelmän käynnistämiseen tai käyttöön liittyy joitain muita toimenpiteitä tai toimintajärjestykseen liittyviä asioita, nekin kerrotaan tässä yhteydessä. 
