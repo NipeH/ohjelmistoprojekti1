@@ -10,7 +10,7 @@ Haetaan tiedot kuinka monta kutakin lipputyyppiä on myyty ja millä sumalla sek
 
 **Permissions required** : YES: admin authorization
 
-**Data and constraints:
+**Data and constraints**
 ```json
 {
 "firstname": "string",
@@ -22,6 +22,7 @@ Haetaan tiedot kuinka monta kutakin lipputyyppiä on myyty ja millä sumalla sek
 "usertype": "user"
 }
 ```
+Username needs to be unique and not null, password can't be null.
 
 ## Success Response
 
@@ -75,6 +76,23 @@ Haetaan tiedot kuinka monta kutakin lipputyyppiä on myyty ja millä sumalla sek
     "status": 403,
     "error": "Forbidden",
     "message": "Forbidden",
+    "path": "/api/appusers/"
+}
+```
+
+**Condition** : Jos ei olla kirjauduttu sisään
+
+**Code** : `401 UNAUTHORIZED`
+
+**Content example**
+
+```json
+
+{
+    "timestamp": 1588876483698,
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Unauthorized",
     "path": "/api/appusers/"
 }
 ```
