@@ -1,7 +1,7 @@
 # Yksittäisen lipun tietojen haku
 
-Jos halutaan tietää mihin tapahtumaan kyseinen lippu on lipun koodin perusteella. 
-Esim lippujentarkistuksessa saadaan lipun tarkat tiedot näkyviin.
+Jos halutaan tietää mihin tapahtumaan kyseinen lippu on lipun koodin tai id:n perusteella perusteella. 
+
 
 **URL** : `/api/tickets/{id}`
 
@@ -17,7 +17,7 @@ Lipun id lähetetään URL:issa.
 
 ## Success Response
 
-**Condition** : Jos kaikki kentät on annettu ja lippukoodi on olemassa.
+**Condition** : Jos kaikki kentät on annettu ja lippukoodi tai lipun id on olemassa.
 
 **Code** : `200 OK`
 
@@ -53,7 +53,7 @@ Lipun id lähetetään URL:issa.
 
 ## Error Responses
 
-**Condition** : Jos lippukoodia ei löydy tai se on kirjoitettu väärin
+**Condition** : Jos lippukoodia tai lipun id:tä ei löydy tai se on kirjoitettu väärin
 
 **Code** : `400 SEE BAD REQUEST`
 
