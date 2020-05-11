@@ -40,49 +40,10 @@ public class UserController {
 	private UserTypeRepository utrepo;
 	
 	
-	/*
-	@PostMapping("/api/users")
-	@ResponseStatus(value = HttpStatus.CREATED) // Palauttaa 201 onnistuessaan
-	public @ResponseBody User newUser(@Valid @RequestBody User user) {
-		
-
-		try {
-
-			
-			
-			return urepo.save(user);
-			
-		} catch (Exception e) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-					"Käyttäjän luonti ei onnistunut, tarkista pakolliset kentät", e);
-
-		}
-	
-	}
-	
-	/*
-	
-	
-	
-	
-	//Lähetetään bodyssa seuraavat, atm pakollista username ja salasana, username tulee olla unique
-	/*
-	 *  {
-        "firstname": "kuuu",
-        "lastname": "Kissa",
-        "phone": "1000",
-        "email": "gmail",
-        "username": "test",
-        "password": "test",
-		"usertype": "admin"
-    	}
-	 * 
-	 * */
-	
 	//Vain admin voi lisätä käyttäjiä
 	@PreAuthorize("hasAuthority('admin')") 
 	// Uusi käyttäjä
-	@PostMapping(value = "/api/users")
+	@PostMapping(value = "/api/appusers")
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public User user(@RequestBody Map<String, Object> userinfo) {
 
