@@ -34,7 +34,7 @@ public class UserController {
 	//Vain admin voi lisätä käyttäjiä
 	@PreAuthorize("hasAuthority('admin')") 
 	// Uusi käyttäjä
-	@PostMapping(value = "/api/appusers")
+	@PostMapping(value = "/api/users")
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public User user(@RequestBody Map<String, Object> userinfo) {
 
