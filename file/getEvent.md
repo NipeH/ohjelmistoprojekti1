@@ -1,15 +1,23 @@
 ### Haetaan tietty tapahtuma
 
 **URL** : GET /api/events/{id}
+
 **Method** : GET
+
 **Auth required** : YES
+
 **Permissions required** : None
+
 **Data constraints**
+
 Haettavan eventin id vaaditaan
 
 ### Success Response
+
 **Condition **: Haetaan tapahtumaa olemassaolevalla eventid:llä
+
 **Code** : 200 OK
+
 **Content example**
 
 ```json
@@ -25,8 +33,11 @@ Haettavan eventin id vaaditaan
 }
 ```
 ### Error Responses
+
 Haetaan tapahtumaa eventid:llä jota ei ole käytössä
+
 **Code **: 404 NOT FOUND
+
 **Content example**
 
 ```json
