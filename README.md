@@ -158,11 +158,13 @@ Luodaan lippu tapahtumaan: [POST /api/events/{eventid}/tickets](https://github.c
 
 Deaktivoidaan tai aktivoidaan lippu (peruutustilanteet:) [PATCH /api/tickets/{ticketid}](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/ticketActivate.md)
 
-He kaikki liput [GET /api/tickets](https://github.com/NipeH/ohjelmistoprojekti1/tree/master/file/getTickets.md)
+Hae kaikki liput [GET /api/tickets](https://github.com/NipeH/ohjelmistoprojekti1/tree/master/file/getTickets.md)
 
 Hae yksittäinen lippu id tai ticketcode [GET /api/tickets/{id}](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/getTicket.md)
 
 Luetaan lippu käytetyksi [PATCH /api/tickets/read{ticketcode}](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/readTicket.md)
+
+Poista lippu [DELETE api/tickets/{id}](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/deleteTicket.md)
 
 ### Käyttäjät / Users
 Käyttäjän lisäys: [POST /api/users](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/users.md)
