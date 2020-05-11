@@ -1,83 +1,37 @@
 ### Haetaan tietty tapahtuma
 
-URL : /api/events/{eventid}/tickets
-Method : POST
+URL : GET /api/events/{id}
+Method : GET
 Auth required : YES
 Permissions required : None
 Data constraints
-Orderin id, TicketTypen id ja lippujen lukumäärä vaaditaan.
-      {
-       "pcs" : "[VARCHAR]",
-      "orderid" : "[VARCHAR]",
-      "tickettypeid" : "[VARCHAR]"
-      }
-Data example All fields must be sent.
-      {
-       "pcs" : "3",
-      "orderid" : "15",
-      "tickettypeid" : "3"
-      }
-Success Response
-Condition : Jos kaikki kentät on annettu ja orderid sekä tickettypeid on olemassa.
-Code : 201 CREATED
+Haettavan eventin id vaaditaan
+
+### Success Response
+Condition : Haetaan tapahtumaa olemassaolevalla eventid:llä
+Code : 200 OK
 Content example
-[
-    {
-        "ticketid": 34,
-        "price": 200.0,
-        "type": {
-            "type": "normal",
-            "discount": 0.0,
-            "ticketypeid": 3
-        },
-        "orders": {
-            "orderid": 15,
-            "total": 600,
-            "timestamp": "2020-03-13T18:21:16.959+02:00"
-        },
-        "valid": true
-    },
-    {
-        "ticketid": 35,
-        "price": 200.0,
-        "type": {
-            "type": "normal",
-            "discount": 0.0,
-            "ticketypeid": 3
-        },
-        "orders": {
-            "orderid": 15,
-            "total": 600,
-            "timestamp": "2020-03-13T18:21:16.959+02:00"
-        },
-        "valid": true
-    },
-    {
-        "ticketid": 36,
-        "price": 200.0,
-        "type": {
-            "type": "normal",
-            "discount": 0.0,
-            "ticketypeid": 3
-        },
-        "orders": {
-            "orderid": 15,
-            "total": 600,
-            "timestamp": "2020-03-13T18:21:16.959+02:00"
-        },
-        "valid": true
-    }
-]
+
+{
+    "eventid": 1,
+    "name": "Syksyn sävel",
+    "description": "Suomen luonnon ja vuodenaikojen innoittama konserttiesitys. Soittimina tusina sadeputkea ja märkä rätti",
+    "venue": "Nipen takapiha. Kelivaraus. Poudan yllättäessä siirrymme roskakatokseen",
+    "price": 50.0,
+    "startTime": "2020-09-16T16:00:00.078Z[Etc/UTC]",
+    "endTime": "2020-10-16T18:00Z[Etc/UTC]",
+    "ticketInventory": 2
+}
+
 Error Responses
-Condition : Jos orderidtä, tickettypeidtä ei löydy tai jos kaikkia kenttiä ei ole annettu
-Code : 400 SEE BAD REQUEST
+Haetaan tapahtumaa eventid:llä jota ei ole käytössä
+Code : 404 NOT FOUND
 Content example
 {
-    "timestamp": "2020-03-13T16:45:32.483+0000",
-    "status": 400,
-    "error": "Bad Request",
-    "message": "Tarkista pakolliset kentät, orderid, pcs ja tyckettypeid",
-    "trace": "",
-    "path": "/api/events/2/tickets"
+    "timestamp": 1589218555925,
+    "status": 404,
+    "error": "Not Found",
+    "message": "Tapahtumaa ei löydy",
+    "path": "/api/events/12"
 }
 
