@@ -1,10 +1,10 @@
 ### Add empty order
 
-URL : /api/orders
+**URL** : /api/orders
 
-Method : POST
+**Method** : POST
 
-Auth required : YES (in future)
+**Auth required** : YES
 
 
 Data constraints, empty object
@@ -17,7 +17,7 @@ Content-Type: application/JSON
 
 ### Success Responses
 
-Code : 201 CREATED
+**Code** : 201 CREATED
 
 ```json
 Content example :
@@ -30,11 +30,11 @@ Content example :
 
 ### Error Response
 
-Condition : If data is missing
+**Condition** : If data is missing
 
-Code : 400 BAD REQUEST
+**Code** : 400 BAD REQUEST
 
-Content example :
+**Content example** :
 
 ```json
 {
