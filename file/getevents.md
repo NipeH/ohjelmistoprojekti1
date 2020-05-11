@@ -28,3 +28,17 @@ Content: {[]} with 0, 1 or multiple events:
     "ticketInventory": 2
 }
 ```
+### Error Response
+//haetaan tapahtumaa mitä ei ole
+
+Code : 404 not found
+
+Content example
+```json
+{
+    "timestamp": 1589217659643,
+    "status": 404,
+    "error": "Not Found",
+    "message": "No message available",
+    "path": "/api/event/12"
+}
