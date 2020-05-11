@@ -4,7 +4,7 @@ URL : /api/events
 
 Method : POST
 
-Auth required : YES (in future)
+Auth required : YES 
 
 Data:
 ```json
