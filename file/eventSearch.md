@@ -1,20 +1,23 @@
 ### Etsitään tiettyä tapahtumaa eri hakusanoilla: 
 
-URL : /api/orders//api/events/search/{property}={value}
+**URL** : /api/orders//api/events/search/{property}={value}
 
-Method : GET
+**Method** : GET
 
-Auth required : NO (to be changed, see: https://github.com/NipeH/ohjelmistoprojekti1#avoimet-ja-autentikointia-vaativat-endpointit)
+**Auth required** : YES
 
-Permissions required : None (to be changed, see: https://github.com/NipeH/ohjelmistoprojekti1#avoimet-ja-autentikointia-vaativat-endpointit)
+**Permissions required** : YES
 
 ### Success Response
-Code : 200 OK
 
-Content examples:
+**Code** : 200 OK
+
+**Content examples**:
 GET: http://localhost:8080/api/events/search/description=lazer
 
-  Response: 
+**Response**: 
+
+  ```json
   [
       {
           "eventid": 2,
@@ -27,8 +30,10 @@ GET: http://localhost:8080/api/events/search/description=lazer
           "ticketInventory": 198
       }
   ]
-  
+  ```
   GET: http://localhost:8080/api/events/search/venue=nipe
+  
+  ```json
   
     Response: 
           [
@@ -43,12 +48,21 @@ GET: http://localhost:8080/api/events/search/description=lazer
             "ticketInventory": -9
         }
     ]
-Error Responses
+    
+   ````
+    
+### Error Responses
 
-URL : /api/orders//api/events/search/venue=makkara
-Condition : 
-Code : 400 SEE BAD REQUEST
-Content example
+**URL** : /api/orders//api/events/search/venue=makkara
+
+**Condition** : 
+
+**Code** : 400 SEE BAD REQUEST
+
+**Content example**
+
+```json
+
 {
     "timestamp": "2020-03-13T16:45:32.483+0000",
     "status": 400,
@@ -57,3 +71,4 @@ Content example
     "trace": "",
     "path": "/api/events/2/tickets"
 }
+```
