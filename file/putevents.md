@@ -4,7 +4,7 @@ URL : /api/events/{id}
 
 Method : PUT ja PATCH
 
-Auth required : YES (in future)
+Auth required : YES
 
 Data:
 
@@ -44,4 +44,6 @@ Content example:
 Condition : If parameter is missing
 
 Code : 400 BAD REQUEST
+
+
 
