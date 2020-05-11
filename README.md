@@ -137,7 +137,7 @@ Lisää tapahtuma [POST/api/events](https://github.com/NipeH/ohjelmistoprojekti1
 
 Muokkaa tapahtumaa [PUT or PATCH /api/events/{eventid}](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/putevents.md)
 
-Poista tapahtuma DELETE /api/events/{id}
+Poista tapahtuma [DELETE /api/events/{id}](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/deleteEvent.md)
 
 Hae tapahtuman myyntitiedot [GET/api/events/{eventid}/raport](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/eventRaport.md)
 
