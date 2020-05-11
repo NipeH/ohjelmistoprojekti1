@@ -129,7 +129,7 @@ Endpointin /api/ takaa löytyy lipunmyyntiin tarvittavat rajapinnat, jotka on on
 
 Hae tapahtumat: [GET /api/events](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/getevents.md)
 
-Hae tietty tapahtuma GET /api/events/{id}
+Hae tietty tapahtuma GET /api/events/{id}(https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/getEvent.md)
 
 Etsi tiettyä tapahtumaa eri hakusanoilla: [GET /api/events/search/{property}={value}](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/eventSearch.md)
 
