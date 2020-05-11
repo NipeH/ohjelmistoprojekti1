@@ -2,7 +2,7 @@
 
 Haetaan tiedot kuinka monta kutakin lipputyyppiä on myyty ja millä sumalla sekä yhteenveto.
 
-**URL** : `/api/appusers/`
+**URL** : `/api/users/`
 
 **Method** : `POST`
 
@@ -59,7 +59,7 @@ Username needs to be unique and not null, password can't be null.
     "error": "Bad Request",
     "message": "Käyttäjä on jo olemassa",
     "trace": "",
-    "path": "/api/appusers/"
+    "path": "/api/users/"
 }
 ```
 
@@ -76,7 +76,7 @@ Username needs to be unique and not null, password can't be null.
     "status": 403,
     "error": "Forbidden",
     "message": "Forbidden",
-    "path": "/api/appusers/"
+    "path": "/api/users/"
 }
 ```
 
@@ -93,6 +93,6 @@ Username needs to be unique and not null, password can't be null.
     "status": 401,
     "error": "Unauthorized",
     "message": "Unauthorized",
-    "path": "/api/appusers/"
+    "path": "/api/users/"
 }
 ```
