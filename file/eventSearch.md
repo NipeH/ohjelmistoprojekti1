@@ -43,3 +43,17 @@ GET: http://localhost:8080/api/events/search/description=lazer
             "ticketInventory": -9
         }
     ]
+Error Responses
+
+URL : /api/orders//api/events/search/venue=makkara
+Condition : 
+Code : 400 SEE BAD REQUEST
+Content example
+{
+    "timestamp": "2020-03-13T16:45:32.483+0000",
+    "status": 400,
+    "error": "Bad Request",
+    "message": "Tarkista pakolliset kentät, orderid, pcs ja tyckettypeid",
+    "trace": "",
+    "path": "/api/events/2/tickets"
+}
