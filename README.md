@@ -145,7 +145,7 @@ Hae tapahtuman myyntitiedot [GET/api/events/{eventid}/raport](https://github.com
 ### Tilaustapahtumat / Orders:
 Hae tilaustapahtumat: [GET /api/orders](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/getorders.md)
 
-Hae tietty tilaustapahtuma: [GET /api/orders/{orderid}]
+Hae tietty tilaustapahtuma: [GET /api/orders/{orderid}](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/getOrder.md)
 
 Hae tiettyyn tilaukseen kuuluvat kaikki liput: [GET /api/orders({orderid}/tickets](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/getordersTickets.md)
 
