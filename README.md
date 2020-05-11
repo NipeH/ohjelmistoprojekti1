@@ -185,6 +185,10 @@ Testauksen raportointi:
 
 /api/appusers antaa lisätä käyttäjiä ilman usernamea, vaikka username on @NotNull
 
+Virheiden käsittely on tässä vaiheessa puutteellista: kaikki käyttäjän aiheuttamat virhetilanteet tulisi käydä läpi REST-rajapintaa ajatellen.
+
+REST-rajapinnan endpointien nimeäminen ei ole täysin hyvien käytäntöjen mukaista: verbejä tulisi poistaa
+
 ## Asennustiedot 
 
 Järjestelmän asennus on syytä dokumentoida kahdesta näkökulmasta: 
