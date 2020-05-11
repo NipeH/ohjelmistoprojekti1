@@ -118,7 +118,7 @@ Lipun id lähetetään URL:issa.
 
 ## Error Responses
 
-**Condition** : Jos orderidtä, tickettypeidtä ei löydy tai jos kaikkia kenttiä ei ole annettu
+**Condition** : Jos ticketcodea ei löydy
 
 **Code** : `400 SEE BAD REQUEST`
 
