@@ -70,5 +70,73 @@ Lipun id lähetetään URL:issa.
 ```
 
 
+# Yksittäisen lipun tietojen tuominen lippukoodilla
+
+
+**URL** : `/api/tickets{code}
+
+**Method** : `GET`
+
+**Auth required** : YES
+
+**Permissions required** : None
+
+**Data constraints**
+
+
+## Success Response
+
+
+**Code** : `200 OK`
+
+**Content example**
+
+```json
+    {
+    "ticketid": 8,
+    "event": {
+        "eventid": 2,
+        "name": "Ruisrock",
+        "description": "Esiintyjinä mm. Major Lazer",
+        "venue": "Turun ruissalo",
+        "price": 200.0,
+        "startTime": "2020-07-04T16:00:00.078Z[Etc/UTC]",
+        "endTime": "2020-07-05T20:59Z[Etc/UTC]",
+        "ticketInventory": 200
+    },
+    "price": 0.0,
+    "type": {
+        "type": "student",
+        "discount": 0.8,
+        "ticketypeid": 7
+    },
+    "used": null,
+    "ticketcode": "613b6840-3b2f-4262-968e-8bdfc5d1d4b9",
+    "valid": true
+}
+```
+
+## Error Responses
+
+**Condition** : Jos orderidtä, tickettypeidtä ei löydy tai jos kaikkia kenttiä ei ole annettu
+
+**Code** : `400 SEE BAD REQUEST`
+
+**Content example**
+
+```json
+{
+    "timestamp": 1589217998881,
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Unauthorized",
+    "path": "/api/tickets/613b6840-3b2f-4262-968e-8bdfc5d1d4b2"
+}
+```
+
+
+
+
+
 
 
