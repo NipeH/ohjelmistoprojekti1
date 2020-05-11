@@ -159,7 +159,7 @@ Luodaan lippu tapahtumaan: [POST /api/events/{eventid}/tickets](https://github.c
 Deaktivoidaan tai aktivoidaan lippu (peruutustilanteet:) [PATCH /api/tickets/{ticketid}](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/ticketActivate.md)
 
 ### Käyttäjät / Users
-Käyttäjän lisäys: [POST /api/appusers](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/users.md)
+Käyttäjän lisäys: [POST /api/users](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/users.md)
 
 
 </details>
