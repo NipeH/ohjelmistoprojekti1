@@ -1,17 +1,23 @@
 ### Haetaan kaikki tilaustapahtumaan kuuluvat liput:
 
-URL : /api/orders/{orderid}/tickets
+**URL** : /api/orders/{orderid}/tickets
 
-Method : GET
+**Method** : GET
 
-Auth required : NO (to be changed, see: https://github.com/NipeH/ohjelmistoprojekti1#avoimet-ja-autentikointia-vaativat-endpointit)
+**Auth required** : YES
 
-Permissions required : None (to be changed, see: https://github.com/NipeH/ohjelmistoprojekti1#avoimet-ja-autentikointia-vaativat-endpointit)
+**Permissions required** : YES
 
-Success Response
-Code : 200 OK
+**Success Response**
+
+**Code** : 200 OK
+
+**Content examples**
+
+### Success Responses
+
 ```json
-Content examples:[
+:[
     {
         "ticketid": 28,
         "price": 0.0,
@@ -38,4 +44,21 @@ Content examples:[
         "valid": false
     }
 ]
+```
+### Error Responses
+
+**Condition** : Haettua orderid:tä ei löydy
+
+**Code** : 404 Not Found
+
+
+
+```json
+{
+    "timestamp": 1589224969410,
+    "status": 404,
+    "error": "Not Found",
+    "message": "No order with an id of 15 found",
+    "path": "/api/orders/15/tickets"
+}
 ```
