@@ -1,6 +1,6 @@
 # Haetaan tapahtuman myyntitiedot
 
-Haetaan tiedot kuinka monta kutakin lipputyyppiä on myyty ja millä sumalla sekä yhteenveto.
+Haetaan tiedot kuinka monta kutakin lipputyyppiä on myyty ja millä summalla sekä yhteenveto.
 
 **URL** : `/api/events/{eventid}/raport`
 

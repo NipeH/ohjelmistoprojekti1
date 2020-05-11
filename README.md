@@ -1,29 +1,27 @@
-# Ohjelmistoprojekti1
-Haaga-Helia UAS Ohjelmistoprojekti 1 
-
-## TicketGuru
+# Ohjelmistoprojekti I Haaga Helia UAS
 
 Tiimi: OnnenOravat 
 
-## Johdanto 
+## TicketGuru -ohjelma 
 
-Projektimme aiheena on lipunmyyntijärjestelmä TicketGuru lipputoimistoon. Järjestelmän on tarkoitus tulevaisuudessa toimia myös verkkokauppana, joten järjestelmä valmistetaan myös verkkokaupan edellytykset mielessä pitäen. Järjestelmään voidaan lisätä tapahtumia ja tapahtumiin erilaisia lipputyyppejä haluttu määrä. Asiakkaille myydään liput tulostamalla ne liikkeessä. Lippuihin tulostuu asiakkaan nimi ja uniikki lippukoodi. Järjestelmä varmistaa, ettei lippuja myydä liikaa tai esimerkiksi tapahtuman jälkeen. Myymättä jääneet liput tulostetaan tapahtumien ovelle myytäväksi. Lipunmyyjien työtä helpottaaksemme, lippujen etsinnän on oltava helppoa ja lippuja tulee voida ostaa ja tulostaa useampi kerrallaan. Lisäksi järjestelmä tarjoaa omistajalle liiketoiminnan kannalta tarvittavaa dataa, kuten tapahtuman myyntitapahtumat. Projekti luodaan Spring Boot tekniikalla, käyttäen todennäköisesti MariaDB tietokantaa. Tarkoituksena on luoda responsiivinen, ensisijaitsesti kuitenkin desktopille tarkoitettu järjestelmä. 
+Ohjelmistoprojekti I kurssilla toteutimme lipunmyyntiin tarkoitetun ohjelmiston: järjestelmä tarjoaa REST-rajapinnan lipunmyyntiin ja tapahtumien käsittelyyn. Asiakkaan toiveissa oli, että järjestelmän avulla voidaan lisätä, muokata ja poistaa tapahtumia sekä myydä eri tyyppisiä lippuja tapahtumiin. Myymättä jääneet liput pitää voida tulostaa ovelle myytäväksi. Lippujen tulee olla uniikkeja ja luettavissa olevia. Lisäksi asiakkaan toiveissa oli raportointi tapahtumien myynnistä kertyneistä tuloista ja kappalemääristä. [Toteutimme ohjelman lisäksi yksinkertaisen REST-rajapintaa käyttävän clientin Reactilla](https://github.com/justuskeinanen/front/tree/master/src). Clientilla pystytään demoamaan järjestelmän perustoiminnallisuuksia: lipunmyyntiä, lippujen lukemista sekä tapahtumien raporttien lukua. Tarkoituksena kuitenkin on, että erillinen client-tiimi luo lopullisen käyttöliittymän, jolla voi käyttää kaikkia ohjelman tarjoamia ominaisuuksia.
+
+Projekti on toteutettu pääasiassa seuraavilla teknologioilla: Java, SpringBoot, PostqreSQL ja React.
+
 
 ## Järjestelmän määrittely 
 
-Ohessa kuvattu järjestelmän käyttäjäryhmät ja heidän roolinsa yrityksessä. Käyttäjistä on luotu käyttäjätarinat, joiden pohjalta on luotu projektion työjono Trelloon sekä tarkempi toiminnallisten ominaisuuksien erittely. 
+Järjestelmän tärkein käyttäjäryhmä on lipunmyyjät (rooli 1), lisäksi järjestelmää käyttävät järjestelmänvalvojat (rooli 2) sekä tulevaisuudessa mahdollisesti myös asiakkaat (rooli 3), mikäli järjestelmästä kehitetään verkkokauppasovellus. Asiakkaan roolia sivutaan, mutta ei käsitellä tässä kohtaa. Järjestelmän määrittely on tehty luomalla myyjän ja järjestelmänvalvojan käyttäjärooleista käyttäjätarinoita, joiden perusteella on identifioitu toiminnallisia ja ei toiminnallisia vaatimuksia. 
 
-Rooli 1: Lipunmyyjä  
-Rooli 2: Admin-käyttäjä / järjestelmänvalvoja 
-Rooli 3: Asiakas (Verkkokauppa)  
+<details><summary>Käyttäjätarinat ja toiminnallisuudet käyttäjäryhmittäin</summary>
   
-### Rooli 1: Lipunmyyjä (ja fyysinen asiakas) käyttäjätarinat
+### Rooli 1: Lipunmyyjän käyttäjätarinat
 * Lipunmyyjänä haluan etsiä lipun, jota asiakas toivoo kaupassa, jotta voin myydä sen hänelle. 
 * Lipunmyyjänä haluan tulostaa lipun asiakkaalle, jotta asiakas saa lipun ja pääsee keikalle. 
 * Lipun myyjäni haluan nähdä, onko haluttua lipputyyppiä saatavilla, jotta tiedän, voinko myydä lipun asiakkaalle. 
 * Lipun myyjänä haluan lisätä halutut tuotteet ostoskoriin, jotta voin laskuttaa kaikki kerralla asiakkaalta. 
 * Lipun myyjänä haluan löytää asiakkaan ostaman lipun tietokannasta nimellä tai koodilla, jotta asiakkaan esimerkiksi hukatessa lipun voin tulostaa hänelle uuden. 
-* Asiakkaana haluan valita lipputyypin, jotta saan mahdollisesti alennusta. 
+* Lipunmyyjänä tahdon tarjota asiakkaalle lipun, jossa on hänelle oikeutettu hinnanalennus.
 * Lipunmyyjänä en halua myydä lippuja, joita ei ole enää saatavilla, sillä se olisi huonoa asiakaspalvelua 
 * Lipunmyyjänä edustan omistajaa, enkä halua, että samalla lipulla pääsee useampi sisälle, sillä haluan maksimoida tuotot 
 
@@ -89,23 +87,16 @@ Rooli 3: Asiakas (Verkkokauppa) 
 * Sovelluksen on oltava asiakkaan saatavilla 24/7  
 * Sovellusta on mahdollista käyttää mobiilisti  
 
- 
+ </details>
 
 ## Käyttöliittymä 
 ![kayttoliittymakaavio](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/kayttoliittymakaavio.png)
 
+(suunnitteluvaiheessa toteutettu käyttöliittymä poikkeaa nykytilanteesta)
+
 ## Tietokanta 
 
-Tietokannan kaavio löytyy ajantasaisena linkin takaa:
-
-https://dbdiagram.io/d/5e41478c9e76504e0ef1400c
-
-
-
-tobecontinued....
-
-
-
+[Tietokantakaavio ja datatyypit](https://dbdiagram.io/d/5e41478c9e76504e0ef1400c)
 
 
 ## Tekninen kuvaus 
@@ -118,28 +109,21 @@ Palvelintoteutuksen yleiskuvaus: teknologiat, deployment-ratkaisut yms.
 
 Keskeisten rajapintojen kuvaukset, esimerkit REST-rajapinta. Tarvittaessa voidaan rajapinnan käyttöä täsmentää UML-sekvenssikaavioilla. 
 
-## REST-API:t
+## REST-rajapinnat
 
-Ohjelman API:t pyrkivät toteuttamaan REST-rajapintojen ominaisuudet. Rajapintojen toteutuksessa on käytetty yleisesti käytössä olevia käytänteitä koskien mm. palveluiden nimeämistä. Iteraatiosta kolme alkaen ohjelma tarjoaa oleellisimmat toiminnot ja endpointit JSON-muotoisina API:nä. 
+Ohjelman tarkoitus on tarjota REST-rajapinta, jonka avulla voidaan toteuttaa lipunmyynnissä tarvittavia toiminnallisuuksia. Rajapintojen toteutuksessa on käytetty yleisesti käytössä olevia käytänteitä koskien mm. palveluiden nimeämistä. Ohjelma tarjoaa oleellisimmat toiminnot ja endpointit JSON-muotoisina rajapintoina. 
 
-### basepath
-<details>
-<summary>read more about basepath.. click here..
+### ticketguru.herokuapp.com
 
-</summary>
-Kehitysvaiheen ohjelman basepath on http:localhost:8080/api 
-Tuotantovaiheen ohjelman basepath jatkaa samalla käytännöllä siten, että API-palveluiden osoite on muotoa www.ticketguru.com/api, missä www.ticketguru.com on ohjelman etusivu. Jatkossa tässä dokumentissa viitataan basepathiin merkinnällä ".../api/", milloin ei ole 
-erityistä syytä korostaa maininnan koskevan erikseen joko kehitys- tai tuotantovaiheen sovellusta. 
-</details>
+Ohjelman basepath on https://ticketguru.herokuapp.com/
+ 
+### /autoapi/ ja /api/
 
-### Rajapinnat
-Ensimmäisenä on luotu rajapinta tapahtumille, joihin Ticketguru myy lippuja. Kaikki luodut tapahtumat löytyvät osoitteesta .../api/events Sivu sisältää JSON-muotoisen taulukon, joka sisältää tapahtuma-objektit ja relaatiot. Yksittäisiin objekteihin pääsee käsiksi osoitteesta .../api/events/{id} missä {id} on tapahtuman yksilöllinen id.
+Endpointin /autoapi/ takaa löytyy JSON-muotoisena kaikki tietokannassa oleva data linkityksineen. Endpoint on on luotu automaattisesti ja se on tarkoitettu lähinnä testausvaiheeseen sekä GET-pyyntöihin. Autentikointi vaadittu.
+Endpointin /api/ takaa löytyy lipunmyyntiin tarvittavat rajapinnat, jotka on on dokumentoitu alla. Ainoastaan tulevat tapahtumat on avoin rajapinta, kaikissa muissa autentikointi on vaadittu. Käyttäjien hallintaan liittyvän endpointit ovat myös autorisoitu.
 
-<details>
-
-<summary>
- Yksityiskohtainen kuvaus rajapintojen käytöstä ja toteutuksesta.
- </summary>
+<details><summary>Yksityiskohtainen kuvaus /api/ rajapintojen käytöstä ja toteutuksesta:</summary>
+ 
  
 ### Tapahtumat / Events:
 
@@ -171,36 +155,39 @@ Lisää tilaustapahtuma [POST/orders/{eventid}/{typeid}/{lkm}](https://github.co
 
 ### Liput / Tickets:
 Luodaan lippu tapahtumaan: [POST /api/events/{eventid}/tickets](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/eventTickets.md)
+
 Deaktivoidaan tai aktivoidaan lippu (peruutustilanteet:) [PATCH /api/tickets/{ticketid}](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/ticketActivate.md)
 
-### Avoimet ja autentikointia vaativat endpointit
-Kaikki endpointit vaativat sisäänkirjautumisen. Käyttäjien hallinta on myös autorisoinnin takana, vain admin-oikeuksilla käytettävissä oleva toiminto.
+### Käyttäjät / Users
+Käyttäjän lisäys: [POST /api/appusers](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/users.md)
+
 
 </details>
 
-...
 
-## Toteutuksen yleisiä ratkaisuja, esim. turvallisuus. 
 ## Turvallisuus
-Käyttäjätietojen hallinta on toistaiseksi toteutettu kovakoodaamalla käyttäjätiedot suoraan ohjelmaan. Autorisoinnissa käytetään JSON Web Tokenia jonka avulla käyttäjä varmennetaan allekirjoituksella pääsyn ohjelman sisältöön.
-## Tämän lisäksi 
 
-ohjelmakoodin tulee olla kommentoitua 
+Järjestelmän turvallisuus on pyritty varmistamaan lähes kaiken kattavalla autentikoinnilla: lähes jokainen sivu vaatii sisäänkirjautumisen. Autentikoinnissa on käytetty Basic Authenticointia, lisäksi järjestelmään on alustettu JWT-autentikointi mahdollista myöhäisempää käyttöönottoa varten. Käyttäjien hallinta on lisäksi autorisoinnin takana ja vain admin-oikeudelliset käyttäjät pääsevät käsittelemään käyttäjiä. Uusien käyttäjien salasanat enkoodataan tietokantaan. Tällä hetkellä, kun ohjelman kehitystyöt jatkuvat vielä mobiiliversion kehittämisen suhteen, sallitaan Cors-konfiguroinnissa pyynnöt, sisältäen kaikki metodit, kaikista lähteistä. Tämä ei luonnollisesti ole turvallista ja heti kun client-kehitystyö on saatu valmiiksi, muutetaan konfigurointia niin, että se sallii pyynnöt vain tietyistä lähteistä, kuitenkin niin, että kaikki metodit ovat käytettävissä (kirjautuneille).
 
-luokkien, metodien ja muuttujien tulee olla kuvaavasti nimettyjä ja noudattaa johdonmukaisia nimeämiskäytäntöjä 
-
-ohjelmiston pitää olla organisoitu komponentteihin niin, että turhalta toistolta vältytään 
 
 ## Testaus 
 
-[Testausta](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/testaus.md)
+Järjestelmässä suoritettiin joitain yksikkötestejä, useita integraatiotestejä sekä e2e-testejä. [Testit eivät löydy nykyisellään ohjelmasta, mutta niitä pääsee tarkastelemaan historiasta linkin takaa](https://github.com/NipeH/ohjelmistoprojekti1/tree/8593bb630ff3c1704e7610c983f96d42df4a39a0/src/test)
 
+Testauksen raportointi:
+
+[JUnit 5 testausta](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/testaus.md)
 
 [Testaaminen Postman-ohjelmalla](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/testausPostmanissa.md)
 
-Tässä kohdin selvitetään, miten ohjelmiston oikea toiminta varmistetaan testaamalla projektin aikana: millaisia testauksia tehdään ja missä vaiheessa. Testauksen tarkemmat sisällöt ja testisuoritusten tulosten raportit kirjataan erillisiin dokumentteihin. 
 
-Tänne kirjataan myös lopuksi järjestelmän tunnetut ongelmat, joita ei ole korjattu. 
+### Korjattavaa ja huomioita jatkokehitykseen
+
+/api/appusers antaa lisätä käyttäjiä ilman usernamea, vaikka username on @NotNull
+
+Virheiden käsittely on tässä vaiheessa puutteellista: kaikki käyttäjän aiheuttamat virhetilanteet tulisi käydä läpi REST-rajapintaa ajatellen.
+
+REST-rajapinnan endpointien nimeäminen ei ole täysin hyvien käytäntöjen mukaista: verbejä tulisi poistaa
 
 ## Asennustiedot 
 
@@ -212,11 +199,40 @@ järjestelmän asentaminen tuotantoympäristöön: miten järjestelmän saisi as
 
 Asennusohjeesta tulisi ainakin käydä ilmi, miten käytettävä tietokanta ja käyttäjät tulee ohjelmistoa asentaessa määritellä (käytettävä tietokanta, käyttäjätunnus, salasana, tietokannan luonti yms.). 
 
+### Järjestelmän kehitysympäristön asennus
+
+Asenna/tarkista, että sinulla on asennettuna seuraavat apuvälineet, kirjastot ja työkalut:
+<ul>
+ <li>java</li>
+ <li>jdk</li>
+ <li>java ide</li>
+ <li>postgre</li>
+ <li>pgadmin tai postgresql:n komentorivityökalu</li>
+ <li>node</li>
+ <li>npm</li>
+ <li>jos haluat hallinnoida herokua komentoriviltä käsin, niin heroku cli</li>
+</ul>
+
+ Lisäksi tarvitset käyttäjätilin ja -tunnukset tietokantaan ja versionhallintaan: 
+ 
+ <ul>
+  <li>postgresql-tunnukset, luodaan postgresql:n asennuksen yhteydessä</li>
+  <li>github-tunnukset, jos ei ole oikeuksia tähän projektiin, voit forkata sen ja lähettää tarkistettavaksi. </li>
+  <li>heroku tunnukset (ei välttämätön, jos et joudu tekemään muutoksia herokussa)</li>
+ </ul>
+ 
+ **Lue huolellisesti dokumentaatio.**
+ Voit ladata viimeisimmän version githubista https://github.com/NipeH/ohjelmistoprojekti1
+ luo kehitystyölle oma branch 
+ mene valitsemaasi kehitysympäristöön ja tuo projekti sinne. 
+ muista vaihtaa `application.properties` -tiedostossa postgresql- tunnukset omiksesi, jotta voit testata tietokanta-toimintoja paikallisesti. Älä kuitenkaan lähetä näitä muutoksia gitiin. 
+ herokuun päivittyy kaikki projektin githubrepositoryn master-haaraan tehtävät muutokset. Kun versio on valmis ja testattu, kehityksessä käytetty haara voidaan yhdistää masteriin, jolloin muutokset päivittyvät myös herokussa olevaan tuotantoversioon. 
+ Muista tehdä vähintään kaikki automatisoidut testit ennen julkaisua(et.yksikkötestit) ja sen jälkeen (E2E-testipatteri Postmanissa). 
+ 
+
 ## Käynnistys- ja käyttöohje 
 
-Tyypillisesti tässä riittää kertoa ohjelman käynnistykseen tarvittava URL sekä mahdolliset kirjautumiseen tarvittavat tunnukset. Jos järjestelmän käynnistämiseen tai käyttöön liittyy joitain muita toimenpiteitä tai toimintajärjestykseen liittyviä asioita, nekin kerrotaan tässä yhteydessä. 
-
-Usko tai älä, tulet tarvitsemaan tätä itsekin, kun tauon jälkeen palaat järjestelmän pariin ! 
+Ohjelman tarjoamaaa REST-rajapintaa pääsee käyttämään: https://ticketguru.herokuapp.com/ -linkin takaa tunnuksilla: niilo:salasana, joka on kovakoodattu peruskäyttäjä. Ohjelman demoamiseen käytettävä front löytyy https://ticketgurufront.herokuapp.com -linkin takaa. Sen käyttöön ei tarvita tällä hetkellä salasanaa, vaan tunnukset on koodattu REST-rajapintaa kutsuviin pyyntöihin.
 
 
 
