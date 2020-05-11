@@ -232,8 +232,7 @@ Asenna/tarkista, että sinulla on asennettuna seuraavat apuvälineet, kirjastot 
 
 ## Käynnistys- ja käyttöohje 
 
-Tyypillisesti tässä riittää kertoa ohjelman käynnistykseen tarvittava URL sekä mahdolliset kirjautumiseen tarvittavat tunnukset. Jos järjestelmän käynnistämiseen tai käyttöön liittyy joitain muita toimenpiteitä tai toimintajärjestykseen liittyviä asioita, nekin kerrotaan tässä yhteydessä. 
+Ohjelman tarjoamaaa REST-rajapintaa pääsee käyttämään: https://ticketguru.herokuapp.com/ -linkin takaa tunnuksilla: niilo:salasana, joka on kovakoodattu peruskäyttäjä. Ohjelman demoamiseen käytettävä front löytyy https://ticketgurufront.herokuapp.com -linkin takaa. Sen käyttöön ei tarvita tällä hetkellä salasanaa, vaan tunnukset on koodattu REST-rajapintaa kutsuviin pyyntöihin.
 
-Usko tai älä, tulet tarvitsemaan tätä itsekin, kun tauon jälkeen palaat järjestelmän pariin ! 
 
 
