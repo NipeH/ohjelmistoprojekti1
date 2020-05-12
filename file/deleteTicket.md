@@ -26,7 +26,7 @@ Lipun id lähetetään URL:issa.
 
 **Condition** : Jos lipun id:tä ei ole 
 
-**Code** : `400 SEE BAD REQUEST`
+**Code** : `404 NOT FOUND`
 
 **Content example**
 
