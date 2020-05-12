@@ -11,9 +11,8 @@
 **Data constrains**
 
 Orderin id vaaditaan
-"orderid" :  "[varchar]"
 
-##Success Response
+## Success Response
 
 **Condition** : Jos orderId on olemassa
 
@@ -52,7 +51,7 @@ Orderin id vaaditaan
 }
 ````
 
-###Error Response
+### Error Response
 
 **Condition** : Jos orderid:tä ei ole olemassa
 
@@ -67,6 +66,24 @@ Orderin id vaaditaan
 }
 
 ````
+
+**Condition** : `Jos toiminnon suorittaja ei ole kirjautunut sisään`
+
+**Code** : `401 UNAUTHORIZED`
+
+**Content example**
+
+```json
+
+{
+    "timestamp": 1588883234540,
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Unauthorized",
+    "path": "/api/orders/1"
+}
+
+```
 
 
 
