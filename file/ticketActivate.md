@@ -77,6 +77,22 @@ Ticketin id lähetetään parametrinä.
 }
 ```
 
+**Condition** : `Jos toiminnon suorittaja ei ole kirjautunut sisään`
 
+**Code** : `401 UNAUTHORIZED`
+
+**Content example**
+
+```json
+
+{
+    "timestamp": 1588883234540,
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Unauthorized",
+    "path": "/api/tickets/2"
+}
+
+```
 
 
