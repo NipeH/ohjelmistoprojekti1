@@ -16,7 +16,7 @@ Lipun id lähetetään URL:issa.
 
 ## Success Response
 
-**Condition** :Jos lipun id on olemassa.
+**Condition** :Jos lipun id:llä löytyy lippu.
 
 **Code** : `204 NO CONTENT`
 
@@ -39,6 +39,25 @@ Lipun id lähetetään URL:issa.
     "path": "/api/tickets/9"
 }
 ```
+
+**Condition** : `Jos toiminnon suorittaja ei ole kirjautunut sisään`
+
+**Code** : `401 UNAUTHORIZED`
+
+**Content example**
+
+```json
+
+{
+    "timestamp": 1588883234540,
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Unauthorized",
+    "path": "/api/tickets/9"
+}
+
+```
+
 
 
 
