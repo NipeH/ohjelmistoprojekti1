@@ -6,7 +6,7 @@
 
 **Auth required** : YES
 
-**Permissions required** : YES
+**Permissions required** : NOT
 
 ### Success Response
 
