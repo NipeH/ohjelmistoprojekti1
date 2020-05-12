@@ -1,23 +1,25 @@
 ### Haetaan kaikki tapahtumat
 
-URL : /api/events/
+**URL** : `/api/events`
 
-Method : GET
+**Method** : `GET`
 
-Auth required : NO
+**Auth required** : YES
 
-Permissions required : None
+**Permissions required** : None
 
-Data constraints: {}
+**Data constraints**
 
-### Success Response
 
-Code : 200 OK
+## Success Response
 
-Content: {[]} with 0, 1 or multiple events:
+
+**Code** : `200 OK`
+
+**Content example**
 
 ```json
-{
+[{
     "eventid": 1,
     "name": "Syksyn sävel",
     "description": "Suomen luonnon ja vuodenaikojen innoittama konserttiesitys. Soittimina tusina sadeputkea ja märkä rätti",
@@ -26,19 +28,43 @@ Content: {[]} with 0, 1 or multiple events:
     "startTime": "2020-09-16T19:00:00",
     "endTime": "2020-09-16T21:00:00",
     "ticketInventory": 2
-}
-```
-### Error Response
-//haetaan tapahtumaa mitä ei ole
-
-Code : 404 not found
-
-Content example
-```json
+},
 {
-    "timestamp": 1589217659643,
-    "status": 404,
-    "error": "Not Found",
-    "message": "No message available",
-    "path": "/api/event/12"
+    "eventid": 2,
+    "name": "Talven sävel",
+    "description": "Suomen luonnon ja vuodenaikojen innoittama konserttiesitys. Soittimina tusina sadeputkea ja märkä rätti",
+    "price": 50.0,
+    "venue": "Nipen takapiha. Kelivaraus. Poudan yllättäessä siirrymme roskakatokseen",
+    "startTime": "2020-09-16T19:00:00",
+    "endTime": "2020-09-16T21:00:00",
+    "ticketInventory": 2
 }
+]
+```
+## Error Responses
+
+**Condition** : `Jos toiminnon suorittaja ei ole kirjautunut sisään`
+
+**Code** : `401 UNAUTHORIZED`
+
+**Content example**
+
+```json
+
+{
+    "timestamp": 1588883234540,
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Unauthorized",
+    "path": "/api/events"
+}
+
+```
+
+
+
+
+
+
+
+
