@@ -1,15 +1,13 @@
 
 ### Poista tapahtuma
 
-**URL** : DELETE /api/events/{id}
+**URL** : `DELETE /api/events/{id}`
 
-**Method** : DELETE
+**Method** : `DELETE`
 
-**Auth required** : YES
+**Auth required** : `YES`
 
 **Permissions required** : None
-
-
 
 
 
@@ -24,7 +22,7 @@
 
 **Condition** : Jos eventid:tä ei löydy
 
-**Code** : 400 SEE BAD REQUEST
+**Code** : `404 NOT FOUND`
 
 **Content example**
 
@@ -36,6 +34,24 @@
     "message": "Entity Not Found",
     "path": "/api/events/22"
 }
+```
+
+**Condition** : `Jos toiminnon suorittaja ei ole kirjautunut sisään`
+
+**Code** : `401 UNAUTHORIZED`
+
+**Content example**
+
+```json
+
+{
+    "timestamp": 1588883234540,
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Unauthorized",
+    "path": "/api/events/22"
+}
+
 ```
 
 
