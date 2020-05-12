@@ -82,7 +82,7 @@
     "status": 401,
     "error": "Unauthorized",
     "message": "Unauthorized",
-    "path": "/api/events"
+    "path": "/api/tickets"
 }
 
 ```
