@@ -1,4 +1,4 @@
-### Haetaan tietty tapahtuma
+### Haetaan tietty tapahtuma 
 
 **URL** : GET /api/events/{id}
 
@@ -14,7 +14,7 @@ Haettavan eventin id vaaditaan
 
 ### Success Response
 
-**Condition **: Haetaan tapahtumaa olemassaolevalla eventid:llä
+**Condition**: Haetaan tapahtumaa olemassaolevalla eventid:llä
 
 **Code** : 200 OK
 
@@ -36,7 +36,7 @@ Haettavan eventin id vaaditaan
 
 Haetaan tapahtumaa eventid:llä jota ei ole käytössä
 
-**Code **: 404 NOT FOUND
+**Code**: 404 NOT FOUND
 
 **Content example**
 
@@ -49,4 +49,22 @@ Haetaan tapahtumaa eventid:llä jota ei ole käytössä
     "message": "Tapahtumaa ei löydy",
     "path": "/api/events/12"
 }
+```
+
+**Condition** : `Jos toiminnon suorittaja ei ole kirjautunut sisään`
+
+**Code** : `401 UNAUTHORIZED`
+
+**Content example**
+
+```json
+
+{
+    "timestamp": 1588883234540,
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Unauthorized",
+    "path": "/api/events/12"
+}
+
 ```
