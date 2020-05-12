@@ -47,7 +47,7 @@ Poistetaan ohjelmaan käyttöoikeudet antava käyttäjätili kokonaan tietokanna
 }
 ```
 
-**Condition** : `Jos toiminnon suorittajalla ei ole tarvittavaa käyttöoikeutta`
+**Condition** : `Jos toiminnon suorittaja ei ole kirjautunut sisään`
 
 **Code** : `401 UNAUTHORIZED`
 
@@ -59,6 +59,24 @@ Poistetaan ohjelmaan käyttöoikeudet antava käyttäjätili kokonaan tietokanna
     "timestamp": 1588883234540,
     "status": 401,
     "error": "Unauthorized",
+    "message": "Unauthorized",
+    "path": "/api/users/18/"
+}
+
+```
+
+**Condition** : `Jos toiminnon suorittajalla ei ole tarvittavaa käyttöoikeutta`
+
+**Code** : `403 FORBIDDEN`
+
+**Content example**
+
+```json
+
+{
+    "timestamp": 1588883234540,
+    "status": 403,
+    "error": "Forbidden",
     "message": "Unauthorized",
     "path": "/api/users/18/"
 }
