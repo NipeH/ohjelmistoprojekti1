@@ -92,35 +92,23 @@ Järjestelmän tärkein käyttäjäryhmä on lipunmyyjät (rooli 1), lisäksi j�
 ## Käyttöliittymä 
 ![kayttoliittymakaavio](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/kayttoliittymakaavio.png)
 
-(suunnitteluvaiheessa toteutettu käyttöliittymä poikkeaa nykytilanteesta)
+(luonnos client-tiimille | ei vastaa demo frontendia)
 
 ## Tietokanta 
 
 [Tietokantakaavio ja datatyypit](https://dbdiagram.io/d/5e41478c9e76504e0ef1400c)
 
 
-## Tekninen kuvaus 
-
-Teknisessä kuvauksessa esitetään järjestelmän toteutuksen suunnittelussa tehdyt tekniset ratkaisut, esim. 
-
-Missä mikäkin järjestelmän komponentti ajetaan (tietokone, palvelinohjelma) ja komponenttien väliset yhteydet (vaikkapa tähän tyyliin: https://security.ufl.edu/it-workers/risk-assessment/creating-an-information-systemdata-flow-diagram/) 
-
-Palvelintoteutuksen yleiskuvaus: teknologiat, deployment-ratkaisut yms. 
-
-Keskeisten rajapintojen kuvaukset, esimerkit REST-rajapinta. Tarvittaessa voidaan rajapinnan käyttöä täsmentää UML-sekvenssikaavioilla. 
-
 ## REST-rajapinnat
 
 Ohjelman tarkoitus on tarjota REST-rajapinta, jonka avulla voidaan toteuttaa lipunmyynnissä tarvittavia toiminnallisuuksia. Rajapintojen toteutuksessa on käytetty yleisesti käytössä olevia käytänteitä koskien mm. palveluiden nimeämistä. Ohjelma tarjoaa oleellisimmat toiminnot ja endpointit JSON-muotoisina rajapintoina. 
-
-### ticketguru.herokuapp.com
 
 Ohjelman basepath on https://ticketguru.herokuapp.com/
  
 ### /autoapi/ ja /api/
 
-Endpointin /autoapi/ takaa löytyy JSON-muotoisena kaikki tietokannassa oleva data linkityksineen. Endpoint on on luotu automaattisesti ja se on tarkoitettu lähinnä testausvaiheeseen sekä GET-pyyntöihin. Autentikointi vaadittu.
-Endpointin /api/ takaa löytyy lipunmyyntiin tarvittavat rajapinnat, jotka on on dokumentoitu alla. Ainoastaan tulevat tapahtumat on avoin rajapinta, kaikissa muissa autentikointi on vaadittu. Käyttäjien hallintaan liittyvän endpointit ovat myös autorisoitu.
+Endpointin /autoapi/ takaa löytyy JSON-muotoisena kaikki tietokannassa oleva data linkityksineen. Endpoint on on luotu automaattisesti pom.xml rest dependenssillä ja se on tarkoitettu lähinnä testausvaiheeseen sekä GET-pyyntöihin (autentikointi vaadittu).
+Endpointin /api/ takaa löytyy lipunmyyntiin tarvittavat rajapinnat, jotka on on dokumentoitu alla. Ainoastaan tulevat tapahtumat on avoin rajapinta, kaikissa muissa autentikointi on vaadittu. Käyttäjien hallintaan liittyvät endpointit ovat myös auktorisoitu.
 
 <details><summary>Yksityiskohtainen kuvaus /api/ rajapintojen käytöstä ja toteutuksesta:</summary>
  
@@ -175,7 +163,7 @@ Käyttäjän lisäys: [POST /api/users](https://github.com/NipeH/ohjelmistoproje
 
 ## Turvallisuus
 
-Järjestelmän turvallisuus on pyritty varmistamaan lähes kaiken kattavalla autentikoinnilla: lähes jokainen sivu vaatii sisäänkirjautumisen. Autentikoinnissa on käytetty Basic Authenticointia, lisäksi järjestelmään on alustettu JWT-autentikointi mahdollista myöhäisempää käyttöönottoa varten. Käyttäjien hallinta on lisäksi autorisoinnin takana ja vain admin-oikeudelliset käyttäjät pääsevät käsittelemään käyttäjiä. Uusien käyttäjien salasanat enkoodataan tietokantaan. Tällä hetkellä, kun ohjelman kehitystyöt jatkuvat vielä mobiiliversion kehittämisen suhteen, sallitaan Cors-konfiguroinnissa pyynnöt, sisältäen kaikki metodit, kaikista lähteistä. Tämä ei luonnollisesti ole turvallista ja heti kun client-kehitystyö on saatu valmiiksi, muutetaan konfigurointia niin, että se sallii pyynnöt vain tietyistä lähteistä, kuitenkin niin, että kaikki metodit ovat käytettävissä (kirjautuneille).
+Järjestelmän turvallisuus on pyritty varmistamaan lähes kaiken kattavalla autentikoinnilla: lähes jokainen sivu vaatii sisäänkirjautumisen. Autentikoinnissa on käytetty Basic Authenticointia, lisäksi järjestelmään on alustettu JWT-autentikointi mahdollista myöhäisempää käyttöönottoa varten. Käyttäjien hallinta on lisäksi auktorisoinnin takana ja vain admin-oikeudelliset käyttäjät pääsevät käsittelemään käyttäjiä. Uusien käyttäjien salasanat enkoodataan tietokantaan. Tällä hetkellä, kun ohjelman kehitystyöt jatkuvat vielä mobiiliversion kehittämisen suhteen, sallitaan Cors-konfiguroinnissa kaikki pyynnöt kaikista lähteistä. Tämä ei luonnollisesti ole turvallista ja heti kun client-kehitystyö on saatu valmiiksi, muutetaan konfigurointia niin, että järjestelmä sallii pyynnöt vain tietyistä lähteistä, kuitenkin niin, että kaikki metodit ovat käytettävissä (kirjautuneille).
 
 
 ## Testaus 
@@ -195,17 +183,11 @@ Testauksen raportointi:
 
 Virheiden käsittely on tässä vaiheessa puutteellista: kaikki käyttäjän aiheuttamat virhetilanteet tulisi käydä läpi REST-rajapintaa ajatellen.
 
-REST-rajapinnan endpointien nimeäminen ei ole täysin hyvien käytäntöjen mukaista: verbejä tulisi poistaa
+REST-rajapinnan endpointien nimeäminen ei ole täysin hyvien käytäntöjen mukaista: verbejä tulisi poistaa ja sisäkkäisyyksiä poistaa.
+
+Ohjelmaan olisi järkevää toteuttaa palvelukerros
 
 ## Asennustiedot 
-
-Järjestelmän asennus on syytä dokumentoida kahdesta näkökulmasta: 
-
-järjestelmän kehitysympäristö: miten järjestelmän kehitysympäristön saisi rakennettua johonkin toiseen koneeseen 
-
-järjestelmän asentaminen tuotantoympäristöön: miten järjestelmän saisi asennettua johonkin uuteen ympäristöön. 
-
-Asennusohjeesta tulisi ainakin käydä ilmi, miten käytettävä tietokanta ja käyttäjät tulee ohjelmistoa asentaessa määritellä (käytettävä tietokanta, käyttäjätunnus, salasana, tietokannan luonti yms.). 
 
 ### Järjestelmän kehitysympäristön asennus
 
