@@ -15,7 +15,9 @@ Järjestelmän tärkein käyttäjäryhmä on lipunmyyjät (rooli 1), lisäksi j�
 
 <details><summary>Käyttäjätarinat ja toiminnallisuudet käyttäjäryhmittäin</summary>
   
+
 ### Rooli 1: Lipunmyyjän käyttäjätarinat
+
 * Lipunmyyjänä haluan etsiä lipun, jota asiakas toivoo kaupassa, jotta voin myydä sen hänelle. 
 * Lipunmyyjänä haluan tulostaa lipun asiakkaalle, jotta asiakas saa lipun ja pääsee keikalle. 
 * Lipun myyjäni haluan nähdä, onko haluttua lipputyyppiä saatavilla, jotta tiedän, voinko myydä lipun asiakkaalle. 
