@@ -159,6 +159,8 @@ Poista lippu [DELETE api/tickets/{id}](https://github.com/NipeH/ohjelmistoprojek
 ### Käyttäjät / Users
 Käyttäjän lisäys: [POST /api/users](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/users.md)
 
+Käyttäjän poisto: [DELETE /api/users](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/deleteUser.md)
+
 
 </details>
 
