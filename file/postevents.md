@@ -1,6 +1,6 @@
 ### Add new event
 
-URL : /api/events
+URL : `/api/events`
 
 Method : POST
 
@@ -13,8 +13,8 @@ Data:
 "description": "Bailataan niin, että tietää bailanneensa",
 "price": 500.0,
 "venue": "botski",
-"startTime": "2020-09-16T19:00:00",
-"endTime": "2020-09-16T21:00:00",
+"startTime": "2020-09-16T16:00:00.078Z[Etc/UTC]",
+"endTime": "2020-09-16T16:00:00.078Z[Etc/UTC]",
 "ticketInventory": 50
 }
 ```
@@ -32,22 +32,21 @@ Content example:
 "description": "Bailataan niin, että tietää bailanneensa",
 "price": 500.0,
 "venue": "botski",
-"startTime": "2020-09-16T19:00:00",
-"endTime": "2020-09-16T21:00:00",
+"startTime": "2020-09-16T16:00:00.078Z[Etc/UTC]",
+"endTime": "2020-09-16T16:00:00.078Z[Etc/UTC]",
 "ticketInventory": 50
 }
 ```
 ### Error Response
 
-Condition : If data is missing
+Condition : If required data is missing
 
 Code : 400 BAD REQUEST
 
-Content example :
-```json
-{
-    "venue": [
-        "Tapahtuman luonti ei onnistunut, tarkista pakolliset kentät",
-    ]
-}
-```
+or
+
+Condition : Not logged ig
+
+Code : 401 UNUTHORIZED
+
+
