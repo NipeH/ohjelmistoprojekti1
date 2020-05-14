@@ -191,6 +191,8 @@ REST-rajapinnan endpointien nimeäminen ei ole täysin hyvien käytäntöjen muk
 
 Ohjelmaan olisi järkevää toteuttaa palvelukerros
 
+Lipun deaktivoinnin tulisi asettaa peruutetun lipun hinta 0:ksi, jotta se ei näkyisi tilastoissa.
+
 ## Asennustiedot 
 
 ### Järjestelmän kehitysympäristön asennus
