@@ -15,7 +15,9 @@ Järjestelmän tärkein käyttäjäryhmä on lipunmyyjät (rooli 1), lisäksi j�
 
 <details><summary>Käyttäjätarinat ja toiminnallisuudet käyttäjäryhmittäin</summary>
   
+
 ### Rooli 1: Lipunmyyjän käyttäjätarinat
+
 * Lipunmyyjänä haluan etsiä lipun, jota asiakas toivoo kaupassa, jotta voin myydä sen hänelle. 
 * Lipunmyyjänä haluan tulostaa lipun asiakkaalle, jotta asiakas saa lipun ja pääsee keikalle. 
 * Lipun myyjäni haluan nähdä, onko haluttua lipputyyppiä saatavilla, jotta tiedän, voinko myydä lipun asiakkaalle. 
@@ -157,6 +159,8 @@ Poista lippu [DELETE api/tickets/{id}](https://github.com/NipeH/ohjelmistoprojek
 ### Käyttäjät / Users
 Käyttäjän lisäys: [POST /api/users](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/users.md)
 
+Käyttäjän poisto: [DELETE /api/users](https://github.com/NipeH/ohjelmistoprojekti1/blob/master/file/deleteUser.md)
+
 
 </details>
 
@@ -186,6 +190,10 @@ Virheiden käsittely on tässä vaiheessa puutteellista: kaikki käyttäjän aih
 REST-rajapinnan endpointien nimeäminen ei ole täysin hyvien käytäntöjen mukaista: verbejä tulisi poistaa ja sisäkkäisyyksiä poistaa.
 
 Ohjelmaan olisi järkevää toteuttaa palvelukerros
+
+Lipun deaktivoinnin tulisi asettaa peruutetun lipun hinta 0:ksi, jotta se ei näkyisi tilastoissa.
+
+Lipun lukeminen palauttaa stringin -> tulisi muuttaa jsoniksi
 
 ## Asennustiedot 
 

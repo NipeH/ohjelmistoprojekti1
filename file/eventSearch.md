@@ -1,6 +1,6 @@
 ### Etsitään tiettyä tapahtumaa eri hakusanoilla: 
 
-**URL** : /api/orders//api/events/search/{property}={value}
+**URL** : `/api/events/search/{property}={value}`
 
 **Method** : GET
 
@@ -13,7 +13,8 @@
 **Code** : 200 OK
 
 **Content examples**:
-GET: http://localhost:8080/api/events/search/description=lazer
+
+GET: /api/events/search/description=lazer
 
 **Response**: 
 
@@ -31,7 +32,7 @@ GET: http://localhost:8080/api/events/search/description=lazer
       }
   ]
   ```
-  GET: http://localhost:8080/api/events/search/venue=nipe
+  GET: /api/events/search/venue=nipe
   
   ```json
   
@@ -51,24 +52,15 @@ GET: http://localhost:8080/api/events/search/description=lazer
     
    ````
     
-### Error Responses
 
-**URL** : /api/orders//api/events/search/venue=makkara
 
-**Condition** : 
+GET /api/events/search/venue=makkara
 
-**Code** : 400 SEE BAD REQUEST
+**Condition** : If event doesn't exist with given values, response is an empty list
 
 **Content example**
 
 ```json
-
-{
-    "timestamp": "2020-03-13T16:45:32.483+0000",
-    "status": 400,
-    "error": "Bad Request",
-    "message": "Tarkista pakolliset kentät, orderid, pcs ja tyckettypeid",
-    "trace": "",
-    "path": "/api/events/2/tickets"
-}
+[
+]
 ```

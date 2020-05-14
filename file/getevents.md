@@ -25,8 +25,8 @@
     "description": "Suomen luonnon ja vuodenaikojen innoittama konserttiesitys. Soittimina tusina sadeputkea ja märkä rätti",
     "price": 50.0,
     "venue": "Nipen takapiha. Kelivaraus. Poudan yllättäessä siirrymme roskakatokseen",
-    "startTime": "2020-09-16T19:00:00",
-    "endTime": "2020-09-16T21:00:00",
+    "startTime": "2020-09-16T16:00:00.078Z[Etc/UTC]",
+    "endTime": "2020-09-16T16:00:00.078Z[Etc/UTC]",
     "ticketInventory": 2
 },
 {
@@ -35,8 +35,8 @@
     "description": "Suomen luonnon ja vuodenaikojen innoittama konserttiesitys. Soittimina tusina sadeputkea ja märkä rätti",
     "price": 50.0,
     "venue": "Nipen takapiha. Kelivaraus. Poudan yllättäessä siirrymme roskakatokseen",
-    "startTime": "2020-09-16T19:00:00",
-    "endTime": "2020-09-16T21:00:00",
+    "startTime": "2020-09-16T16:00:00.078Z[Etc/UTC]",
+    "endTime": "2020-09-16T16:00:00.078Z[Etc/UTC]",
     "ticketInventory": 2
 }
 ]
