@@ -92,7 +92,7 @@ public class OrderController {
 			props.put("orderid", orderid);
 			Long eventid = (Long) props.get("eventid");
 			EventController ec = new EventController();
-			return ec.tickets( eventid, props);
+			return ec.tickets(eventid, props);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
@@ -109,11 +109,17 @@ public class OrderController {
 		}
 		return orepo.findById(ord.getOrderid());
 	}
-	
+
 	@DeleteMapping(value = "api/orders/{orderid}")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	public void deleteOrder(@PathVariable Long orderid) {
-		orepo.deleteById(orderid);
+		try {
+			orepo.deleteById(orderid);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
 	}
 
 }
