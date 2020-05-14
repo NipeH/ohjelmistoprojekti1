@@ -1,6 +1,7 @@
 # Ohjelmistoprojekti I Haaga Helia UAS
 
 Tiimi: OnnenOravat 
+
 Clientin lähdekoodi: https://github.com/justuskeinanen/front/tree/master/src
 
 ## TicketGuru -ohjelma 
