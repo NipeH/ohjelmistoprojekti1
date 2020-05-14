@@ -193,6 +193,8 @@ Ohjelmaan olisi järkevää toteuttaa palvelukerros
 
 Lipun deaktivoinnin tulisi asettaa peruutetun lipun hinta 0:ksi, jotta se ei näkyisi tilastoissa.
 
+Lipun lukeminen palauttaa stringin -> tulisi muuttaa jsoniksi
+
 ## Asennustiedot 
 
 ### Järjestelmän kehitysympäristön asennus
