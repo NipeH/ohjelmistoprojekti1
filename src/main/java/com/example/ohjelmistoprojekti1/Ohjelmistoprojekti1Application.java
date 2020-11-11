@@ -69,8 +69,8 @@ public class Ohjelmistoprojekti1Application {
 			event.setPrice(50);
 			event.setVenue("Helsinki: Kaupintie 10");
 			// sample time presentation: 2020-04-28T13:34:52.408+03:00[Europe/Helsinki]
-			event.setStartTime("2020-09-16T19:00:00.078+03:00[Europe/Helsinki]");
-			event.setEndTime("2020-10-16T21:00:00.000+03:00[Europe/Helsinki]");
+			event.setStartTime("2020-12-16T19:00:00.078+03:00[Europe/Helsinki]");
+			event.setEndTime("2020-12-29T21:00:00.000+03:00[Europe/Helsinki]");
 			event.setTicketInventory(20);
 			eventRepo.save(event);
 			
@@ -79,8 +79,8 @@ public class Ohjelmistoprojekti1Application {
 			ruisrock.setDescription("Esiintyjinä mm. Major Lazer");
 			ruisrock.setPrice(200);
 			ruisrock.setVenue("Turku: Kartanontie 12");
-			ruisrock.setStartTime("2020-07-04T19:00:00.078+03:00[Europe/Helsinki]");
-			ruisrock.setEndTime("2020-07-05T23:59:00.000+03:00[Europe/Helsinki]");
+			ruisrock.setStartTime("2020-12-16T19:00:00.078+03:00[Europe/Helsinki]");
+			ruisrock.setEndTime("2020-12-29T21:00:00.000+03:00[Europe/Helsinki]");
 			ruisrock.setTicketInventory(200);
 			eventRepo.save(ruisrock);
 			
@@ -89,18 +89,18 @@ public class Ohjelmistoprojekti1Application {
 			jazz.setDescription("Esiintyjinä Jazz");
 			jazz.setPrice(100);
 			jazz.setVenue("Pori: Pelle-Hermanninpolku");
-			jazz.setStartTime("2020-07-03T19:00:00.078+03:00[Europe/Helsinki]");
-			jazz.setEndTime("2020-07-05T23:59:00.000+03:00[Europe/Helsinki]");
+			jazz.setStartTime("2020-12-16T19:00:00.078+03:00[Europe/Helsinki]");
+			jazz.setEndTime("2020-12-29T21:00:00.000+03:00[Europe/Helsinki]");
 			jazz.setTicketInventory(9);
 			eventRepo.save(jazz);	
 			
 			Event historyevent = new Event();
-			historyevent.setName("Historiaa");
-			historyevent.setDescription("Esiintyjinä Jazz");
+			historyevent.setName("Historian havinaa");
+			historyevent.setDescription("Esiintyjinä Jazz Kettunen");
 			historyevent.setPrice(100);
 			historyevent.setVenue("Pori");
-			historyevent.setStartTime("2020-01-03T19:00:00.078+03:00[Europe/Helsinki]");
-			historyevent.setEndTime("2020-02-05T23:59:00.000+03:00[Europe/Helsinki]");
+			historyevent.setStartTime("2020-12-16T19:00:00.078+03:00[Europe/Helsinki]");
+			historyevent.setEndTime("2020-12-29T21:00:00.000+03:00[Europe/Helsinki]");
 			historyevent.setTicketInventory(9);
 			eventRepo.save(historyevent);	
 
