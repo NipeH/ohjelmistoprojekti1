@@ -453,7 +453,7 @@ public class EventController {
 			return tickets;
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-					"Tarkista pakolliset kentät, orderid, pcs ja tyckettypeid", e);
+					e.getMessage(), e);
 
 		}
 	}
