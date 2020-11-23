@@ -104,7 +104,15 @@ public class Ohjelmistoprojekti1Application {
 			historyevent.setTicketInventory(9);
 			eventRepo.save(historyevent);	
 
-
+			Event myevent = new Event();
+			myevent.setName("Opi koodaamaan");
+			myevent.setDescription("Puhujana Jazz Kettunen");
+			myevent.setPrice(500);
+			myevent.setVenue("Turku");
+			myevent.setStartTime("2020-12-16T19:00:00.078+03:00[Europe/Helsinki]");
+			myevent.setEndTime("2020-12-29T21:00:00.000+03:00[Europe/Helsinki]");
+			myevent.setTicketInventory(900);
+			eventRepo.save(myevent);	
 		
 			
 			
